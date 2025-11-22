@@ -1,0 +1,28 @@
+{
+  "name": "studio-axis-console",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "concurrently -n server,client -c green,cyan \"npm run dev --workspace=server\" \"cd client && next dev -p 3000 2>$null\"",
+    "build": "npm --workspace server run build && npm --workspace client run build",
+    "start": "npm --workspace server run start && npm --workspace client run start",
+    "lint": "npm --workspace client run lint"
+  },
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "engines": {
+    "node": ">=18.17",
+    "npm": ">=9"
+  },
+  "devDependencies": {
+    "@types/cookie": "^0.6.0",
+    "@types/luxon": "^3.7.1",
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "lucide-react": "^0.554.0",
+    "recharts": "^3.4.1"
+  }
+}

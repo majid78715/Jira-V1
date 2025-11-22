@@ -1,0 +1,977 @@
+{
+  "users": [
+    {
+      "id": "user-super-admin",
+      "email": "super@humain.local",
+      "role": "SUPER_ADMIN",
+      "password": "Admin#123",
+      "companyId": "company-humain",
+      "profile": {
+        "firstName": "Ada",
+        "lastName": "Steward",
+        "mobileNumber": "+14155551000",
+        "country": "US",
+        "city": "San Francisco",
+        "timeZone": "America/Los_Angeles",
+        "title": "Chief of Staff"
+      },
+      "firstLoginRequired": false,
+      "preferences": {
+        "savedDashboardViews": []
+      }
+    },
+    {
+      "id": "user-vp-1",
+      "email": "vp@humain.local",
+      "role": "VP",
+      "password": "Leader#123",
+      "companyId": "company-humain",
+      "profile": {
+        "firstName": "Miguel",
+        "lastName": "Sanders",
+        "mobileNumber": "+14155551005",
+        "country": "US",
+        "city": "Chicago",
+        "timeZone": "America/Chicago",
+        "title": "VP, Delivery"
+      },
+      "firstLoginRequired": false,
+      "preferences": {
+        "savedDashboardViews": [
+          {
+            "id": "view-portfolio-90d",
+            "name": "Portfolio 90d",
+            "filterParams": {
+              "dateFrom": "2025-08-01T00:00:00.000Z",
+              "dateTo": "2025-10-30T23:59:59.000Z",
+              "timeGranularity": "month",
+              "statusList": [
+                "ACTIVE",
+                "ON_HOLD"
+              ],
+              "healthList": [
+                "AMBER",
+                "RED"
+              ],
+              "riskLevels": [
+                "MEDIUM",
+                "HIGH"
+              ]
+            },
+            "createdAt": "2025-11-01T00:00:00.000Z"
+          }
+        ]
+      }
+    },
+    {
+      "id": "user-pm-1",
+      "email": "pm@humain.local",
+      "role": "PM",
+      "password": "Manager#123",
+      "companyId": "company-humain",
+      "profile": {
+        "firstName": "Priya",
+        "lastName": "Malhotra",
+        "mobileNumber": "+14155551010",
+        "country": "IN",
+        "city": "Bengaluru",
+        "timeZone": "Asia/Kolkata",
+        "title": "Program Manager"
+      },
+      "firstLoginRequired": false,
+      "preferences": {
+        "savedDashboardViews": [],
+        "preferredCompanyIds": [
+          "company-vertex"
+        ]
+      },
+      "vpUserId": "user-vp-1"
+    },
+    {
+      "id": "user-eng-1",
+      "email": "eng@humain.local",
+      "role": "ENGINEER",
+      "password": "Builder#123",
+      "companyId": "company-humain",
+      "profile": {
+        "firstName": "Luis",
+        "lastName": "Garcia",
+        "mobileNumber": "+33155551020",
+        "country": "FR",
+        "city": "Paris",
+        "timeZone": "Europe/Paris",
+        "title": "Lead Engineer"
+      },
+      "firstLoginRequired": false,
+      "preferences": {
+        "savedDashboardViews": []
+      }
+    },
+    {
+      "id": "user-vm-1",
+      "email": "vm@vendor.local",
+      "role": "PROJECT_MANAGER",
+      "password": "Vendor#123",
+      "companyId": "company-vertex",
+      "profile": {
+        "firstName": "Valeria",
+        "lastName": "Monroe",
+        "mobileNumber": "+14155558000",
+        "country": "US",
+        "city": "Austin",
+        "timeZone": "America/Chicago",
+        "title": "Project Manager"
+      },
+      "firstLoginRequired": false,
+      "preferences": {
+        "savedDashboardViews": [],
+        "managedVendorIds": [
+          "company-vertex"
+        ]
+      }
+    },
+    {
+      "id": "user-vm-ceo",
+      "email": "ceo@vendor.local",
+      "role": "PROJECT_MANAGER",
+      "password": "VendorCeo#123",
+      "companyId": "company-vertex",
+      "profile": {
+        "firstName": "Carmen",
+        "lastName": "Lopez",
+        "mobileNumber": "+14155558010",
+        "country": "US",
+        "city": "Austin",
+        "timeZone": "America/Chicago",
+        "title": "Vendor CEO"
+      },
+      "firstLoginRequired": false,
+      "preferences": {
+        "savedDashboardViews": [],
+        "managedVendorIds": [
+          "company-vertex"
+        ]
+      }
+    },
+    {
+      "id": "user-dev-1",
+      "email": "dev@vendor.local",
+      "role": "DEVELOPER",
+      "password": "Dev#1234",
+      "companyId": "company-vertex",
+      "profile": {
+        "firstName": "Dara",
+        "lastName": "Singh",
+        "mobileNumber": "+442045551234",
+        "country": "GB",
+        "city": "London",
+        "timeZone": "Europe/London",
+        "title": "Senior Developer"
+      },
+      "firstLoginRequired": false,
+      "preferences": {
+        "savedDashboardViews": []
+      }
+    },
+    {
+      "id": "test-pm",
+      "email": "test-pm@humain.local",
+      "role": "PM",
+      "password": "Test#123",
+      "companyId": "company-humain",
+      "profile": {
+        "firstName": "Test",
+        "lastName": "Product Manager",
+        "mobileNumber": "+10000000001",
+        "country": "US",
+        "city": "Test City",
+        "timeZone": "America/Los_Angeles",
+        "title": "Test Product Manager"
+      },
+      "firstLoginRequired": false,
+      "preferences": {
+        "savedDashboardViews": []
+      }
+    },
+    {
+      "id": "test-pjm",
+      "email": "test-pjm@humain.local",
+      "role": "PROJECT_MANAGER",
+      "password": "Test#123",
+      "companyId": "company-vertex",
+      "profile": {
+        "firstName": "Test",
+        "lastName": "Project Manager",
+        "mobileNumber": "+10000000002",
+        "country": "US",
+        "city": "Test City",
+        "timeZone": "America/Los_Angeles",
+        "title": "Test Project Manager"
+      },
+      "firstLoginRequired": false,
+      "preferences": {
+        "savedDashboardViews": []
+      }
+    },
+    {
+      "id": "test-dev",
+      "email": "test-dev@humain.local",
+      "role": "DEVELOPER",
+      "password": "Test#123",
+      "companyId": "company-vertex",
+      "profile": {
+        "firstName": "Test",
+        "lastName": "Developer",
+        "mobileNumber": "+10000000003",
+        "country": "US",
+        "city": "Test City",
+        "timeZone": "America/Los_Angeles",
+        "title": "Test Developer"
+      },
+      "firstLoginRequired": false,
+      "preferences": {
+        "savedDashboardViews": []
+      }
+    },
+    {
+      "id": "test-admin",
+      "email": "test-admin@humain.local",
+      "role": "SUPER_ADMIN",
+      "password": "Test#123",
+      "companyId": "company-humain",
+      "profile": {
+        "firstName": "Test",
+        "lastName": "Admin",
+        "mobileNumber": "+10000000004",
+        "country": "US",
+        "city": "Test City",
+        "timeZone": "America/Los_Angeles",
+        "title": "Test Admin"
+      },
+      "firstLoginRequired": false,
+      "preferences": {
+        "savedDashboardViews": []
+      }
+    }
+  ],
+  "userPreferences": [
+    {
+      "id": "prefs-user-super-admin",
+      "userId": "user-super-admin",
+      "notificationPreferences": {
+        "dailyDigestEmail": true,
+        "taskAssignmentEmail": true,
+        "commentMentionEmail": true,
+        "timesheetReminderEmail": true,
+        "alertEscalationsEmail": true
+      },
+      "workflowPreferences": {
+        "autoSubscribeOnAssignment": true,
+        "autoShareStatusWithTeam": true,
+        "autoCaptureFocusBlocks": false
+      },
+      "availabilityPreferences": {
+        "meetingHoursStart": "09:00",
+        "meetingHoursEnd": "17:00",
+        "shareCalendarWithTeam": true,
+        "protectFocusTime": false
+      },
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "prefs-user-vp-1",
+      "userId": "user-vp-1",
+      "notificationPreferences": {
+        "dailyDigestEmail": true,
+        "taskAssignmentEmail": true,
+        "commentMentionEmail": true,
+        "timesheetReminderEmail": true,
+        "alertEscalationsEmail": true
+      },
+      "workflowPreferences": {
+        "autoSubscribeOnAssignment": true,
+        "autoShareStatusWithTeam": true,
+        "autoCaptureFocusBlocks": false
+      },
+      "availabilityPreferences": {
+        "meetingHoursStart": "09:00",
+        "meetingHoursEnd": "17:00",
+        "shareCalendarWithTeam": true,
+        "protectFocusTime": false
+      },
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "prefs-user-pm-1",
+      "userId": "user-pm-1",
+      "notificationPreferences": {
+        "dailyDigestEmail": true,
+        "taskAssignmentEmail": true,
+        "commentMentionEmail": true,
+        "timesheetReminderEmail": true,
+        "alertEscalationsEmail": true
+      },
+      "workflowPreferences": {
+        "autoSubscribeOnAssignment": true,
+        "autoShareStatusWithTeam": true,
+        "autoCaptureFocusBlocks": false
+      },
+      "availabilityPreferences": {
+        "meetingHoursStart": "09:00",
+        "meetingHoursEnd": "17:00",
+        "shareCalendarWithTeam": true,
+        "protectFocusTime": false
+      },
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "prefs-user-eng-1",
+      "userId": "user-eng-1",
+      "notificationPreferences": {
+        "dailyDigestEmail": true,
+        "taskAssignmentEmail": true,
+        "commentMentionEmail": true,
+        "timesheetReminderEmail": true,
+        "alertEscalationsEmail": true
+      },
+      "workflowPreferences": {
+        "autoSubscribeOnAssignment": true,
+        "autoShareStatusWithTeam": true,
+        "autoCaptureFocusBlocks": false
+      },
+      "availabilityPreferences": {
+        "meetingHoursStart": "09:00",
+        "meetingHoursEnd": "17:00",
+        "shareCalendarWithTeam": true,
+        "protectFocusTime": false
+      },
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "prefs-user-vm-1",
+      "userId": "user-vm-1",
+      "notificationPreferences": {
+        "dailyDigestEmail": true,
+        "taskAssignmentEmail": true,
+        "commentMentionEmail": true,
+        "timesheetReminderEmail": true,
+        "alertEscalationsEmail": true
+      },
+      "workflowPreferences": {
+        "autoSubscribeOnAssignment": true,
+        "autoShareStatusWithTeam": true,
+        "autoCaptureFocusBlocks": false
+      },
+      "availabilityPreferences": {
+        "meetingHoursStart": "09:00",
+        "meetingHoursEnd": "17:00",
+        "shareCalendarWithTeam": true,
+        "protectFocusTime": false
+      },
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "prefs-user-dev-1",
+      "userId": "user-dev-1",
+      "notificationPreferences": {
+        "dailyDigestEmail": true,
+        "taskAssignmentEmail": true,
+        "commentMentionEmail": true,
+        "timesheetReminderEmail": true,
+        "alertEscalationsEmail": true
+      },
+      "workflowPreferences": {
+        "autoSubscribeOnAssignment": true,
+        "autoShareStatusWithTeam": true,
+        "autoCaptureFocusBlocks": false
+      },
+      "availabilityPreferences": {
+        "meetingHoursStart": "09:00",
+        "meetingHoursEnd": "17:00",
+        "shareCalendarWithTeam": true,
+        "protectFocusTime": false
+      },
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    }
+  ],
+  "companies": [
+    {
+      "id": "company-humain",
+      "name": "Humain",
+      "type": "HUMAIN",
+      "description": "Internal operations team.",
+      "isActive": true,
+      "ceoUserId": "user-super-admin",
+      "region": "North America",
+      "timeZone": "America/Los_Angeles",
+      "slaConfig": {
+        "responseTimeHours": 1,
+        "resolutionTimeHours": 8,
+        "notes": "Internal escalations resolved same business day."
+      }
+    },
+    {
+      "id": "company-vertex",
+      "name": "Vertex Vendors",
+      "type": "VENDOR",
+      "description": "Preferred vendor partner.",
+      "isActive": true,
+      "vendorOwnerUserId": "user-vm-1",
+      "vendorCeoUserId": "user-vm-ceo",
+      "region": "North America",
+      "timeZone": "America/Chicago",
+      "slaConfig": {
+        "responseTimeHours": 4,
+        "resolutionTimeHours": 24,
+        "notes": "Critical defects escalated to Humain PM the same day."
+      }
+    }
+  ],
+  "userInvitations": [],
+  "profileChangeRequests": [],
+  "projects": [
+    {
+      "id": "project-portfolio-1",
+      "name": "Vendor Hub Rollout",
+      "code": "HUM-VND-001",
+      "description": "Launch the vendor coordination workspace for PMO teams.",
+      "ownerId": "user-pm-1",
+      "projectType": "PRODUCT_FEATURE",
+      "objectiveOrOkrId": "OKR-2025-01",
+      "priority": "HIGH",
+      "stage": "EXECUTION",
+      "sponsorUserId": "user-vp-1",
+      "deliveryManagerUserId": "user-eng-1",
+      "coreTeamUserIds": [
+        "user-eng-1"
+      ],
+      "stakeholderUserIds": [
+        "user-super-admin"
+      ],
+      "vendorCompanyIds": [
+        "company-vertex"
+      ],
+      "primaryVendorId": "company-vertex",
+      "additionalVendorIds": [],
+      "budgetHours": 1200,
+      "estimatedEffortHours": 1200,
+      "approvedBudgetAmount": 250000,
+      "approvedBudgetCurrency": "USD",
+      "timeTrackingRequired": true,
+      "status": "ACTIVE",
+      "health": "AMBER",
+      "riskLevel": "MEDIUM",
+      "riskSummary": "Integration timeline depends on vendor resourcing.",
+      "complianceFlags": [
+        "PII"
+      ],
+      "businessUnit": "Platform",
+      "productModule": "Humain One - Vendor Hub",
+      "tags": [
+        "Critical",
+        "Vendor"
+      ],
+      "contractId": "SOW-001",
+      "rateModel": "TIME_AND_MATERIAL",
+      "rateCardReference": "RateCard-Q1",
+      "startDate": "2025-01-15",
+      "endDate": "2025-06-30",
+      "actualStartDate": "2025-01-20",
+      "actualEndDate": null,
+      "taskWorkflowDefinitionId": "workflow-task-default",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-10T00:00:00.000Z",
+      "packageStatus": "PM_DRAFT",
+      "packageSentBackTo": null,
+      "packageSentBackReason": null
+    },
+    {
+      "id": "project-portfolio-2",
+      "name": "Platform Modernization",
+      "code": "HUM-PLAT-002",
+      "description": "Upgrade shared services to support automation.",
+      "ownerId": "user-pm-1",
+      "projectType": "PLATFORM_UPGRADE",
+      "objectiveOrOkrId": "OKR-2025-02",
+      "priority": "MEDIUM",
+      "stage": "PLANNING",
+      "sponsorUserId": "user-vp-1",
+      "deliveryManagerUserId": "user-eng-1",
+      "coreTeamUserIds": [
+        "user-eng-1"
+      ],
+      "stakeholderUserIds": [
+        "user-super-admin"
+      ],
+      "vendorCompanyIds": [],
+      "primaryVendorId": null,
+      "additionalVendorIds": [],
+      "budgetHours": 600,
+      "estimatedEffortHours": 600,
+      "approvedBudgetAmount": 90000,
+      "approvedBudgetCurrency": "USD",
+      "timeTrackingRequired": true,
+      "status": "IN_PLANNING",
+      "health": "GREEN",
+      "riskLevel": "LOW",
+      "complianceFlags": [],
+      "businessUnit": "Platform",
+      "productModule": "Humain One - Core",
+      "tags": [
+        "Architecture"
+      ],
+      "contractId": null,
+      "rateModel": "TIME_AND_MATERIAL",
+      "rateCardReference": null,
+      "startDate": "2025-03-01",
+      "endDate": "2025-09-30",
+      "actualStartDate": null,
+      "actualEndDate": null,
+      "taskWorkflowDefinitionId": "workflow-task-default",
+      "createdAt": "2025-01-05T00:00:00.000Z",
+      "updatedAt": "2025-01-05T00:00:00.000Z",
+      "packageStatus": "PM_DRAFT",
+      "packageSentBackTo": null,
+      "packageSentBackReason": null
+    }
+  ],
+  "tasks": [
+    {
+      "id": "task-portfolio-1",
+      "projectId": "project-portfolio-1",
+      "taskType": "TASK",
+      "title": "Migrate vendor records",
+      "description": "Consolidate legacy vendor data in the new hub.",
+      "createdById": "user-pm-1",
+      "reporterUserId": "user-pm-1",
+      "assigneeUserId": "user-eng-1",
+      "isVendorTask": false,
+      "vendorId": null,
+      "status": "IN_PROGRESS",
+      "priority": "HIGH",
+      "budgetHours": 120,
+      "estimateStoryPoints": 20,
+      "dueDate": "2025-04-15",
+      "plannedStartDate": "2025-02-01",
+      "requiredSkills": [
+        "node",
+        "sql"
+      ],
+      "acceptanceCriteria": [
+        "All vendor records migrated",
+        "Data validated and signed off"
+      ],
+      "dependencyTaskIds": [],
+      "environment": "QA",
+      "linkedIssueIds": [],
+      "epicId": null,
+      "component": "Data",
+      "sprintId": null,
+      "workflowInstanceId": null,
+      "createdAt": "2025-01-10T00:00:00.000Z",
+      "updatedAt": "2025-01-10T00:00:00.000Z"
+    },
+    {
+      "id": "task-portfolio-2",
+      "projectId": "project-portfolio-1",
+      "taskType": "TASK",
+      "title": "Vendor onboarding playbook",
+      "description": "Create the vendor-facing onboarding plan.",
+      "createdById": "user-pm-1",
+      "reporterUserId": "user-pm-1",
+      "assigneeUserId": null,
+      "isVendorTask": true,
+      "vendorId": "company-vertex",
+      "status": "BACKLOG",
+      "priority": "MEDIUM",
+      "budgetHours": 80,
+      "estimateStoryPoints": 13,
+      "dueDate": "2025-05-01",
+      "plannedStartDate": "2025-03-01",
+      "requiredSkills": [
+        "documentation"
+      ],
+      "acceptanceCriteria": [
+        "Draft reviewed by sponsor",
+        "Feedback incorporated"
+      ],
+      "dependencyTaskIds": [],
+      "environment": "Not Applicable",
+      "linkedIssueIds": [],
+      "epicId": null,
+      "component": "Process",
+      "sprintId": null,
+      "workflowInstanceId": null,
+      "createdAt": "2025-01-12T00:00:00.000Z",
+      "updatedAt": "2025-01-12T00:00:00.000Z"
+    }
+  ],
+  "assignments": [],
+  "workflowDefinitions": [
+    {
+      "id": "workflow-task-default",
+      "name": "Task Estimation Workflow",
+      "description": "Project manager completion then PM approval",
+      "entityType": "TASK",
+      "isActive": true,
+      "steps": [
+        {
+          "id": "workflow-step-vm",
+          "name": "Project Manager Completion",
+          "description": "Project manager marks the task ready for product manager review.",
+          "order": 1,
+          "assigneeRole": "PROJECT_MANAGER",
+          "approverType": "ROLE",
+          "approverRole": "PROJECT_MANAGER",
+          "requiresCommentOnReject": true,
+          "requiresCommentOnSendBack": true,
+          "actions": [
+            "APPROVE",
+            "REJECT",
+            "SEND_BACK",
+            "REQUEST_CHANGE"
+          ]
+        },
+        {
+          "id": "workflow-step-pm",
+          "name": "Product Manager Approval",
+          "description": "Product manager reviews completion and finalizes start.",
+          "order": 2,
+          "assigneeRole": "PM",
+          "approverType": "ROLE",
+          "approverRole": "PM",
+          "requiresCommentOnReject": true,
+          "requiresCommentOnSendBack": true,
+          "actions": [
+            "APPROVE",
+            "REJECT",
+            "SEND_BACK",
+            "REQUEST_CHANGE"
+          ]
+        }
+      ],
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    }
+  ],
+  "workflowInstances": [],
+  "workflowActions": [],
+  "timeEntries": [],
+  "workSchedules": [
+    {
+      "id": "schedule-humain-default",
+      "name": "Humain Core Hours",
+      "timeZone": "America/Los_Angeles",
+      "companyId": "company-humain",
+      "slots": [
+        {
+          "day": 1,
+          "start": "09:00",
+          "end": "17:00"
+        },
+        {
+          "day": 2,
+          "start": "09:00",
+          "end": "17:00"
+        },
+        {
+          "day": 3,
+          "start": "09:00",
+          "end": "17:00"
+        },
+        {
+          "day": 4,
+          "start": "09:00",
+          "end": "17:00"
+        },
+        {
+          "day": 5,
+          "start": "09:00",
+          "end": "17:00"
+        }
+      ],
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    }
+  ],
+  "companyHolidays": [
+    {
+      "id": "holiday-humain-memorial",
+      "companyId": "company-humain",
+      "name": "Memorial Day",
+      "date": "2025-05-26",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z",
+      "calendarName": "Memorial Day",
+      "isFullDay": true
+    }
+  ],
+  "dayOffs": [
+    {
+      "id": "dayoff-pm1",
+      "userId": "user-pm-1",
+      "requestedById": "user-pm-1",
+      "date": "2025-05-30",
+      "reason": "Personal day",
+      "status": "APPROVED",
+      "approvedById": "user-pm-1",
+      "approvedAt": "2025-01-02T00:00:00.000Z",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z",
+      "leaveType": "ANNUAL",
+      "isPartialDay": false,
+      "totalRequestedHours": 8,
+      "attachmentIds": [],
+      "submittedAt": "2025-01-01T00:00:00.000Z",
+      "submittedById": "user-pm-1"
+    }
+  ],
+  "attendanceRecords": [],
+  "timesheets": [],
+  "comments": [],
+  "attachments": [],
+  "alerts": [],
+  "notifications": [],
+  "activityLogs": [],
+  "chatSessions": [],
+  "chatMessages": [],
+  "teamChatRooms": [
+    {
+      "id": "room-studio-ops",
+      "name": "Studio Ops",
+      "description": "Humain HQ for cross-functional chatter.",
+      "topic": "Share wins, risks, and support needs.",
+      "createdById": "user-super-admin",
+      "lastMessageAt": "2025-11-15T12:08:00.000Z",
+      "lastMessagePreview": "Heads up: API deploy scheduled for 18:00 UTC \u00e2\u20ac\u201c shout if that collides with anything.",
+      "createdAt": "2025-11-15T11:40:00.000Z",
+      "updatedAt": "2025-11-15T12:08:00.000Z"
+    },
+    {
+      "id": "room-vendor-desk",
+      "name": "Vendor Desk",
+      "description": "Align with Project Managers and PMs on escalations.",
+      "topic": "Share partner asks plus staffing blockers.",
+      "createdById": "user-pm-1",
+      "lastMessageAt": "2025-11-15T13:05:00.000Z",
+      "lastMessagePreview": "Looping Vertex in so they can see the burn-down ahead of the noon sync.",
+      "createdAt": "2025-11-15T11:45:00.000Z",
+      "updatedAt": "2025-11-15T13:05:00.000Z"
+    },
+    {
+      "id": "room-build-room",
+      "name": "Dev Build Room",
+      "description": "Daily thread for engineers and vendor devs.",
+      "topic": "Post blockers, deploys, and pairing needs.",
+      "createdById": "user-eng-1",
+      "lastMessageAt": "2025-11-15T11:35:00.000Z",
+      "lastMessagePreview": "Snapshot uploaded to S3 if you need fresh data for debugging.",
+      "createdAt": "2025-11-15T11:20:00.000Z",
+      "updatedAt": "2025-11-15T11:35:00.000Z"
+    }
+  ],
+  "teamChatMessages": [
+    {
+      "id": "msg-studio-ops-1",
+      "roomId": "room-studio-ops",
+      "authorId": "user-super-admin",
+      "body": "Morning standup thread: post wins + risks before 9am PT so I can prep the exec note.",
+      "mentions": [
+        "user-pm-1"
+      ],
+      "createdAt": "2025-11-15T12:00:00.000Z",
+      "updatedAt": "2025-11-15T12:00:00.000Z"
+    },
+    {
+      "id": "msg-studio-ops-2",
+      "roomId": "room-studio-ops",
+      "authorId": "user-pm-1",
+      "body": "Win: vendor onboarding pack is 95% ready. Risk: timesheet portal latency is creeping back.",
+      "mentions": [
+        "user-vm-1"
+      ],
+      "createdAt": "2025-11-15T12:05:00.000Z",
+      "updatedAt": "2025-11-15T12:05:00.000Z"
+    },
+    {
+      "id": "msg-studio-ops-3",
+      "roomId": "room-studio-ops",
+      "authorId": "user-eng-1",
+      "body": "Heads up: API deploy scheduled for 18:00 UTC \u00e2\u20ac\u201c shout if that collides with anything.",
+      "createdAt": "2025-11-15T12:08:00.000Z",
+      "updatedAt": "2025-11-15T12:08:00.000Z"
+    },
+    {
+      "id": "msg-vendor-desk-1",
+      "roomId": "room-vendor-desk",
+      "authorId": "user-vm-1",
+      "body": "Need sign-off on Vertex staffing split so we can lock tomorrow's kickoff.",
+      "createdAt": "2025-11-15T13:00:00.000Z",
+      "updatedAt": "2025-11-15T13:00:00.000Z"
+    },
+    {
+      "id": "msg-vendor-desk-2",
+      "roomId": "room-vendor-desk",
+      "authorId": "user-pm-1",
+      "body": "Copy. I'll confirm with finance before lunch and circle back here.",
+      "mentions": [
+        "user-vm-1"
+      ],
+      "createdAt": "2025-11-15T13:02:00.000Z",
+      "updatedAt": "2025-11-15T13:02:00.000Z"
+    },
+    {
+      "id": "msg-vendor-desk-3",
+      "roomId": "room-vendor-desk",
+      "authorId": "user-super-admin",
+      "body": "Looping Vertex in so they can see the burn-down ahead of the noon sync.",
+      "createdAt": "2025-11-15T13:05:00.000Z",
+      "updatedAt": "2025-11-15T13:05:00.000Z"
+    },
+    {
+      "id": "msg-build-room-1",
+      "roomId": "room-build-room",
+      "authorId": "user-eng-1",
+      "body": "Pairing schedule for the build room lives in Drive \u00e2\u20ac\u201d take slot 3 if you're open.",
+      "createdAt": "2025-11-15T11:30:00.000Z",
+      "updatedAt": "2025-11-15T11:30:00.000Z"
+    },
+    {
+      "id": "msg-build-room-2",
+      "roomId": "room-build-room",
+      "authorId": "user-dev-1",
+      "body": "Blocked on clean test data; could use a refreshed snapshot after lunch.",
+      "mentions": [
+        "user-eng-1"
+      ],
+      "createdAt": "2025-11-15T11:32:00.000Z",
+      "updatedAt": "2025-11-15T11:32:00.000Z"
+    },
+    {
+      "id": "msg-build-room-3",
+      "roomId": "room-build-room",
+      "authorId": "user-eng-1",
+      "body": "Snapshot uploaded to S3 if you need fresh data for debugging.",
+      "createdAt": "2025-11-15T11:35:00.000Z",
+      "updatedAt": "2025-11-15T11:35:00.000Z"
+    }
+  ],
+  "rolePermissions": [
+    {
+      "id": "role-perm-super-admin",
+      "role": "SUPER_ADMIN",
+      "modules": [
+        "dashboard",
+        "projects",
+        "notifications",
+        "alerts",
+        "reports",
+        "approvals",
+        "chat",
+        "settings",
+        "admin",
+        "personas"
+      ],
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "role-perm-vp",
+      "role": "VP",
+      "modules": [
+        "dashboard",
+        "projects",
+        "notifications",
+        "alerts",
+        "reports",
+        "chat",
+        "settings",
+        "personas"
+      ],
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "role-perm-pm",
+      "role": "PM",
+      "modules": [
+        "dashboard",
+        "projects",
+        "notifications",
+        "alerts",
+        "reports",
+        "approvals",
+        "chat",
+        "settings",
+        "admin",
+        "personas"
+      ],
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "role-perm-project-manager",
+      "role": "PROJECT_MANAGER",
+      "modules": [
+        "dashboard",
+        "projects",
+        "notifications",
+        "teamDevelopers",
+        "reports",
+        "chat",
+        "settings",
+        "personas"
+      ],
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "role-perm-developer",
+      "role": "DEVELOPER",
+      "modules": [
+        "dashboard",
+        "tasks",
+        "notifications",
+        "chat",
+        "settings",
+        "personas"
+      ],
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "role-perm-engineer",
+      "role": "ENGINEER",
+      "modules": [
+        "dashboard",
+        "tasks",
+        "notifications",
+        "chat",
+        "settings",
+        "personas"
+      ],
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "role-perm-viewer",
+      "role": "VIEWER",
+      "modules": [
+        "dashboard",
+        "projects",
+        "notifications",
+        "chat",
+        "settings",
+        "personas"
+      ],
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    }
+  ]
+}

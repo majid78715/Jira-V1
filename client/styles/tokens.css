@@ -1,0 +1,49 @@
+:root {
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --line-height-tight: 1.2;
+  --line-height-snug: 1.35;
+  --line-height-relaxed: 1.5;
+  --chat-card-radius: 0.75rem;
+  --chat-muted: #4b5565;
+  --chat-muted-foreground: #667085;
+  --chat-border: rgba(16, 24, 40, 0.08);
+  --chat-notice-icon: rgba(16, 24, 40, 0.08);
+}
+
+.chat-sidebar {
+  --chat-line-tight: var(--line-height-tight);
+  --chat-line-snug: var(--line-height-snug);
+  --chat-space-item-y: 0.5rem;
+  --chat-space-item-x: 0.75rem;
+  --chat-gap: 0.5rem;
+  --chat-avatar-size: 2rem;
+  --chat-card-padding: 0.75rem;
+}
+
+.chat-sidebar.chat-density-compact {
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.8125rem; /* 13px */
+  --font-size-base: 0.875rem; /* 14px */
+  --font-size-lg: 1rem; /* 16px */
+  --chat-space-item-y: 0.5rem; /* 8px */
+  --chat-space-item-x: 0.75rem; /* 12px */
+  --chat-avatar-size: 1.875rem; /* 30px */
+  --chat-gap: 0.5rem;
+  --chat-card-padding: 0.75rem;
+}
+
+.chat-sidebar.chat-density-comfortable {
+  --font-size-xs: 0.8125rem; /* 13px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-lg: 1.125rem; /* 18px */
+  --chat-space-item-y: 0.625rem; /* +2px */
+  --chat-space-item-x: 0.875rem;
+  --chat-avatar-size: 2rem; /* 32px */
+  --chat-gap: 0.625rem;
+  --chat-card-padding: 0.875rem;
+}

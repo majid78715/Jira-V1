@@ -1,0 +1,15 @@
+# Node
+node_modules
+dist
+.turbo
+.next
+
+# Logs
+*.log
+npm-debug.log*
+
+# Mac/Windows
+.DS_Store
+Thumbs.db
+
+# Note: .env and db.json are intentionally NOT ignored per user request.
