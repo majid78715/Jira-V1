@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "concurrently -n server,client -c green,cyan \"npm run dev --workspace=server\" \"cd client && next dev -p 3000 2>$null\"",
+    "dev": "concurrently -n server,client -c green,cyan \"npm run dev --workspace=server\" \"cd client && next dev -p 3000\"",
     "build": "npm --workspace server run build && npm --workspace client run build",
     "start": "npm --workspace server run start && npm --workspace client run start",
     "lint": "npm --workspace client run lint"
