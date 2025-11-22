@@ -353,84 +353,7 @@
   ],
   "userInvitations": [],
   "profileChangeRequests": [],
-  "projects": [
-    {
-      "id": "6f74f51e-e40c-4f89-a604-44246860f1ef",
-      "createdAt": "2025-11-22T10:51:45.479Z",
-      "updatedAt": "2025-11-22T10:59:31.032Z",
-      "name": "P122",
-      "code": "P122-6648",
-      "description": "P122P122P122",
-      "ownerId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
-      "projectType": "PRODUCT_FEATURE",
-      "priority": "MEDIUM",
-      "stage": "PLANNING",
-      "sponsorUserId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
-      "deliveryManagerUserId": "test-pjm",
-      "coreTeamUserIds": [],
-      "stakeholderUserIds": [],
-      "vendorCompanyIds": [
-        "company-vertex"
-      ],
-      "primaryVendorId": "company-vertex",
-      "additionalVendorIds": [],
-      "budgetHours": 80,
-      "estimatedEffortHours": 80,
-      "timeTrackingRequired": true,
-      "status": "ACTIVE",
-      "health": "GREEN",
-      "riskLevel": "LOW",
-      "complianceFlags": [],
-      "businessUnit": "GENERAL",
-      "productModule": "CORE",
-      "tags": [],
-      "rateModel": "TIME_AND_MATERIAL",
-      "taskWorkflowDefinitionId": "workflow-task-default",
-      "isDraft": false,
-      "packageStatus": "ACTIVE"
-    },
-    {
-      "id": "346ed05b-a2bc-4c90-9ba4-bb88a528ce1e",
-      "createdAt": "2025-11-22T16:56:28.371Z",
-      "updatedAt": "2025-11-22T16:56:30.359Z",
-      "name": "xzczxczxcxz",
-      "code": "XZCZ-8184",
-      "description": "xczxczxc",
-      "ownerId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
-      "ownerIds": [
-        "edcedaae-7893-474e-aee4-7cdc77eb6ab0"
-      ],
-      "projectType": "PRODUCT_FEATURE",
-      "priority": "MEDIUM",
-      "stage": "PLANNING",
-      "sponsorUserId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
-      "deliveryManagerUserId": "test-pjm",
-      "deliveryManagerUserIds": [
-        "test-pjm"
-      ],
-      "coreTeamUserIds": [],
-      "stakeholderUserIds": [],
-      "vendorCompanyIds": [
-        "company-vertex"
-      ],
-      "primaryVendorId": "company-vertex",
-      "additionalVendorIds": [],
-      "budgetHours": 80,
-      "estimatedEffortHours": 80,
-      "timeTrackingRequired": true,
-      "status": "PROPOSED",
-      "health": "GREEN",
-      "riskLevel": "LOW",
-      "complianceFlags": [],
-      "businessUnit": "GENERAL",
-      "productModule": "CORE",
-      "tags": [],
-      "rateModel": "TIME_AND_MATERIAL",
-      "taskWorkflowDefinitionId": "workflow-task-default",
-      "isDraft": false,
-      "packageStatus": "PM_DRAFT"
-    }
-  ],
+  "projects": [],
   "tasks": [
     {
       "id": "3b7471c1-b35a-4403-92db-e994ac4128e4",
@@ -7688,6 +7611,32 @@
       "metadata": {
         "sessionId": "0ab0ce91-93b5-41e9-bcf5-95bb1d6bd1fa",
         "reason": "disconnected"
+      }
+    },
+    {
+      "id": "41aec4b0-138b-44b8-bd8c-53ef7979d1d6",
+      "createdAt": "2025-11-22T18:47:59.330Z",
+      "updatedAt": "2025-11-22T18:47:59.330Z",
+      "actorId": "user-super-admin",
+      "action": "PROJECT_DELETED",
+      "entityId": "6f74f51e-e40c-4f89-a604-44246860f1ef",
+      "entityType": "PROJECT",
+      "message": "Deleted project P122",
+      "metadata": {
+        "projectId": "6f74f51e-e40c-4f89-a604-44246860f1ef"
+      }
+    },
+    {
+      "id": "0c86743f-b389-47af-8975-c80e02306f25",
+      "createdAt": "2025-11-22T18:48:03.663Z",
+      "updatedAt": "2025-11-22T18:48:03.663Z",
+      "actorId": "user-super-admin",
+      "action": "PROJECT_DELETED",
+      "entityId": "346ed05b-a2bc-4c90-9ba4-bb88a528ce1e",
+      "entityType": "PROJECT",
+      "message": "Deleted project xzczxczxcxz",
+      "metadata": {
+        "projectId": "346ed05b-a2bc-4c90-9ba4-bb88a528ce1e"
       }
     }
   ],
