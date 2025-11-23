@@ -876,7 +876,9 @@
         "chat",
         "settings",
         "admin",
-        "personas"
+        "personas",
+        "createProject",
+        "createWorkflow"
       ],
       "createdAt": "2025-01-01T00:00:00.000Z",
       "updatedAt": "2025-01-01T00:00:00.000Z"
@@ -910,7 +912,9 @@
         "chat",
         "settings",
         "admin",
-        "personas"
+        "personas",
+        "createProject",
+        "createWorkflow"
       ],
       "createdAt": "2025-01-01T00:00:00.000Z",
       "updatedAt": "2025-01-01T00:00:00.000Z"
@@ -922,7 +926,6 @@
         "dashboard",
         "projects",
         "notifications",
-        "teamDevelopers",
         "reports",
         "chat",
         "settings",
@@ -936,7 +939,6 @@
       "role": "DEVELOPER",
       "modules": [
         "dashboard",
-        "tasks",
         "notifications",
         "chat",
         "settings",
@@ -950,7 +952,6 @@
       "role": "ENGINEER",
       "modules": [
         "dashboard",
-        "tasks",
         "notifications",
         "chat",
         "settings",

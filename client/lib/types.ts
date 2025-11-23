@@ -11,17 +11,16 @@ export type Role =
 export type PermissionModule =
   | "dashboard"
   | "projects"
-  | "tasks"
   | "notifications"
-  | "teamDevelopers"
   | "approvals"
   | "alerts"
   | "reports"
   | "chat"
   | "settings"
   | "admin"
-  | "adminHolidays"
-  | "personas";
+  | "personas"
+  | "createProject"
+  | "createWorkflow";
 
 export type CompanyType = "HUMAIN" | "VENDOR";
 export type ProfileStatus = "ACTIVE" | "PENDING_APPROVAL" | "REJECTED";
@@ -1073,6 +1072,15 @@ export interface WorkflowScheme {
 }
 
 export type AiProvider = "openai" | "gemini" | "claude" | "local";
+
+export interface RoleDefinition {
+  id: string;
+  name: string;
+  description?: string;
+  isSystem: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
 
 
 

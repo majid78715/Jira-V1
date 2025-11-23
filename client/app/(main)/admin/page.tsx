@@ -27,12 +27,6 @@ const destinations = [
     cta: "Open Companies"
   },
   {
-    href: "/admin/company-holidays",
-    title: "Company Holidays",
-    description: "Review and configure the holiday calendar.",
-    cta: "Open Holidays"
-  },
-  {
     href: "/admin/workflows",
     title: "Workflow Definitions",
     description: "Design and publish multi-step approvals.",

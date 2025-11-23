@@ -99,7 +99,7 @@ export default function ProjectsPage() {
   const isScopedUser = user?.role === "PM" || user?.role === "PROJECT_MANAGER";
   // Project Managers are forced to see only their projects
   const activeScope: "mine" | "all" = user?.role === "PROJECT_MANAGER" ? "mine" : (isScopedUser ? projectScope : "all");
-  const canCreateProject = user?.role !== "PROJECT_MANAGER";
+  const canCreateProject = user?.permittedModules?.includes("createProject") ?? false;
 
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {

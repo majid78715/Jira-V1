@@ -15,17 +15,16 @@ import { PermissionModule, Role, RolePermission } from "../../../../lib/types";
 const MODULES: Array<{ id: PermissionModule; label: string }> = [
   { id: "dashboard", label: "Dashboard" },
   { id: "projects", label: "Projects" },
-  { id: "tasks", label: "Tasks" },
   { id: "notifications", label: "Notifications" },
-  { id: "teamDevelopers", label: "Developers" },
   { id: "approvals", label: "Approvals" },
   { id: "alerts", label: "Alerts" },
   { id: "reports", label: "Reports" },
   { id: "chat", label: "Chat" },
   { id: "settings", label: "Settings" },
   { id: "admin", label: "Admin" },
-  { id: "adminHolidays", label: "Company Holidays" },
-  { id: "personas", label: "Personas" }
+  { id: "personas", label: "Personas" },
+  { id: "createProject", label: "Create Project" },
+  { id: "createWorkflow", label: "Create Workflow" }
 ];
 
 const SYSTEM_ROLES: string[] = ["SUPER_ADMIN", "VP", "PM", "ENGINEER", "PROJECT_MANAGER", "DEVELOPER", "VIEWER"];

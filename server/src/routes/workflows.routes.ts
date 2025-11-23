@@ -36,7 +36,7 @@ const workflowDefinitionSchema = {
             description: z.string().trim().max(1024).optional(),
             order: z.number().int().min(0).optional(),
             approverType: z.enum(approverTypes),
-            approverRole: z.enum(roles).optional(),
+            approverRole: z.string().min(1).optional(),
             dynamicApproverType: z.enum(dynamicApprovers).optional(),
             requiresCommentOnReject: z.boolean().optional(),
             requiresCommentOnSendBack: z.boolean().optional(),

@@ -11,17 +11,16 @@ export type Role =
 export type PermissionModule =
   | "dashboard"
   | "projects"
-  | "tasks"
   | "notifications"
-  | "teamDevelopers"
   | "approvals"
   | "alerts"
   | "reports"
   | "chat"
   | "settings"
   | "admin"
-  | "adminHolidays"
-  | "personas";
+  | "personas"
+  | "createProject"
+  | "createWorkflow";
 
 export interface BaseEntity {
   id: string;

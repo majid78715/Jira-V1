@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { apiRequest } from "../../../lib/apiClient";
 import { PageShell } from "../../../components/layout/PageShell";
 import { Role } from "../../../lib/types";
+import { useCurrentUser } from "../../../hooks/useCurrentUser";
 
 interface Persona {
   id: string;
@@ -75,6 +76,7 @@ const PERSONAS: Persona[] = [
 
 export default function PersonasPage() {
   const router = useRouter();
+  const { user } = useCurrentUser({ redirectTo: "/login" });
   const [loadingId, setLoadingId] = useState<string | null>(null);
 
   const handleSwitch = async (persona: Persona) => {
@@ -94,7 +96,11 @@ export default function PersonasPage() {
   };
 
   return (
-    <PageShell title="Test Personas" subtitle="Switch between different user roles for testing.">
+    <PageShell 
+      title="Test Personas" 
+      subtitle="Switch between different user roles for testing."
+      currentUser={user}
+    >
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {PERSONAS.map((persona) => (
           <div

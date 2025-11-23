@@ -159,6 +159,31 @@
         "savedDashboardViews": [],
         "preferredCompanyIds": []
       }
+    },
+    {
+      "id": "8152c20b-31bb-4774-87dc-ac1705c60d80",
+      "createdAt": "2025-11-23T08:01:04.856Z",
+      "updatedAt": "2025-11-23T08:01:36.563Z",
+      "email": "fhussain@humain.com",
+      "passwordHash": "$2a$10$eV/G5vG/X/9HdKwJHH23YuRyS/rNOBj4cCjuVcLnmgaSvS7z120PC",
+      "role": "PM",
+      "profile": {
+        "firstName": "Faisal",
+        "lastName": "Hussein",
+        "mobileNumber": "+10000000000",
+        "country": "US",
+        "city": "TBD",
+        "timeZone": "UTC",
+        "title": "Product Manager"
+      },
+      "companyId": "company-humain",
+      "isActive": true,
+      "profileStatus": "ACTIVE",
+      "firstLoginRequired": false,
+      "preferences": {
+        "savedDashboardViews": [],
+        "preferredCompanyIds": []
+      }
     }
   ],
   "userPreferences": [
@@ -311,6 +336,30 @@
       "createdAt": "2025-11-21T10:44:09.551Z",
       "updatedAt": "2025-11-21T10:44:09.551Z",
       "userId": "test-pjm",
+      "notificationPreferences": {
+        "dailyDigestEmail": true,
+        "taskAssignmentEmail": true,
+        "commentMentionEmail": true,
+        "timesheetReminderEmail": true,
+        "alertEscalationsEmail": true
+      },
+      "workflowPreferences": {
+        "autoSubscribeOnAssignment": true,
+        "autoShareStatusWithTeam": true,
+        "autoCaptureFocusBlocks": false
+      },
+      "availabilityPreferences": {
+        "meetingHoursStart": "09:00",
+        "meetingHoursEnd": "17:00",
+        "shareCalendarWithTeam": true,
+        "protectFocusTime": false
+      }
+    },
+    {
+      "id": "70a9f86f-907d-426a-8f49-1d66df1578bd",
+      "createdAt": "2025-11-23T08:01:39.589Z",
+      "updatedAt": "2025-11-23T08:01:39.589Z",
+      "userId": "8152c20b-31bb-4774-87dc-ac1705c60d80",
       "notificationPreferences": {
         "dailyDigestEmail": true,
         "taskAssignmentEmail": true,
@@ -3028,6 +3077,51 @@
       "id": "bdcbdb06-1ddf-4aa3-858f-575d8885e25c",
       "createdAt": "2025-11-23T07:05:54.441Z",
       "updatedAt": "2025-11-23T07:06:03.617Z",
+      "userId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "message": "majid abdulelah sent you a message",
+      "type": "CHAT_MESSAGE",
+      "read": true,
+      "metadata": {
+        "roomId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+        "roomName": "Mohamed AlArjani ↔ majid abdulelah",
+        "senderId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+        "preview": "📝 **Call Transcription**"
+      }
+    },
+    {
+      "id": "c01ec756-05e3-483c-adbc-614d7f0c7685",
+      "createdAt": "2025-11-23T08:01:53.447Z",
+      "updatedAt": "2025-11-23T08:02:02.984Z",
+      "userId": "8152c20b-31bb-4774-87dc-ac1705c60d80",
+      "message": "Test Admin sent you a message",
+      "type": "CHAT_MESSAGE",
+      "read": true,
+      "metadata": {
+        "roomId": "9cec2676-9765-49cc-8642-7e37a9400c54",
+        "roomName": "Test Admin ↔ Faisal Hussein",
+        "senderId": "test-admin",
+        "preview": "HELLO"
+      }
+    },
+    {
+      "id": "ef795b19-9639-48c4-a92a-4697258c0084",
+      "createdAt": "2025-11-23T08:02:24.724Z",
+      "updatedAt": "2025-11-23T08:02:50.693Z",
+      "userId": "8152c20b-31bb-4774-87dc-ac1705c60d80",
+      "message": "majid abdulelah sent you a message",
+      "type": "CHAT_MESSAGE",
+      "read": true,
+      "metadata": {
+        "roomId": "5d008b98-00c1-46f4-a537-7bd89b64fed2",
+        "roomName": "majid abdulelah ↔ Faisal Hussein",
+        "senderId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+        "preview": "hello"
+      }
+    },
+    {
+      "id": "0abed45d-cdc4-4b33-9ea3-ce0942470f4d",
+      "createdAt": "2025-11-23T08:19:58.496Z",
+      "updatedAt": "2025-11-23T08:26:31.840Z",
       "userId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
       "message": "majid abdulelah sent you a message",
       "type": "CHAT_MESSAGE",
@@ -8824,6 +8918,46 @@
         "sessionId": "1fa442d2-5faa-4944-a97c-926784e5b921",
         "reason": "ended"
       }
+    },
+    {
+      "id": "a99d7f65-de4a-4994-a4b0-a7a6a9fd51d5",
+      "createdAt": "2025-11-23T08:01:36.580Z",
+      "updatedAt": "2025-11-23T08:01:36.580Z",
+      "actorId": "8152c20b-31bb-4774-87dc-ac1705c60d80",
+      "action": "FIRST_LOGIN_PASSWORD_CHANGED",
+      "message": "Completed first login password change",
+      "metadata": {
+        "userId": "8152c20b-31bb-4774-87dc-ac1705c60d80"
+      }
+    },
+    {
+      "id": "ca847c57-d59d-4b8d-9773-4f0e3caa357a",
+      "createdAt": "2025-11-23T08:19:38.241Z",
+      "updatedAt": "2025-11-23T08:19:38.241Z",
+      "actorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "action": "CALL_INVITE",
+      "entityId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+      "entityType": "CHAT_CALL",
+      "message": "Started audio call with Mohamed AlArjani",
+      "metadata": {
+        "sessionId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+        "media": "audio",
+        "toUserId": "e9a7ac57-a140-45d7-b294-4b1201e63dad"
+      }
+    },
+    {
+      "id": "8debd6ff-c93a-442e-8e5a-956832169449",
+      "createdAt": "2025-11-23T08:19:58.409Z",
+      "updatedAt": "2025-11-23T08:19:58.409Z",
+      "actorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "action": "CALL_END",
+      "entityId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+      "entityType": "CHAT_CALL",
+      "message": "Call with Group ended (ended)",
+      "metadata": {
+        "sessionId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+        "reason": "ended"
+      }
     }
   ],
   "chatSessions": [
@@ -12461,7 +12595,7 @@
     {
       "id": "1fa442d2-5faa-4944-a97c-926784e5b921",
       "createdAt": "2025-11-23T06:18:54.418Z",
-      "updatedAt": "2025-11-23T07:05:54.432Z",
+      "updatedAt": "2025-11-23T08:19:58.483Z",
       "name": "Mohamed AlArjani ↔ majid abdulelah",
       "topic": "Direct chat between Mohamed AlArjani and majid abdulelah",
       "createdById": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
@@ -12470,7 +12604,7 @@
         "e9a7ac57-a140-45d7-b294-4b1201e63dad",
         "edcedaae-7893-474e-aee4-7cdc77eb6ab0"
       ],
-      "lastMessageAt": "2025-11-23T07:05:54.432Z",
+      "lastMessageAt": "2025-11-23T08:19:58.483Z",
       "lastMessagePreview": "📝 **Call Transcription**"
     },
     {
@@ -12487,6 +12621,36 @@
       ],
       "lastMessageAt": "2025-11-23T07:02:39.678Z",
       "lastMessagePreview": "📝 **Call Transcription**"
+    },
+    {
+      "id": "9cec2676-9765-49cc-8642-7e37a9400c54",
+      "createdAt": "2025-11-23T08:01:49.855Z",
+      "updatedAt": "2025-11-23T08:01:53.436Z",
+      "name": "Test Admin ↔ Faisal Hussein",
+      "topic": "Direct chat between Test Admin and Faisal Hussein",
+      "createdById": "test-admin",
+      "type": "DIRECT",
+      "participantIds": [
+        "test-admin",
+        "8152c20b-31bb-4774-87dc-ac1705c60d80"
+      ],
+      "lastMessageAt": "2025-11-23T08:01:53.436Z",
+      "lastMessagePreview": "HELLO"
+    },
+    {
+      "id": "5d008b98-00c1-46f4-a537-7bd89b64fed2",
+      "createdAt": "2025-11-23T08:02:21.557Z",
+      "updatedAt": "2025-11-23T08:02:24.712Z",
+      "name": "majid abdulelah ↔ Faisal Hussein",
+      "topic": "Direct chat between majid abdulelah and Faisal Hussein",
+      "createdById": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "type": "DIRECT",
+      "participantIds": [
+        "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+        "8152c20b-31bb-4774-87dc-ac1705c60d80"
+      ],
+      "lastMessageAt": "2025-11-23T08:02:24.712Z",
+      "lastMessagePreview": "hello"
     }
   ],
   "teamChatMessages": [
@@ -12759,6 +12923,64 @@
       "roomId": "1fa442d2-5faa-4944-a97c-926784e5b921",
       "authorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
       "body": "📝 **Call Transcription**"
+    },
+    {
+      "id": "c8b1e05a-04ff-408e-ad48-03947481524f",
+      "createdAt": "2025-11-23T08:01:53.436Z",
+      "updatedAt": "2025-11-23T08:01:53.436Z",
+      "roomId": "9cec2676-9765-49cc-8642-7e37a9400c54",
+      "authorId": "test-admin",
+      "body": "HELLO"
+    },
+    {
+      "id": "0d860d14-8d3a-47fb-8121-1ac78bdd671a",
+      "createdAt": "2025-11-23T08:02:24.712Z",
+      "updatedAt": "2025-11-23T08:02:24.712Z",
+      "roomId": "5d008b98-00c1-46f4-a537-7bd89b64fed2",
+      "authorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "body": "hello"
+    },
+    {
+      "id": "07d386c9-1a7f-4175-b7e3-4cc3d8f90804",
+      "createdAt": "2025-11-23T08:19:38.223Z",
+      "updatedAt": "2025-11-23T08:19:38.223Z",
+      "roomId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+      "authorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "body": "Call event: call_started",
+      "messageType": "CALL_EVENT",
+      "payload": {
+        "event": "call_started",
+        "fromUserId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+        "toUserId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+        "media": "audio",
+        "startedAt": "2025-11-23T08:19:38.223Z"
+      }
+    },
+    {
+      "id": "950d926a-3449-4884-9e6a-91dade453658",
+      "createdAt": "2025-11-23T08:19:58.393Z",
+      "updatedAt": "2025-11-23T08:19:58.393Z",
+      "roomId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+      "authorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "body": "Call event: call_ended",
+      "messageType": "CALL_EVENT",
+      "payload": {
+        "event": "call_ended",
+        "fromUserId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+        "toUserId": "group",
+        "media": "audio",
+        "startedAt": "2025-11-23T08:19:38.223Z",
+        "endedAt": "2025-11-23T08:19:58.393Z",
+        "reason": "ended"
+      }
+    },
+    {
+      "id": "08e05268-f994-49e5-ba81-56175f5e88a4",
+      "createdAt": "2025-11-23T08:19:58.483Z",
+      "updatedAt": "2025-11-23T08:19:58.483Z",
+      "roomId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+      "authorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "body": "📝 **Call Transcription**"
     }
   ],
   "rolePermissions": [
@@ -12793,13 +13015,13 @@
         "settings",
         "personas",
         "tasks",
-        "teamDevelopers",
-        "approvals",
         "adminHolidays",
-        "admin"
+        "admin",
+        "createProject",
+        "createWorkflow"
       ],
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2025-11-23T07:08:44.856Z"
+      "updatedAt": "2025-11-23T08:15:47.664Z"
     },
     {
       "id": "role-perm-pm",
@@ -12810,17 +13032,17 @@
         "notifications",
         "alerts",
         "reports",
-        "approvals",
         "chat",
         "settings",
         "admin",
         "personas",
+        "adminHolidays",
         "tasks",
-        "teamDevelopers",
-        "adminHolidays"
+        "createProject",
+        "createWorkflow"
       ],
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2025-11-23T07:08:47.097Z"
+      "updatedAt": "2025-11-23T08:15:49.259Z"
     },
     {
       "id": "role-perm-project-manager",
@@ -12864,7 +13086,7 @@
         "personas"
       ],
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2025-11-23T07:08:47.782Z"
+      "updatedAt": "2025-11-23T08:15:46.787Z"
     },
     {
       "id": "role-perm-viewer",

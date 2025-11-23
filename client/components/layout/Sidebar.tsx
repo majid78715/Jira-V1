@@ -15,24 +15,16 @@ type SidebarLink = {
   alias?: Partial<Record<Role, string>>;
 };
 
-const NAV_BLUEPRINT: Record<SidebarLinkId, SidebarLink> = {
+const NAV_BLUEPRINT: Partial<Record<SidebarLinkId, SidebarLink>> = {
   dashboard: { id: "dashboard", href: "/dashboard", label: "Dashboard" },
   projects: { id: "projects", href: "/projects", label: "Projects" },
-  tasks: {
-    id: "tasks",
-    href: "/tasks/my",
-    label: "Tasks",
-    alias: { DEVELOPER: "My Tasks", ENGINEER: "My Tasks" }
-  },
   notifications: { id: "notifications", href: "/notifications", label: "Notifications" },
-  teamDevelopers: { id: "teamDevelopers", href: "/team/developers", label: "Developers" },
   approvals: { id: "approvals", href: "/team/pending-profiles", label: "Approvals" },
   alerts: { id: "alerts", href: "/alerts", label: "Alerts & Risks" },
   reports: { id: "reports", href: "/reports", label: "Reports" },
   chat: { id: "chat", href: "/chat", label: "Chat" },
   settings: { id: "settings", href: "/settings", label: "Settings" },
   admin: { id: "admin", href: "/admin", label: "Admin" },
-  adminHolidays: { id: "adminHolidays", href: "/admin/company-holidays", label: "Admin · Company Holidays" },
   personas: { id: "personas", href: "/personas", label: "Personas" }
 };
 
@@ -61,13 +53,12 @@ const DEFAULT_ROLE_MODULES: Record<Role, SidebarLinkId[]> = {
     "dashboard",
     "projects",
     "notifications",
-    "teamDevelopers",
     "reports",
     "chat",
     "personas"
   ],
-  DEVELOPER: ["tasks", "notifications", "chat", "personas"],
-  ENGINEER: ["tasks", "notifications", "chat", "personas"],
+  DEVELOPER: ["notifications", "chat", "personas"],
+  ENGINEER: ["notifications", "chat", "personas"],
   VP: ["dashboard", "projects", "notifications", "alerts", "reports", "chat", "personas"],
   VIEWER: ["dashboard", "projects", "notifications", "chat", "personas"]
 };

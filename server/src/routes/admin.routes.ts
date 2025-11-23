@@ -18,17 +18,16 @@ import { profileSchema } from "../utils/validation";
 const permissionModuleValues = [
   "dashboard",
   "projects",
-  "tasks",
   "notifications",
-  "teamDevelopers",
   "approvals",
   "alerts",
   "reports",
   "chat",
   "settings",
   "admin",
-  "adminHolidays",
-  "personas"
+  "personas",
+  "createProject",
+  "createWorkflow"
 ] as const;
 
 const createAdminUserSchema = {

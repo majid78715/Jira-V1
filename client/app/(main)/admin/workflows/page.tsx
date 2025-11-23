@@ -12,12 +12,14 @@ import { useCurrentUser } from "../../../../hooks/useCurrentUser";
 import { ApiError } from "../../../../lib/apiClient";
 import {
   Role,
+  RoleDefinition,
   WorkflowApproverDynamic,
   WorkflowApproverType,
   WorkflowDefinition,
   WorkflowEntityType
 } from "../../../../lib/types";
 import { createWorkflowDefinition, fetchWorkflowDefinitions } from "../../../../features/workflow/api";
+import { fetchRoles } from "../../../../features/admin/api";
 
 type StepFormState = {
   name: string;
@@ -27,8 +29,6 @@ type StepFormState = {
   requiresCommentOnReject: boolean;
   requiresCommentOnSendBack: boolean;
 };
-
-const roleOptions: Role[] = ["SUPER_ADMIN", "VP", "PM", "ENGINEER", "PROJECT_MANAGER", "DEVELOPER", "VIEWER"];
 
 const dynamicApproverOptions: { value: WorkflowApproverDynamic; label: string }[] = [
   { value: "ENGINEERING_TEAM", label: "Engineering team" },
@@ -52,10 +52,10 @@ function createStepState(): StepFormState {
 
 export default function AdminWorkflowsPage() {
   const { user, loading: sessionLoading } = useCurrentUser({
-    redirectTo: "/login",
-    requiredRoles: ["PM", "SUPER_ADMIN"]
+    redirectTo: "/login"
   });
   const [definitions, setDefinitions] = useState<WorkflowDefinition[]>([]);
+  const [roles, setRoles] = useState<RoleDefinition[]>([]);
   const [loading, setLoading] = useState(true);
   const [listError, setListError] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
@@ -64,6 +64,18 @@ export default function AdminWorkflowsPage() {
   const [entityType, setEntityType] = useState<WorkflowEntityType>("TASK");
   const [steps, setSteps] = useState<StepFormState[]>([createStepState()]);
   const [feedback, setFeedback] = useState<string | null>(null);
+
+  const canCreateWorkflow = (user?.permittedModules?.includes("createWorkflow") ?? false) || user?.role === "SUPER_ADMIN" || user?.role === "PM";
+  const hasAccess = canCreateWorkflow;
+
+  const loadRoles = useCallback(async () => {
+    try {
+      const list = await fetchRoles();
+      setRoles(list);
+    } catch (error) {
+      console.error("Failed to load roles", error);
+    }
+  }, []);
 
   const loadDefinitions = useCallback(async () => {
     try {
@@ -171,13 +183,18 @@ export default function AdminWorkflowsPage() {
   useEffect(() => {
     if (user) {
       void loadDefinitions();
+      void loadRoles();
     }
-  }, [user, loadDefinitions]);
+  }, [user, loadDefinitions, loadRoles]);
 
   const pageHelper = loading ? "Loading workflows..." : `${definitions.length} definition(s)`;
 
   if (sessionLoading || !user) {
     return <div className="flex min-h-screen items-center justify-center text-ink-400">Loading access...</div>;
+  }
+
+  if (!hasAccess) {
+    return <div className="flex min-h-screen items-center justify-center text-ink-400">Access Denied</div>;
   }
 
   return (
@@ -193,7 +210,7 @@ export default function AdminWorkflowsPage() {
             <p className="text-lg font-semibold text-ink-900">Workflow Definitions</p>
             <p className="text-sm text-ink-500">Manage approval logic for vendor and engineering flows.</p>
           </div>
-          <Button onClick={handleOpenModal}>Create Workflow</Button>
+          {canCreateWorkflow && <Button onClick={handleOpenModal}>Create Workflow</Button>}
         </div>
         <Card title="Definitions" helperText={pageHelper}>
           {loading ? (
@@ -296,14 +313,14 @@ export default function AdminWorkflowsPage() {
                     </div>
                     {step.approverType === "ROLE" ? (
                       <div>
-                        <label className="mb-1 block text-xs font-semibold uppercase tracking-wide text-ink-400">Approver role</label>
+                        <label className="mb-1 block text-xs font-semibold uppercase tracking-wide text-ink-400">Assignee Role</label>
                         <Select
                           value={step.approverRole}
                           onChange={(e) => handleStepChange(index, { approverRole: e.target.value as Role })}
                         >
-                          {roleOptions.map((role) => (
-                            <option key={role} value={role}>
-                              {role}
+                          {roles.map((role) => (
+                            <option key={role.id} value={role.name}>
+                              {role.name}
                             </option>
                           ))}
                         </Select>

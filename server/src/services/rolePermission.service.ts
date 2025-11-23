@@ -4,17 +4,16 @@ import { getRolePermissionByRole, setRolePermissions, listRoles } from "../data/
 export const PERMISSION_MODULES: PermissionModule[] = [
   "dashboard",
   "projects",
-  "tasks",
   "notifications",
-  "teamDevelopers",
   "approvals",
   "alerts",
   "reports",
   "chat",
   "settings",
   "admin",
-  "adminHolidays",
-  "personas"
+  "personas",
+  "createProject",
+  "createWorkflow"
 ];
 
 export const SYSTEM_ROLES: Role[] = [
@@ -28,11 +27,11 @@ export const SYSTEM_ROLES: Role[] = [
 ];
 
 const DEFAULT_ROLE_MODULES: Record<string, PermissionModule[]> = {
-  SUPER_ADMIN: ["dashboard", "projects", "notifications", "alerts", "reports", "approvals", "chat", "settings", "admin", "personas"],
-  PM: ["dashboard", "projects", "notifications", "alerts", "reports", "approvals", "chat", "settings", "admin", "personas"],
-  PROJECT_MANAGER: ["dashboard", "projects", "notifications", "teamDevelopers", "reports", "chat", "settings", "personas"],
-  DEVELOPER: ["dashboard", "tasks", "notifications", "chat", "settings", "personas"],
-  ENGINEER: ["dashboard", "tasks", "notifications", "chat", "settings", "personas"],
+  SUPER_ADMIN: ["dashboard", "projects", "notifications", "alerts", "reports", "approvals", "chat", "settings", "admin", "personas", "createProject", "createWorkflow"],
+  PM: ["dashboard", "projects", "notifications", "alerts", "reports", "approvals", "chat", "settings", "admin", "personas", "createProject", "createWorkflow"],
+  PROJECT_MANAGER: ["dashboard", "projects", "notifications", "reports", "chat", "settings", "personas"],
+  DEVELOPER: ["dashboard", "notifications", "chat", "settings", "personas"],
+  ENGINEER: ["dashboard", "notifications", "chat", "settings", "personas"],
   VP: ["dashboard", "projects", "notifications", "alerts", "reports", "chat", "settings", "personas"],
   VIEWER: ["dashboard", "projects", "notifications", "chat", "settings", "personas"]
 };

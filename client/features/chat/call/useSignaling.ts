@@ -102,14 +102,23 @@ type UseSignalingInput = {
 } & SignalingHandlers;
 
 const deriveSignalingUrl = () => {
-  const envUrl = process.env.NEXT_PUBLIC_SIGNALING_URL;
-  if (envUrl) {
-    return envUrl;
+  let url = process.env.NEXT_PUBLIC_SIGNALING_URL;
+  if (!url) {
+    if (API_BASE_URL.endsWith("/api")) {
+      url = `${API_BASE_URL.replace(/\/api$/, "")}/ws`;
+    } else {
+      url = `${API_BASE_URL.replace(/\/api(?:\/.*)?$/, "")}/ws`;
+    }
   }
-  if (API_BASE_URL.endsWith("/api")) {
-    return `${API_BASE_URL.replace(/\/api$/, "")}/ws`;
+
+  // If running in browser and URL is localhost but we are not, try to fix it
+  if (typeof window !== "undefined" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+     if (url.includes("localhost") || url.includes("127.0.0.1")) {
+         url = url.replace(/localhost|127\.0\.0\.1/g, window.location.hostname);
+     }
   }
-  return `${API_BASE_URL.replace(/\/api(?:\/.*)?$/, "")}/ws`;
+  
+  return url;
 };
 
 export function useSignaling({

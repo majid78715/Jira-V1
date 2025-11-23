@@ -87,7 +87,7 @@ export function getIoNamespace(): Namespace | undefined {
 export function initSignalingServer(httpServer: HttpServer): Namespace {
   const io = new Server(httpServer, {
     cors: {
-      origin: process.env.CLIENT_ORIGIN || "http://localhost:3000",
+      origin: process.env.NODE_ENV === "development" ? true : (process.env.CLIENT_ORIGIN || "http://localhost:3000"),
       credentials: true
     }
   });
