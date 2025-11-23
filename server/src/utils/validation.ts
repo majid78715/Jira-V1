@@ -35,12 +35,14 @@ export const profileSchema = z
     firstName: z.string({ message: "firstName is required." }).trim().min(1).max(64),
     lastName: z.string({ message: "lastName is required." }).trim().min(1).max(64),
     mobileNumber: z
-      .string({ message: "mobileNumber is required." })
+      .string()
       .trim()
-      .regex(E164_REGEX, "mobileNumber must follow E.164 format."),
-    country: countrySchema,
-    city: z.string({ message: "city is required." }).trim().min(1).max(CITY_MAX),
-    timeZone: timeZoneSchema,
+      .regex(E164_REGEX, "mobileNumber must follow E.164 format.")
+      .optional()
+      .or(z.literal("")),
+    country: countrySchema.optional(),
+    city: z.string({ message: "city is required." }).trim().min(1).max(CITY_MAX).optional(),
+    timeZone: timeZoneSchema.optional(),
     title: z.string({ message: "title is required." }).trim().min(1).max(TITLE_MAX)
   })
   .strict();

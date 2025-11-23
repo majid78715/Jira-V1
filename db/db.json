@@ -353,7 +353,136 @@
   ],
   "userInvitations": [],
   "profileChangeRequests": [],
-  "projects": [],
+  "projects": [
+    {
+      "id": "0c81f7db-c4e7-4756-9609-9f030997507a",
+      "createdAt": "2025-11-23T05:46:11.331Z",
+      "updatedAt": "2025-11-23T06:02:10.368Z",
+      "name": "marketplace",
+      "code": "MARK-1573",
+      "description": "test12345",
+      "ownerId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "ownerIds": [
+        "edcedaae-7893-474e-aee4-7cdc77eb6ab0"
+      ],
+      "projectType": "PRODUCT_FEATURE",
+      "priority": "MEDIUM",
+      "stage": "PLANNING",
+      "sponsorUserId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "deliveryManagerUserId": "test-pjm",
+      "deliveryManagerUserIds": [
+        "test-pjm"
+      ],
+      "coreTeamUserIds": [],
+      "stakeholderUserIds": [],
+      "vendorCompanyIds": [
+        "company-vertex"
+      ],
+      "primaryVendorId": "company-vertex",
+      "additionalVendorIds": [],
+      "budgetHours": 80,
+      "estimatedEffortHours": 80,
+      "timeTrackingRequired": true,
+      "status": "PROPOSED",
+      "health": "GREEN",
+      "riskLevel": "LOW",
+      "complianceFlags": [],
+      "businessUnit": "GENERAL",
+      "productModule": "CORE",
+      "tags": [],
+      "rateModel": "TIME_AND_MATERIAL",
+      "taskWorkflowDefinitionId": "workflow-task-default",
+      "isDraft": false,
+      "packageStatus": "PJM_REVIEW"
+    },
+    {
+      "id": "d51b9ea6-2102-4c44-b2dc-695275b3d0c7",
+      "createdAt": "2025-11-23T06:26:35.447Z",
+      "updatedAt": "2025-11-23T06:47:43.983Z",
+      "name": "Project120",
+      "code": "PROJ-3716",
+      "description": "Project120Project120Project120",
+      "ownerId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "ownerIds": [
+        "e9a7ac57-a140-45d7-b294-4b1201e63dad"
+      ],
+      "projectType": "PRODUCT_FEATURE",
+      "priority": "MEDIUM",
+      "stage": "PLANNING",
+      "sponsorUserId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "deliveryManagerUserId": "test-pjm",
+      "deliveryManagerUserIds": [
+        "test-pjm"
+      ],
+      "coreTeamUserIds": [],
+      "stakeholderUserIds": [],
+      "vendorCompanyIds": [
+        "company-vertex"
+      ],
+      "primaryVendorId": "company-vertex",
+      "additionalVendorIds": [],
+      "budgetHours": 100,
+      "estimatedEffortHours": 100,
+      "timeTrackingRequired": true,
+      "status": "ACTIVE",
+      "health": "GREEN",
+      "riskLevel": "LOW",
+      "complianceFlags": [],
+      "businessUnit": "GENERAL",
+      "productModule": "CORE",
+      "tags": [],
+      "rateModel": "TIME_AND_MATERIAL",
+      "taskWorkflowDefinitionId": "workflow-task-default",
+      "isDraft": false,
+      "packageStatus": "ACTIVE",
+      "startDate": "2025-11-24",
+      "endDate": "2025-11-30"
+    },
+    {
+      "id": "5e529259-73a5-4682-919f-3deb86da4408",
+      "createdAt": "2025-11-23T06:53:23.755Z",
+      "updatedAt": "2025-11-23T06:54:58.418Z",
+      "name": "Project 150",
+      "code": "PROJ-3736",
+      "description": "Project 150Project 150Project 150Project 150",
+      "ownerId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "ownerIds": [
+        "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+        "edcedaae-7893-474e-aee4-7cdc77eb6ab0"
+      ],
+      "projectType": "PRODUCT_FEATURE",
+      "priority": "MEDIUM",
+      "stage": "PLANNING",
+      "sponsorUserId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "deliveryManagerUserId": "test-pjm",
+      "deliveryManagerUserIds": [
+        "test-pjm"
+      ],
+      "coreTeamUserIds": [],
+      "stakeholderUserIds": [],
+      "vendorCompanyIds": [
+        "company-vertex"
+      ],
+      "primaryVendorId": "company-vertex",
+      "additionalVendorIds": [],
+      "budgetHours": 100,
+      "estimatedEffortHours": 100,
+      "timeTrackingRequired": true,
+      "status": "PROPOSED",
+      "health": "GREEN",
+      "riskLevel": "LOW",
+      "complianceFlags": [],
+      "businessUnit": "GENERAL",
+      "productModule": "CORE",
+      "tags": [],
+      "rateModel": "TIME_AND_MATERIAL",
+      "taskWorkflowDefinitionId": "workflow-task-default",
+      "isDraft": false,
+      "packageStatus": "PJM_REVIEW",
+      "startDate": "2025-11-23",
+      "endDate": "2025-11-30"
+    }
+  ],
   "tasks": [
     {
       "id": "3b7471c1-b35a-4403-92db-e994ac4128e4",
@@ -1248,6 +1377,220 @@
         "newFeature": {}
       },
       "parentId": "580996e5-80bd-4474-b487-18a5296c78ee"
+    },
+    {
+      "id": "c6d6312c-2993-43eb-ab09-c9644e6bbb69",
+      "createdAt": "2025-11-23T05:46:33.717Z",
+      "updatedAt": "2025-11-23T06:04:39.866Z",
+      "projectId": "0c81f7db-c4e7-4756-9609-9f030997507a",
+      "itemType": "NEW_FEATURE",
+      "taskType": "STORY",
+      "title": "ui expansion",
+      "description": "the thing we want to do is do new ui changes",
+      "createdById": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "reporterUserId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "isVendorTask": false,
+      "status": "IN_PROGRESS",
+      "priority": "MEDIUM",
+      "budgetHours": 0,
+      "requiredSkills": [],
+      "acceptanceCriteria": [],
+      "dependencyTaskIds": [],
+      "linkedIssueIds": [],
+      "estimationHours": 0,
+      "costAmount": 0,
+      "assignmentPlan": [],
+      "typeMeta": {
+        "newFeature": {}
+      },
+      "assigneeUserId": "test-dev"
+    },
+    {
+      "id": "d6a30e55-b650-436f-934c-af6ed3cac17f",
+      "createdAt": "2025-11-23T05:53:23.274Z",
+      "updatedAt": "2025-11-23T06:44:27.005Z",
+      "projectId": "0c81f7db-c4e7-4756-9609-9f030997507a",
+      "itemType": "NEW_FEATURE",
+      "taskType": "STORY",
+      "title": "test123",
+      "createdById": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "reporterUserId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "isVendorTask": false,
+      "status": "IN_PROGRESS",
+      "priority": "MEDIUM",
+      "budgetHours": 0,
+      "dueDate": "2025-11-30",
+      "plannedStartDate": "2025-11-24",
+      "requiredSkills": [],
+      "acceptanceCriteria": [],
+      "dependencyTaskIds": [],
+      "linkedIssueIds": [],
+      "estimationHours": 0,
+      "costAmount": 0,
+      "assignmentPlan": [],
+      "typeMeta": {
+        "newFeature": {
+          "userStory": "test1234567889"
+        }
+      },
+      "assigneeUserId": "test-dev"
+    },
+    {
+      "id": "960de3a1-b19f-4962-a386-f93530c3bb02",
+      "createdAt": "2025-11-23T05:53:38.215Z",
+      "updatedAt": "2025-11-23T05:53:38.215Z",
+      "projectId": "0c81f7db-c4e7-4756-9609-9f030997507a",
+      "itemType": "NEW_FEATURE",
+      "taskType": "STORY",
+      "title": "test subtask",
+      "createdById": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "reporterUserId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "isVendorTask": false,
+      "status": "NEW",
+      "priority": "MEDIUM",
+      "budgetHours": 0,
+      "requiredSkills": [],
+      "acceptanceCriteria": [],
+      "dependencyTaskIds": [],
+      "linkedIssueIds": [],
+      "estimationHours": 0,
+      "costAmount": 0,
+      "assignmentPlan": [],
+      "typeMeta": {
+        "newFeature": {}
+      },
+      "parentId": "d6a30e55-b650-436f-934c-af6ed3cac17f"
+    },
+    {
+      "id": "8aeab42e-8c8b-4e0b-8dc5-39a80d00d95c",
+      "createdAt": "2025-11-23T06:27:09.574Z",
+      "updatedAt": "2025-11-23T06:46:22.799Z",
+      "projectId": "d51b9ea6-2102-4c44-b2dc-695275b3d0c7",
+      "itemType": "NEW_FEATURE",
+      "taskType": "STORY",
+      "title": "Test",
+      "description": "Test",
+      "createdById": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "reporterUserId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "assigneeUserId": "test-dev",
+      "isVendorTask": false,
+      "status": "DONE",
+      "priority": "MEDIUM",
+      "budgetHours": 0,
+      "dueDate": "2025-11-30",
+      "plannedStartDate": "2025-11-24",
+      "requiredSkills": [],
+      "acceptanceCriteria": [],
+      "dependencyTaskIds": [],
+      "linkedIssueIds": [],
+      "estimationHours": 0,
+      "costAmount": 0,
+      "assignmentPlan": [
+        {
+          "userId": "test-dev",
+          "hours": 0
+        }
+      ],
+      "typeMeta": {
+        "newFeature": {
+          "userStory": "Project120Project120Project120Project120Project120Project120"
+        }
+      }
+    },
+    {
+      "id": "86c82393-7ff7-4431-9d52-91498e6706f5",
+      "createdAt": "2025-11-23T06:42:36.969Z",
+      "updatedAt": "2025-11-23T06:47:44.064Z",
+      "projectId": "d51b9ea6-2102-4c44-b2dc-695275b3d0c7",
+      "itemType": "IMPROVEMENT",
+      "taskType": "TASK",
+      "title": "Test",
+      "description": "Test",
+      "createdById": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "reporterUserId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "isVendorTask": false,
+      "status": "PLANNED",
+      "priority": "MEDIUM",
+      "budgetHours": 0,
+      "dueDate": "2025-11-30",
+      "plannedStartDate": "2025-11-24",
+      "requiredSkills": [],
+      "acceptanceCriteria": [],
+      "dependencyTaskIds": [],
+      "linkedIssueIds": [],
+      "estimationHours": 0,
+      "costAmount": 0,
+      "assignmentPlan": [],
+      "parentId": "8aeab42e-8c8b-4e0b-8dc5-39a80d00d95c"
+    },
+    {
+      "id": "6ec29dca-4ce5-43ec-8501-0ea97680fe05",
+      "createdAt": "2025-11-23T06:54:53.529Z",
+      "updatedAt": "2025-11-23T06:57:17.169Z",
+      "projectId": "5e529259-73a5-4682-919f-3deb86da4408",
+      "itemType": "NEW_FEATURE",
+      "taskType": "STORY",
+      "title": "Project 150",
+      "description": "Project 150Project 150Project 150Project 150Project 150",
+      "createdById": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "reporterUserId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "assigneeUserId": "test-dev",
+      "isVendorTask": false,
+      "status": "DONE",
+      "priority": "MEDIUM",
+      "budgetHours": 0,
+      "requiredSkills": [],
+      "acceptanceCriteria": [],
+      "dependencyTaskIds": [],
+      "linkedIssueIds": [],
+      "estimationHours": 0,
+      "costAmount": 0,
+      "assignmentPlan": [
+        {
+          "userId": "test-pjm",
+          "hours": 0
+        }
+      ],
+      "typeMeta": {
+        "newFeature": {
+          "userStory": "Project 150Project 150Project 150Project 150"
+        }
+      }
+    },
+    {
+      "id": "ee5eb742-6d12-4635-bf40-d46319ea28c7",
+      "createdAt": "2025-11-23T06:55:20.307Z",
+      "updatedAt": "2025-11-23T06:55:20.307Z",
+      "projectId": "5e529259-73a5-4682-919f-3deb86da4408",
+      "itemType": "IMPROVEMENT",
+      "taskType": "TASK",
+      "title": "Project 150",
+      "description": "Project 150",
+      "createdById": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "reporterUserId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "assigneeUserId": "test-pjm",
+      "isVendorTask": false,
+      "status": "NEW",
+      "priority": "MEDIUM",
+      "budgetHours": 0,
+      "requiredSkills": [],
+      "acceptanceCriteria": [],
+      "dependencyTaskIds": [],
+      "linkedIssueIds": [],
+      "estimationHours": 0,
+      "costAmount": 0,
+      "assignmentPlan": [
+        {
+          "userId": "test-pjm",
+          "hours": 0
+        }
+      ],
+      "typeMeta": {
+        "improvement": {
+          "description": "Project 150Project 150"
+        }
+      },
+      "parentId": "6ec29dca-4ce5-43ec-8501-0ea97680fe05"
     }
   ],
   "assignments": [
@@ -1376,6 +1719,51 @@
       "status": "COMPLETED",
       "approvedById": "test-pjm",
       "approvedAt": "2025-11-22T10:53:32.952Z"
+    },
+    {
+      "id": "b9768169-7272-4e3c-b161-647a1e05d9bf",
+      "createdAt": "2025-11-23T06:04:39.840Z",
+      "updatedAt": "2025-11-23T06:04:39.840Z",
+      "taskId": "c6d6312c-2993-43eb-ab09-c9644e6bbb69",
+      "developerId": "test-dev",
+      "requestedById": "test-pjm",
+      "requestedMessage": "test 1223",
+      "status": "APPROVED",
+      "approvedById": "test-pjm",
+      "approvedAt": "2025-11-23T06:04:39.840Z"
+    },
+    {
+      "id": "bcae542a-73f5-42b8-b9d6-77c6a1d635f9",
+      "createdAt": "2025-11-23T06:27:59.642Z",
+      "updatedAt": "2025-11-23T06:46:22.786Z",
+      "taskId": "8aeab42e-8c8b-4e0b-8dc5-39a80d00d95c",
+      "developerId": "test-dev",
+      "requestedById": "test-pjm",
+      "status": "COMPLETED",
+      "approvedById": "test-pjm",
+      "approvedAt": "2025-11-23T06:46:22.782Z"
+    },
+    {
+      "id": "02b21c39-7eaa-421d-a4ba-348b8cfb6359",
+      "createdAt": "2025-11-23T06:44:26.990Z",
+      "updatedAt": "2025-11-23T06:44:26.990Z",
+      "taskId": "d6a30e55-b650-436f-934c-af6ed3cac17f",
+      "developerId": "test-dev",
+      "requestedById": "test-pjm",
+      "status": "APPROVED",
+      "approvedById": "test-pjm",
+      "approvedAt": "2025-11-23T06:44:26.990Z"
+    },
+    {
+      "id": "47325175-5be2-438d-8656-0f6959d02ef2",
+      "createdAt": "2025-11-23T06:56:38.746Z",
+      "updatedAt": "2025-11-23T06:57:17.159Z",
+      "taskId": "6ec29dca-4ce5-43ec-8501-0ea97680fe05",
+      "developerId": "test-dev",
+      "requestedById": "test-pjm",
+      "status": "COMPLETED",
+      "approvedById": "test-pjm",
+      "approvedAt": "2025-11-23T06:57:17.155Z"
     }
   ],
   "workflowDefinitions": [
@@ -1492,7 +1880,25 @@
     }
   ],
   "workflowActions": [],
-  "timeEntries": [],
+  "timeEntries": [
+    {
+      "id": "0a48a0a4-5f5e-453d-aa4f-5da5d69d1211",
+      "createdAt": "2025-11-23T06:07:50.688Z",
+      "updatedAt": "2025-11-23T06:07:50.688Z",
+      "userId": "test-dev",
+      "projectId": "0c81f7db-c4e7-4756-9609-9f030997507a",
+      "taskId": "c6d6312c-2993-43eb-ab09-c9644e6bbb69",
+      "date": "2025-11-24",
+      "minutes": 180,
+      "startedAt": "2025-11-24T17:00:00.000Z",
+      "endedAt": "2025-11-24T20:00:00.000Z",
+      "note": "[Code: this is the gitlab code details ]",
+      "source": "MANUAL",
+      "outOfSchedule": false,
+      "isLocked": false,
+      "billable": true
+    }
+  ],
   "workSchedules": [
     {
       "id": "schedule-humain-default",
@@ -1604,6 +2010,16 @@
       "entityType": "TASK",
       "authorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
       "body": "test",
+      "attachmentIds": []
+    },
+    {
+      "id": "3a35c70b-e47a-4470-9241-c4f343b50bcd",
+      "createdAt": "2025-11-23T06:06:30.677Z",
+      "updatedAt": "2025-11-23T06:06:30.677Z",
+      "entityId": "c6d6312c-2993-43eb-ab09-c9644e6bbb69",
+      "entityType": "TASK",
+      "authorId": "test-dev",
+      "body": "ive added a new ui button",
       "attachmentIds": []
     }
   ],
@@ -2362,6 +2778,264 @@
         "roomId": "0ab0ce91-93b5-41e9-bcf5-95bb1d6bd1fa",
         "roomName": "majid abdulelah ↔ Super Admin",
         "senderId": "user-super-admin",
+        "preview": "📝 **Call Transcription**"
+      }
+    },
+    {
+      "id": "49e4a2e0-665c-4664-ac07-1dea67485ef6",
+      "createdAt": "2025-11-23T06:02:10.381Z",
+      "updatedAt": "2025-11-23T06:02:10.381Z",
+      "userId": "test-pjm",
+      "message": "New project assigned: marketplace",
+      "type": "PROJECT_PACKAGE_ASSIGNED",
+      "read": false,
+      "metadata": {
+        "projectId": "0c81f7db-c4e7-4756-9609-9f030997507a"
+      }
+    },
+    {
+      "id": "f87572a4-9785-4ce6-a301-1a53bd7ddc42",
+      "createdAt": "2025-11-23T06:04:39.886Z",
+      "updatedAt": "2025-11-23T06:04:39.886Z",
+      "userId": "test-dev",
+      "message": "You have been assigned to task ui expansion",
+      "type": "ASSIGNMENT_APPROVED",
+      "read": false,
+      "metadata": {
+        "assignmentId": "b9768169-7272-4e3c-b161-647a1e05d9bf"
+      }
+    },
+    {
+      "id": "51036e6f-ebb6-403a-aed3-aa8857cef673",
+      "createdAt": "2025-11-23T06:18:43.628Z",
+      "updatedAt": "2025-11-23T06:18:55.657Z",
+      "userId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "message": "Super Admin sent you a message",
+      "type": "CHAT_MESSAGE",
+      "read": true,
+      "metadata": {
+        "roomId": "b7d6c0e9-e34c-4870-a8c8-ab104f9db81f",
+        "roomName": "Mohamed AlArjani ↔ Super Admin",
+        "senderId": "user-super-admin",
+        "preview": "hello"
+      }
+    },
+    {
+      "id": "86c5119e-7f53-4648-9f47-4a6ac1ee6288",
+      "createdAt": "2025-11-23T06:18:58.600Z",
+      "updatedAt": "2025-11-23T06:34:41.077Z",
+      "userId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "message": "Mohamed AlArjani sent you a message",
+      "type": "CHAT_MESSAGE",
+      "read": true,
+      "metadata": {
+        "roomId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+        "roomName": "Mohamed AlArjani ↔ majid abdulelah",
+        "senderId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+        "preview": "hi"
+      }
+    },
+    {
+      "id": "d31672af-69f3-4e4a-8e17-b14b2be6c397",
+      "createdAt": "2025-11-23T06:22:33.716Z",
+      "updatedAt": "2025-11-23T06:22:34.733Z",
+      "userId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "message": "Super Admin sent you a message",
+      "type": "CHAT_MESSAGE",
+      "read": true,
+      "metadata": {
+        "roomId": "b7d6c0e9-e34c-4870-a8c8-ab104f9db81f",
+        "roomName": "Mohamed AlArjani ↔ Super Admin",
+        "senderId": "user-super-admin",
+        "preview": "📝 **Call Transcription**\n\n**Super Admin:** Thadoos Salaam alaikum.\n\n**Super Admin:** Hello.\n\n**Super Admin:** Hello Salaam Alaikum.\n\n**Super Admin:** Assala..."
+      }
+    },
+    {
+      "id": "34d10acc-b7c1-4313-b92d-520c14de6254",
+      "createdAt": "2025-11-23T06:22:37.164Z",
+      "updatedAt": "2025-11-23T06:22:37.975Z",
+      "userId": "user-super-admin",
+      "message": "Mohamed AlArjani sent you a message",
+      "type": "CHAT_MESSAGE",
+      "read": true,
+      "metadata": {
+        "roomId": "b7d6c0e9-e34c-4870-a8c8-ab104f9db81f",
+        "roomName": "Mohamed AlArjani ↔ Super Admin",
+        "senderId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+        "preview": "📝 **Call Transcription**\n\n**Mohamed AlArjani:** \n\n**Mohamed AlArjani:** Auto.\n\n**Mohamed AlArjani:** Oh yeah, my script is working very good. Very good.\n\n**..."
+      }
+    },
+    {
+      "id": "d831ac4c-fd6a-4275-bf59-1ecf1027c964",
+      "createdAt": "2025-11-23T06:27:20.062Z",
+      "updatedAt": "2025-11-23T06:27:20.062Z",
+      "userId": "test-pjm",
+      "message": "New project assigned: Project120",
+      "type": "PROJECT_PACKAGE_ASSIGNED",
+      "read": false,
+      "metadata": {
+        "projectId": "d51b9ea6-2102-4c44-b2dc-695275b3d0c7"
+      }
+    },
+    {
+      "id": "101f51c3-f235-4afa-9040-645d05f9b9bf",
+      "createdAt": "2025-11-23T06:27:59.678Z",
+      "updatedAt": "2025-11-23T06:27:59.678Z",
+      "userId": "test-dev",
+      "message": "You have been assigned to task Test",
+      "type": "ASSIGNMENT_APPROVED",
+      "read": false,
+      "metadata": {
+        "assignmentId": "bcae542a-73f5-42b8-b9d6-77c6a1d635f9"
+      }
+    },
+    {
+      "id": "95b92b82-343c-4e9c-a6c1-1cbc2ccc23c8",
+      "createdAt": "2025-11-23T06:44:27.020Z",
+      "updatedAt": "2025-11-23T06:44:27.020Z",
+      "userId": "test-dev",
+      "message": "You have been assigned to task test123",
+      "type": "ASSIGNMENT_APPROVED",
+      "read": false,
+      "metadata": {
+        "assignmentId": "02b21c39-7eaa-421d-a4ba-348b8cfb6359"
+      }
+    },
+    {
+      "id": "771d6f89-7ad0-4496-b229-521cb5c00f74",
+      "createdAt": "2025-11-23T06:46:22.814Z",
+      "updatedAt": "2025-11-23T06:46:22.814Z",
+      "userId": "test-dev",
+      "message": "Task completion approved",
+      "type": "ASSIGNMENT_COMPLETED",
+      "read": false,
+      "metadata": {
+        "assignmentId": "bcae542a-73f5-42b8-b9d6-77c6a1d635f9"
+      }
+    },
+    {
+      "id": "9ef4cf9b-bf60-43c0-80a1-7ae1922dc655",
+      "createdAt": "2025-11-23T06:54:58.424Z",
+      "updatedAt": "2025-11-23T06:54:58.424Z",
+      "userId": "test-pjm",
+      "message": "New project assigned: Project 150",
+      "type": "PROJECT_PACKAGE_ASSIGNED",
+      "read": false,
+      "metadata": {
+        "projectId": "5e529259-73a5-4682-919f-3deb86da4408"
+      }
+    },
+    {
+      "id": "2947f1e9-fb8d-4e6b-a950-d8743c33f8c9",
+      "createdAt": "2025-11-23T06:56:38.778Z",
+      "updatedAt": "2025-11-23T06:56:38.778Z",
+      "userId": "test-dev",
+      "message": "You have been assigned to task Project 150",
+      "type": "ASSIGNMENT_APPROVED",
+      "read": false,
+      "metadata": {
+        "assignmentId": "47325175-5be2-438d-8656-0f6959d02ef2"
+      }
+    },
+    {
+      "id": "3a5de0e1-68c2-4e6e-a118-52b51bc2b5b7",
+      "createdAt": "2025-11-23T06:57:17.184Z",
+      "updatedAt": "2025-11-23T06:57:17.184Z",
+      "userId": "test-dev",
+      "message": "Task completion approved",
+      "type": "ASSIGNMENT_COMPLETED",
+      "read": false,
+      "metadata": {
+        "assignmentId": "47325175-5be2-438d-8656-0f6959d02ef2"
+      }
+    },
+    {
+      "id": "64957443-a159-4d86-8cb1-e7ee83cd87ab",
+      "createdAt": "2025-11-23T07:01:30.590Z",
+      "updatedAt": "2025-11-23T07:08:09.601Z",
+      "userId": "user-super-admin",
+      "message": "Test Project Manager sent you a message",
+      "type": "CHAT_MESSAGE",
+      "read": true,
+      "metadata": {
+        "roomId": "98773fed-8778-4cf4-800e-b310acfed35a",
+        "roomName": "Test Project Manager ↔ Super Admin",
+        "senderId": "test-pjm",
+        "preview": "📝 **Call Transcription**"
+      }
+    },
+    {
+      "id": "696bdc5d-c76f-46a7-bea6-19f9549326d9",
+      "createdAt": "2025-11-23T07:01:55.507Z",
+      "updatedAt": "2025-11-23T07:02:55.057Z",
+      "userId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "message": "majid abdulelah sent you a message",
+      "type": "CHAT_MESSAGE",
+      "read": true,
+      "metadata": {
+        "roomId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+        "roomName": "Mohamed AlArjani ↔ majid abdulelah",
+        "senderId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+        "preview": "hi"
+      }
+    },
+    {
+      "id": "7b9858fd-135d-4ea0-8c4f-23ed36689ab4",
+      "createdAt": "2025-11-23T07:02:32.757Z",
+      "updatedAt": "2025-11-23T07:02:33.584Z",
+      "userId": "test-pjm",
+      "message": "majid abdulelah sent you a message",
+      "type": "CHAT_MESSAGE",
+      "read": true,
+      "metadata": {
+        "roomId": "b89a9283-ef50-4513-83f9-9a6fc96dd20e",
+        "roomName": "Test Project Manager ↔ majid abdulelah",
+        "senderId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+        "preview": "📝 **Call Transcription**"
+      }
+    },
+    {
+      "id": "a6d1ea61-c249-4595-8386-c5b301a57079",
+      "createdAt": "2025-11-23T07:02:39.687Z",
+      "updatedAt": "2025-11-23T07:02:46.966Z",
+      "userId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "message": "Test Project Manager sent you a message",
+      "type": "CHAT_MESSAGE",
+      "read": true,
+      "metadata": {
+        "roomId": "b89a9283-ef50-4513-83f9-9a6fc96dd20e",
+        "roomName": "Test Project Manager ↔ majid abdulelah",
+        "senderId": "test-pjm",
+        "preview": "📝 **Call Transcription**"
+      }
+    },
+    {
+      "id": "2374d9d2-12d8-4db9-8702-72b9e8496b9e",
+      "createdAt": "2025-11-23T07:05:36.803Z",
+      "updatedAt": "2025-11-23T07:05:36.867Z",
+      "userId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "message": "Mohamed AlArjani sent you a message",
+      "type": "CHAT_MESSAGE",
+      "read": true,
+      "metadata": {
+        "roomId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+        "roomName": "Mohamed AlArjani ↔ majid abdulelah",
+        "senderId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+        "preview": "📝 **Call Transcription**"
+      }
+    },
+    {
+      "id": "bdcbdb06-1ddf-4aa3-858f-575d8885e25c",
+      "createdAt": "2025-11-23T07:05:54.441Z",
+      "updatedAt": "2025-11-23T07:06:03.617Z",
+      "userId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "message": "majid abdulelah sent you a message",
+      "type": "CHAT_MESSAGE",
+      "read": true,
+      "metadata": {
+        "roomId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+        "roomName": "Mohamed AlArjani ↔ majid abdulelah",
+        "senderId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
         "preview": "📝 **Call Transcription**"
       }
     }
@@ -7638,6 +8312,518 @@
       "metadata": {
         "projectId": "346ed05b-a2bc-4c90-9ba4-bb88a528ce1e"
       }
+    },
+    {
+      "id": "a8a725f6-3d7b-4afb-a13e-1c00d7b5182c",
+      "createdAt": "2025-11-23T05:46:11.344Z",
+      "updatedAt": "2025-11-23T05:46:11.344Z",
+      "actorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "action": "PROJECT_CREATED",
+      "entityId": "0c81f7db-c4e7-4756-9609-9f030997507a",
+      "entityType": "PROJECT",
+      "message": "Created project marketplace",
+      "metadata": {
+        "projectId": "0c81f7db-c4e7-4756-9609-9f030997507a"
+      }
+    },
+    {
+      "id": "600fdd50-81c6-4da6-9f79-b4c1814995a9",
+      "createdAt": "2025-11-23T05:46:14.179Z",
+      "updatedAt": "2025-11-23T05:46:14.180Z",
+      "actorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "action": "PROJECT_CREATED",
+      "entityId": "0c81f7db-c4e7-4756-9609-9f030997507a",
+      "entityType": "PROJECT",
+      "message": "Created project marketplace from draft",
+      "metadata": {
+        "projectId": "0c81f7db-c4e7-4756-9609-9f030997507a"
+      }
+    },
+    {
+      "id": "b5b56d42-0d35-422b-bc1f-7afc1257d6ad",
+      "createdAt": "2025-11-23T05:46:33.730Z",
+      "updatedAt": "2025-11-23T05:46:33.730Z",
+      "actorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "action": "TASK_CREATED",
+      "entityId": "c6d6312c-2993-43eb-ab09-c9644e6bbb69",
+      "entityType": "TASK",
+      "message": "Created task ui expansion for marketplace",
+      "metadata": {
+        "projectId": "0c81f7db-c4e7-4756-9609-9f030997507a",
+        "taskId": "c6d6312c-2993-43eb-ab09-c9644e6bbb69"
+      }
+    },
+    {
+      "id": "911e73ee-7b0f-4496-ae29-7c353f8052e6",
+      "createdAt": "2025-11-23T05:53:23.294Z",
+      "updatedAt": "2025-11-23T05:53:23.294Z",
+      "actorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "action": "TASK_CREATED",
+      "entityId": "d6a30e55-b650-436f-934c-af6ed3cac17f",
+      "entityType": "TASK",
+      "message": "Created task test123 for marketplace",
+      "metadata": {
+        "projectId": "0c81f7db-c4e7-4756-9609-9f030997507a",
+        "taskId": "d6a30e55-b650-436f-934c-af6ed3cac17f"
+      }
+    },
+    {
+      "id": "5ce6266a-706d-4d3f-a934-57ae24971f8b",
+      "createdAt": "2025-11-23T05:53:38.238Z",
+      "updatedAt": "2025-11-23T05:53:38.238Z",
+      "actorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "action": "TASK_CREATED",
+      "entityId": "960de3a1-b19f-4962-a386-f93530c3bb02",
+      "entityType": "TASK",
+      "message": "Created task test subtask for marketplace",
+      "metadata": {
+        "projectId": "0c81f7db-c4e7-4756-9609-9f030997507a",
+        "taskId": "960de3a1-b19f-4962-a386-f93530c3bb02"
+      }
+    },
+    {
+      "id": "a9c41606-8127-4e84-a362-dbc3d611fc76",
+      "createdAt": "2025-11-23T06:02:10.397Z",
+      "updatedAt": "2025-11-23T06:02:10.397Z",
+      "actorId": "user-super-admin",
+      "action": "PROJECT_PACKAGE_SUBMITTED",
+      "entityId": "0c81f7db-c4e7-4756-9609-9f030997507a",
+      "entityType": "PROJECT",
+      "message": "Advanced project package to PJM_REVIEW",
+      "metadata": {
+        "projectId": "0c81f7db-c4e7-4756-9609-9f030997507a"
+      }
+    },
+    {
+      "id": "5f555bfe-b4d8-4f13-82f4-0fb95b31556c",
+      "createdAt": "2025-11-23T06:04:39.874Z",
+      "updatedAt": "2025-11-23T06:04:39.874Z",
+      "actorId": "test-pjm",
+      "action": "ASSIGNMENT_REQUESTED",
+      "entityId": "b9768169-7272-4e3c-b161-647a1e05d9bf",
+      "entityType": "ASSIGNMENT",
+      "message": "Requested assignment for Test Developer",
+      "metadata": {
+        "taskId": "c6d6312c-2993-43eb-ab09-c9644e6bbb69",
+        "assignmentId": "b9768169-7272-4e3c-b161-647a1e05d9bf"
+      }
+    },
+    {
+      "id": "26dd83b1-fdd9-4e53-a715-428ea1608a8b",
+      "createdAt": "2025-11-23T06:06:30.693Z",
+      "updatedAt": "2025-11-23T06:06:30.693Z",
+      "actorId": "test-dev",
+      "action": "COMMENT_ADDED",
+      "entityId": "c6d6312c-2993-43eb-ab09-c9644e6bbb69",
+      "entityType": "TASK",
+      "message": "Commented on task",
+      "metadata": {
+        "entityId": "c6d6312c-2993-43eb-ab09-c9644e6bbb69",
+        "commentId": "3a35c70b-e47a-4470-9241-c4f343b50bcd",
+        "entityType": "TASK"
+      }
+    },
+    {
+      "id": "2f144921-2026-4245-9990-f35fcfbbf66e",
+      "createdAt": "2025-11-23T06:07:50.718Z",
+      "updatedAt": "2025-11-23T06:07:50.718Z",
+      "actorId": "test-dev",
+      "action": "TIME_ENTRY_CREATED",
+      "message": "Logged manual time",
+      "metadata": {
+        "timeEntryId": "0a48a0a4-5f5e-453d-aa4f-5da5d69d1211",
+        "minutes": 180,
+        "taskId": "c6d6312c-2993-43eb-ab09-c9644e6bbb69"
+      }
+    },
+    {
+      "id": "a75970b9-a1b2-4795-a3c8-196d6324d958",
+      "createdAt": "2025-11-23T06:19:36.531Z",
+      "updatedAt": "2025-11-23T06:19:36.531Z",
+      "actorId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "action": "CALL_INVITE",
+      "entityId": "b7d6c0e9-e34c-4870-a8c8-ab104f9db81f",
+      "entityType": "CHAT_CALL",
+      "message": "Started audio call with Super Admin",
+      "metadata": {
+        "sessionId": "b7d6c0e9-e34c-4870-a8c8-ab104f9db81f",
+        "media": "audio",
+        "toUserId": "user-super-admin"
+      }
+    },
+    {
+      "id": "35310d18-9dd5-4b70-a55e-aa47e359f5a3",
+      "createdAt": "2025-11-23T06:22:33.629Z",
+      "updatedAt": "2025-11-23T06:22:33.629Z",
+      "actorId": "user-super-admin",
+      "action": "CALL_END",
+      "entityId": "b7d6c0e9-e34c-4870-a8c8-ab104f9db81f",
+      "entityType": "CHAT_CALL",
+      "message": "Call with Group ended (ended)",
+      "metadata": {
+        "sessionId": "b7d6c0e9-e34c-4870-a8c8-ab104f9db81f",
+        "reason": "ended"
+      }
+    },
+    {
+      "id": "abb7db99-7f56-4350-b29e-4bfaf637abb3",
+      "createdAt": "2025-11-23T06:22:36.917Z",
+      "updatedAt": "2025-11-23T06:22:36.917Z",
+      "actorId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "action": "CALL_END",
+      "entityId": "b7d6c0e9-e34c-4870-a8c8-ab104f9db81f",
+      "entityType": "CHAT_CALL",
+      "message": "Call with Group ended (ended)",
+      "metadata": {
+        "sessionId": "b7d6c0e9-e34c-4870-a8c8-ab104f9db81f",
+        "reason": "ended"
+      }
+    },
+    {
+      "id": "e8b4c026-1b22-413c-962c-bca82ff7ec96",
+      "createdAt": "2025-11-23T06:26:35.461Z",
+      "updatedAt": "2025-11-23T06:26:35.461Z",
+      "actorId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "action": "PROJECT_CREATED",
+      "entityId": "d51b9ea6-2102-4c44-b2dc-695275b3d0c7",
+      "entityType": "PROJECT",
+      "message": "Created project Project120",
+      "metadata": {
+        "projectId": "d51b9ea6-2102-4c44-b2dc-695275b3d0c7"
+      }
+    },
+    {
+      "id": "e9558ee1-d152-468a-815b-2732da3cf7df",
+      "createdAt": "2025-11-23T06:26:45.507Z",
+      "updatedAt": "2025-11-23T06:26:45.507Z",
+      "actorId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "action": "PROJECT_CREATED",
+      "entityId": "d51b9ea6-2102-4c44-b2dc-695275b3d0c7",
+      "entityType": "PROJECT",
+      "message": "Created project Project120 from draft",
+      "metadata": {
+        "projectId": "d51b9ea6-2102-4c44-b2dc-695275b3d0c7"
+      }
+    },
+    {
+      "id": "64a8ab6c-05c0-4155-9821-64605a665257",
+      "createdAt": "2025-11-23T06:27:09.602Z",
+      "updatedAt": "2025-11-23T06:27:09.602Z",
+      "actorId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "action": "TASK_CREATED",
+      "entityId": "8aeab42e-8c8b-4e0b-8dc5-39a80d00d95c",
+      "entityType": "TASK",
+      "message": "Created task Test for Project120",
+      "metadata": {
+        "projectId": "d51b9ea6-2102-4c44-b2dc-695275b3d0c7",
+        "taskId": "8aeab42e-8c8b-4e0b-8dc5-39a80d00d95c"
+      }
+    },
+    {
+      "id": "ee85d670-796c-46e0-873a-cf3630415fee",
+      "createdAt": "2025-11-23T06:27:20.073Z",
+      "updatedAt": "2025-11-23T06:27:20.073Z",
+      "actorId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "action": "PROJECT_PACKAGE_SUBMITTED",
+      "entityId": "d51b9ea6-2102-4c44-b2dc-695275b3d0c7",
+      "entityType": "PROJECT",
+      "message": "Advanced project package to PJM_REVIEW",
+      "metadata": {
+        "projectId": "d51b9ea6-2102-4c44-b2dc-695275b3d0c7"
+      }
+    },
+    {
+      "id": "a2ae5fbd-5efb-446e-be38-813593f885ea",
+      "createdAt": "2025-11-23T06:27:59.666Z",
+      "updatedAt": "2025-11-23T06:27:59.666Z",
+      "actorId": "test-pjm",
+      "action": "ASSIGNMENT_REQUESTED",
+      "entityId": "bcae542a-73f5-42b8-b9d6-77c6a1d635f9",
+      "entityType": "ASSIGNMENT",
+      "message": "Requested assignment for Test Developer",
+      "metadata": {
+        "taskId": "8aeab42e-8c8b-4e0b-8dc5-39a80d00d95c",
+        "assignmentId": "bcae542a-73f5-42b8-b9d6-77c6a1d635f9"
+      }
+    },
+    {
+      "id": "e2d3b40f-d1b5-42ff-8770-e43c247a3e6a",
+      "createdAt": "2025-11-23T06:42:36.988Z",
+      "updatedAt": "2025-11-23T06:42:36.988Z",
+      "actorId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "action": "TASK_CREATED",
+      "entityId": "86c82393-7ff7-4431-9d52-91498e6706f5",
+      "entityType": "TASK",
+      "message": "Created subtask Test",
+      "metadata": {
+        "projectId": "d51b9ea6-2102-4c44-b2dc-695275b3d0c7",
+        "taskId": "86c82393-7ff7-4431-9d52-91498e6706f5",
+        "parentId": "8aeab42e-8c8b-4e0b-8dc5-39a80d00d95c"
+      }
+    },
+    {
+      "id": "b5ce4f48-6a2a-4563-b6e7-0a2dba6a9d9c",
+      "createdAt": "2025-11-23T06:44:27.011Z",
+      "updatedAt": "2025-11-23T06:44:27.011Z",
+      "actorId": "test-pjm",
+      "action": "ASSIGNMENT_REQUESTED",
+      "entityId": "02b21c39-7eaa-421d-a4ba-348b8cfb6359",
+      "entityType": "ASSIGNMENT",
+      "message": "Requested assignment for Test Developer",
+      "metadata": {
+        "taskId": "d6a30e55-b650-436f-934c-af6ed3cac17f",
+        "assignmentId": "02b21c39-7eaa-421d-a4ba-348b8cfb6359"
+      }
+    },
+    {
+      "id": "28406c87-25bc-4e59-be69-8532f32123eb",
+      "createdAt": "2025-11-23T06:46:22.804Z",
+      "updatedAt": "2025-11-23T06:46:22.804Z",
+      "actorId": "test-pjm",
+      "action": "ASSIGNMENT_COMPLETED",
+      "entityId": "bcae542a-73f5-42b8-b9d6-77c6a1d635f9",
+      "entityType": "ASSIGNMENT",
+      "message": "Approved task completion",
+      "metadata": {
+        "assignmentId": "bcae542a-73f5-42b8-b9d6-77c6a1d635f9",
+        "taskId": "8aeab42e-8c8b-4e0b-8dc5-39a80d00d95c"
+      }
+    },
+    {
+      "id": "98eb27e2-c5b3-4189-8cb7-e621dd685e20",
+      "createdAt": "2025-11-23T06:46:36.632Z",
+      "updatedAt": "2025-11-23T06:46:36.632Z",
+      "actorId": "test-pjm",
+      "action": "PROJECT_PACKAGE_SUBMITTED",
+      "entityId": "d51b9ea6-2102-4c44-b2dc-695275b3d0c7",
+      "entityType": "PROJECT",
+      "message": "Advanced project package to PM_ACTIVATE",
+      "metadata": {
+        "projectId": "d51b9ea6-2102-4c44-b2dc-695275b3d0c7"
+      }
+    },
+    {
+      "id": "8058d4c8-0377-40b9-bda2-4ab53d3054af",
+      "createdAt": "2025-11-23T06:47:44.073Z",
+      "updatedAt": "2025-11-23T06:47:44.073Z",
+      "actorId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "action": "PROJECT_PACKAGE_ACTIVATED",
+      "entityId": "d51b9ea6-2102-4c44-b2dc-695275b3d0c7",
+      "entityType": "PROJECT",
+      "message": "Activated project package",
+      "metadata": {
+        "projectId": "d51b9ea6-2102-4c44-b2dc-695275b3d0c7"
+      }
+    },
+    {
+      "id": "342c4a99-add2-4ec3-995d-5aad56e37e72",
+      "createdAt": "2025-11-23T06:53:23.765Z",
+      "updatedAt": "2025-11-23T06:53:23.765Z",
+      "actorId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "action": "PROJECT_CREATED",
+      "entityId": "5e529259-73a5-4682-919f-3deb86da4408",
+      "entityType": "PROJECT",
+      "message": "Created project Project 150",
+      "metadata": {
+        "projectId": "5e529259-73a5-4682-919f-3deb86da4408"
+      }
+    },
+    {
+      "id": "38082fcb-d578-45f4-8671-6b7d6b0d7d75",
+      "createdAt": "2025-11-23T06:54:00.865Z",
+      "updatedAt": "2025-11-23T06:54:00.865Z",
+      "actorId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "action": "PROJECT_CREATED",
+      "entityId": "5e529259-73a5-4682-919f-3deb86da4408",
+      "entityType": "PROJECT",
+      "message": "Created project Project 150 from draft",
+      "metadata": {
+        "projectId": "5e529259-73a5-4682-919f-3deb86da4408"
+      }
+    },
+    {
+      "id": "afb247c8-62ec-4d2d-b99b-5e3850e2e0b7",
+      "createdAt": "2025-11-23T06:54:53.539Z",
+      "updatedAt": "2025-11-23T06:54:53.539Z",
+      "actorId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "action": "TASK_CREATED",
+      "entityId": "6ec29dca-4ce5-43ec-8501-0ea97680fe05",
+      "entityType": "TASK",
+      "message": "Created task Project 150 for Project 150",
+      "metadata": {
+        "projectId": "5e529259-73a5-4682-919f-3deb86da4408",
+        "taskId": "6ec29dca-4ce5-43ec-8501-0ea97680fe05"
+      }
+    },
+    {
+      "id": "f30eadd8-b2cd-442b-85d5-4a60b86b5ec8",
+      "createdAt": "2025-11-23T06:54:58.433Z",
+      "updatedAt": "2025-11-23T06:54:58.433Z",
+      "actorId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "action": "PROJECT_PACKAGE_SUBMITTED",
+      "entityId": "5e529259-73a5-4682-919f-3deb86da4408",
+      "entityType": "PROJECT",
+      "message": "Advanced project package to PJM_REVIEW",
+      "metadata": {
+        "projectId": "5e529259-73a5-4682-919f-3deb86da4408"
+      }
+    },
+    {
+      "id": "e0b8e457-10ad-490b-bd09-523a47ada6fb",
+      "createdAt": "2025-11-23T06:55:20.318Z",
+      "updatedAt": "2025-11-23T06:55:20.318Z",
+      "actorId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "action": "TASK_CREATED",
+      "entityId": "ee5eb742-6d12-4635-bf40-d46319ea28c7",
+      "entityType": "TASK",
+      "message": "Created task Project 150 for Project 150",
+      "metadata": {
+        "projectId": "5e529259-73a5-4682-919f-3deb86da4408",
+        "taskId": "ee5eb742-6d12-4635-bf40-d46319ea28c7"
+      }
+    },
+    {
+      "id": "73fdfed2-7239-4a7b-b6b2-a3684858393f",
+      "createdAt": "2025-11-23T06:56:38.766Z",
+      "updatedAt": "2025-11-23T06:56:38.766Z",
+      "actorId": "test-pjm",
+      "action": "ASSIGNMENT_REQUESTED",
+      "entityId": "47325175-5be2-438d-8656-0f6959d02ef2",
+      "entityType": "ASSIGNMENT",
+      "message": "Requested assignment for Test Developer",
+      "metadata": {
+        "taskId": "6ec29dca-4ce5-43ec-8501-0ea97680fe05",
+        "assignmentId": "47325175-5be2-438d-8656-0f6959d02ef2"
+      }
+    },
+    {
+      "id": "cef87616-af94-4777-a3c4-e8b45ad2408f",
+      "createdAt": "2025-11-23T06:57:17.174Z",
+      "updatedAt": "2025-11-23T06:57:17.174Z",
+      "actorId": "test-pjm",
+      "action": "ASSIGNMENT_COMPLETED",
+      "entityId": "47325175-5be2-438d-8656-0f6959d02ef2",
+      "entityType": "ASSIGNMENT",
+      "message": "Approved task completion",
+      "metadata": {
+        "assignmentId": "47325175-5be2-438d-8656-0f6959d02ef2",
+        "taskId": "6ec29dca-4ce5-43ec-8501-0ea97680fe05"
+      }
+    },
+    {
+      "id": "13fd35db-1ef7-4ac0-a2eb-e86b52510756",
+      "createdAt": "2025-11-23T07:01:10.006Z",
+      "updatedAt": "2025-11-23T07:01:10.006Z",
+      "actorId": "test-pjm",
+      "action": "CALL_INVITE",
+      "entityId": "98773fed-8778-4cf4-800e-b310acfed35a",
+      "entityType": "CHAT_CALL",
+      "message": "Started video call with Super Admin",
+      "metadata": {
+        "sessionId": "98773fed-8778-4cf4-800e-b310acfed35a",
+        "media": "video",
+        "toUserId": "user-super-admin"
+      }
+    },
+    {
+      "id": "97712594-38e8-40d7-a294-73ae832f7a35",
+      "createdAt": "2025-11-23T07:01:30.387Z",
+      "updatedAt": "2025-11-23T07:01:30.387Z",
+      "actorId": "test-pjm",
+      "action": "CALL_END",
+      "entityId": "98773fed-8778-4cf4-800e-b310acfed35a",
+      "entityType": "CHAT_CALL",
+      "message": "Call with Group ended (ended)",
+      "metadata": {
+        "sessionId": "98773fed-8778-4cf4-800e-b310acfed35a",
+        "reason": "ended"
+      }
+    },
+    {
+      "id": "078c5127-c665-4020-a669-5a45fb16a301",
+      "createdAt": "2025-11-23T07:02:07.533Z",
+      "updatedAt": "2025-11-23T07:02:07.533Z",
+      "actorId": "test-pjm",
+      "action": "CALL_INVITE",
+      "entityId": "b89a9283-ef50-4513-83f9-9a6fc96dd20e",
+      "entityType": "CHAT_CALL",
+      "message": "Started video call with majid abdulelah",
+      "metadata": {
+        "sessionId": "b89a9283-ef50-4513-83f9-9a6fc96dd20e",
+        "media": "video",
+        "toUserId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0"
+      }
+    },
+    {
+      "id": "c3ac25f2-b0e4-468e-b8ef-2b47890ba22c",
+      "createdAt": "2025-11-23T07:02:32.722Z",
+      "updatedAt": "2025-11-23T07:02:32.722Z",
+      "actorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "action": "CALL_END",
+      "entityId": "b89a9283-ef50-4513-83f9-9a6fc96dd20e",
+      "entityType": "CHAT_CALL",
+      "message": "Call with Group ended (ended)",
+      "metadata": {
+        "sessionId": "b89a9283-ef50-4513-83f9-9a6fc96dd20e",
+        "reason": "ended"
+      }
+    },
+    {
+      "id": "4a487dac-51bb-4842-9c92-c0464ca79ccf",
+      "createdAt": "2025-11-23T07:02:39.486Z",
+      "updatedAt": "2025-11-23T07:02:39.486Z",
+      "actorId": "test-pjm",
+      "action": "CALL_END",
+      "entityId": "b89a9283-ef50-4513-83f9-9a6fc96dd20e",
+      "entityType": "CHAT_CALL",
+      "message": "Call with Group ended (ended)",
+      "metadata": {
+        "sessionId": "b89a9283-ef50-4513-83f9-9a6fc96dd20e",
+        "reason": "ended"
+      }
+    },
+    {
+      "id": "a9a1fe77-8017-4d12-88a3-22096d4291f0",
+      "createdAt": "2025-11-23T07:03:27.645Z",
+      "updatedAt": "2025-11-23T07:03:27.645Z",
+      "actorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "action": "CALL_INVITE",
+      "entityId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+      "entityType": "CHAT_CALL",
+      "message": "Started audio call with Mohamed AlArjani",
+      "metadata": {
+        "sessionId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+        "media": "audio",
+        "toUserId": "e9a7ac57-a140-45d7-b294-4b1201e63dad"
+      }
+    },
+    {
+      "id": "2b005c34-f448-4d03-956c-b38d448f9efb",
+      "createdAt": "2025-11-23T07:05:35.903Z",
+      "updatedAt": "2025-11-23T07:05:35.903Z",
+      "actorId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "action": "CALL_END",
+      "entityId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+      "entityType": "CHAT_CALL",
+      "message": "Call with Group ended (ended)",
+      "metadata": {
+        "sessionId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+        "reason": "ended"
+      }
+    },
+    {
+      "id": "c287721f-6a84-4d78-a945-bc1f13d56ab0",
+      "createdAt": "2025-11-23T07:05:54.359Z",
+      "updatedAt": "2025-11-23T07:05:54.359Z",
+      "actorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "action": "CALL_END",
+      "entityId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+      "entityType": "CHAT_CALL",
+      "message": "Call with Group ended (ended)",
+      "metadata": {
+        "sessionId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+        "reason": "ended"
+      }
     }
   ],
   "chatSessions": [
@@ -7752,6 +8938,48 @@
       ],
       "lastMessageAt": "2025-11-22T10:02:51.518Z",
       "lastMessagePreview": "[OPENAI] - **Action Status:** I cannot add tasks or see available assignees based on the provided context; there are no users or resources listed.  \n\n- **Suggested Next Step:** In your project tool, c"
+    },
+    {
+      "id": "de18fb66-47f9-4360-a918-ab79a3bc887d",
+      "createdAt": "2025-11-23T05:53:52.864Z",
+      "updatedAt": "2025-11-23T05:53:53.792Z",
+      "userId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "title": "how many projects do i have",
+      "contextChips": [
+        "project",
+        "this-week",
+        "my-tasks"
+      ],
+      "lastMessageAt": "2025-11-23T05:53:53.747Z",
+      "lastMessagePreview": "[OPENAI] Error calling AI provider: OpenAI Error: Incorrect API key provided: sk-proj-******************************************************************************************************************"
+    },
+    {
+      "id": "6e7510a9-5420-473e-854e-39fe039e52d5",
+      "createdAt": "2025-11-23T05:55:03.077Z",
+      "updatedAt": "2025-11-23T05:55:03.792Z",
+      "userId": "user-super-admin",
+      "title": "hello",
+      "contextChips": [
+        "project",
+        "this-week",
+        "my-tasks"
+      ],
+      "lastMessageAt": "2025-11-23T05:55:03.743Z",
+      "lastMessagePreview": "[OPENAI] Error calling AI provider: OpenAI Error: Incorrect API key provided: sk-proj-******************************************************************************************************************"
+    },
+    {
+      "id": "a64006d4-8fbf-4c38-b905-ce4656e12096",
+      "createdAt": "2025-11-23T05:57:54.838Z",
+      "updatedAt": "2025-11-23T05:57:57.695Z",
+      "userId": "user-super-admin",
+      "title": "hello",
+      "contextChips": [
+        "project",
+        "this-week",
+        "my-tasks"
+      ],
+      "lastMessageAt": "2025-11-23T05:57:57.645Z",
+      "lastMessagePreview": "[OPENAI] - **Greeting:** Hello! You’re logged in as **Super Admin** at **Humain**.  \n- **Current Overview:** You have the **marketplace** project (status: **PROPOSED**) with **3 open tasks** and **0 a"
     }
   ],
   "chatMessages": [
@@ -11051,13 +12279,94 @@
         "generatedAt": "2025-11-22T13:02:48.299+03:00"
       },
       "messageType": "TEXT"
+    },
+    {
+      "id": "b527957c-36d5-4e8a-a024-44ed2b7f10c7",
+      "createdAt": "2025-11-23T05:53:52.892Z",
+      "updatedAt": "2025-11-23T05:53:52.892Z",
+      "sessionId": "de18fb66-47f9-4360-a918-ab79a3bc887d",
+      "userId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "role": "USER",
+      "body": "how many projects do i have",
+      "messageType": "TEXT"
+    },
+    {
+      "id": "427d018a-a3b7-478c-8603-df5f9e4245fe",
+      "createdAt": "2025-11-23T05:53:53.747Z",
+      "updatedAt": "2025-11-23T05:53:53.747Z",
+      "sessionId": "de18fb66-47f9-4360-a918-ab79a3bc887d",
+      "userId": "ai-assistant",
+      "role": "ASSISTANT",
+      "body": "[OPENAI] Error calling AI provider: OpenAI Error: Incorrect API key provided: sk-proj-********************************************************************************************************************************************************mb8A. You can find your API key at https://platform.openai.com/account/api-keys.. Falling back to local summary.",
+      "metadata": {
+        "guardrailTriggered": false,
+        "topics": [
+          "error"
+        ],
+        "generatedAt": "2025-11-23T08:53:52.892+03:00"
+      },
+      "messageType": "TEXT"
+    },
+    {
+      "id": "69c52651-d536-448e-9d6e-c68f1470f5cc",
+      "createdAt": "2025-11-23T05:55:03.105Z",
+      "updatedAt": "2025-11-23T05:55:03.105Z",
+      "sessionId": "6e7510a9-5420-473e-854e-39fe039e52d5",
+      "userId": "user-super-admin",
+      "role": "USER",
+      "body": "hello",
+      "messageType": "TEXT"
+    },
+    {
+      "id": "9c84ac95-1dfe-462c-a158-81ba3a458df2",
+      "createdAt": "2025-11-23T05:55:03.743Z",
+      "updatedAt": "2025-11-23T05:55:03.743Z",
+      "sessionId": "6e7510a9-5420-473e-854e-39fe039e52d5",
+      "userId": "ai-assistant",
+      "role": "ASSISTANT",
+      "body": "[OPENAI] Error calling AI provider: OpenAI Error: Incorrect API key provided: sk-proj-********************************************************************************************************************************************************mb8A. You can find your API key at https://platform.openai.com/account/api-keys.. Falling back to local summary.",
+      "metadata": {
+        "guardrailTriggered": false,
+        "topics": [
+          "error"
+        ],
+        "generatedAt": "2025-11-23T08:55:03.103+03:00"
+      },
+      "messageType": "TEXT"
+    },
+    {
+      "id": "813f2742-289c-411c-808b-78e461d13c00",
+      "createdAt": "2025-11-23T05:57:54.863Z",
+      "updatedAt": "2025-11-23T05:57:54.863Z",
+      "sessionId": "a64006d4-8fbf-4c38-b905-ce4656e12096",
+      "userId": "user-super-admin",
+      "role": "USER",
+      "body": "hello",
+      "messageType": "TEXT"
+    },
+    {
+      "id": "cc7c7c91-ada3-42d7-bdd4-9f25320f9540",
+      "createdAt": "2025-11-23T05:57:57.645Z",
+      "updatedAt": "2025-11-23T05:57:57.645Z",
+      "sessionId": "a64006d4-8fbf-4c38-b905-ce4656e12096",
+      "userId": "ai-assistant",
+      "role": "ASSISTANT",
+      "body": "[OPENAI] - **Greeting:** Hello! You’re logged in as **Super Admin** at **Humain**.  \n- **Current Overview:** You have the **marketplace** project (status: **PROPOSED**) with **3 open tasks** and **0 alerts**.  \n- **How I Can Help:** I can help you review marketplace tasks, set priorities, or plan next steps—what would you like to do?",
+      "metadata": {
+        "guardrailTriggered": false,
+        "topics": [
+          "llm-response"
+        ],
+        "generatedAt": "2025-11-23T08:57:54.863+03:00"
+      },
+      "messageType": "TEXT"
     }
   ],
   "teamChatRooms": [
     {
       "id": "98773fed-8778-4cf4-800e-b310acfed35a",
       "createdAt": "2025-11-21T14:55:07.442Z",
-      "updatedAt": "2025-11-21T14:55:07.442Z",
+      "updatedAt": "2025-11-23T07:01:30.582Z",
       "name": "Test Project Manager ↔ Super Admin",
       "topic": "Direct chat between Test Project Manager and Super Admin",
       "createdById": "test-pjm",
@@ -11065,7 +12374,9 @@
       "participantIds": [
         "test-pjm",
         "user-super-admin"
-      ]
+      ],
+      "lastMessageAt": "2025-11-23T07:01:30.582Z",
+      "lastMessagePreview": "📝 **Call Transcription**"
     },
     {
       "id": "0a8e8a4c-483c-4c99-ad90-41af6ff562ca",
@@ -11135,7 +12446,7 @@
     {
       "id": "b7d6c0e9-e34c-4870-a8c8-ab104f9db81f",
       "createdAt": "2025-11-22T10:26:48.828Z",
-      "updatedAt": "2025-11-22T10:26:48.828Z",
+      "updatedAt": "2025-11-23T06:22:37.152Z",
       "name": "Mohamed AlArjani ↔ Super Admin",
       "topic": "Direct chat between Mohamed AlArjani and Super Admin",
       "createdById": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
@@ -11143,10 +12454,313 @@
       "participantIds": [
         "e9a7ac57-a140-45d7-b294-4b1201e63dad",
         "user-super-admin"
-      ]
+      ],
+      "lastMessageAt": "2025-11-23T06:22:37.152Z",
+      "lastMessagePreview": "📝 **Call Transcription**\n\n**Mohamed AlArjani:** \n\n**Mohamed AlArjani:** Auto.\n\n**Mohamed AlArjani:** Oh yeah, my script is working very good. Very good.\n\n**Mohamed AlArjani:** Imagine the account ..."
+    },
+    {
+      "id": "1fa442d2-5faa-4944-a97c-926784e5b921",
+      "createdAt": "2025-11-23T06:18:54.418Z",
+      "updatedAt": "2025-11-23T07:05:54.432Z",
+      "name": "Mohamed AlArjani ↔ majid abdulelah",
+      "topic": "Direct chat between Mohamed AlArjani and majid abdulelah",
+      "createdById": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "type": "DIRECT",
+      "participantIds": [
+        "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+        "edcedaae-7893-474e-aee4-7cdc77eb6ab0"
+      ],
+      "lastMessageAt": "2025-11-23T07:05:54.432Z",
+      "lastMessagePreview": "📝 **Call Transcription**"
+    },
+    {
+      "id": "b89a9283-ef50-4513-83f9-9a6fc96dd20e",
+      "createdAt": "2025-11-23T07:02:02.932Z",
+      "updatedAt": "2025-11-23T07:02:39.678Z",
+      "name": "Test Project Manager ↔ majid abdulelah",
+      "topic": "Direct chat between Test Project Manager and majid abdulelah",
+      "createdById": "test-pjm",
+      "type": "DIRECT",
+      "participantIds": [
+        "test-pjm",
+        "edcedaae-7893-474e-aee4-7cdc77eb6ab0"
+      ],
+      "lastMessageAt": "2025-11-23T07:02:39.678Z",
+      "lastMessagePreview": "📝 **Call Transcription**"
     }
   ],
-  "teamChatMessages": [],
+  "teamChatMessages": [
+    {
+      "id": "20a01d5e-a3cb-4a4d-91b9-39866497e58f",
+      "createdAt": "2025-11-23T06:18:43.614Z",
+      "updatedAt": "2025-11-23T06:18:43.614Z",
+      "roomId": "b7d6c0e9-e34c-4870-a8c8-ab104f9db81f",
+      "authorId": "user-super-admin",
+      "body": "hello"
+    },
+    {
+      "id": "1436d071-59b7-4d0c-b4cd-38544793d002",
+      "createdAt": "2025-11-23T06:18:58.586Z",
+      "updatedAt": "2025-11-23T06:18:58.586Z",
+      "roomId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+      "authorId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "body": "hi"
+    },
+    {
+      "id": "9ef45b39-8361-49e9-bead-b78f8f209113",
+      "createdAt": "2025-11-23T06:19:36.510Z",
+      "updatedAt": "2025-11-23T06:19:36.510Z",
+      "roomId": "b7d6c0e9-e34c-4870-a8c8-ab104f9db81f",
+      "authorId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "body": "Call event: call_started",
+      "messageType": "CALL_EVENT",
+      "payload": {
+        "event": "call_started",
+        "fromUserId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+        "toUserId": "user-super-admin",
+        "media": "audio",
+        "startedAt": "2025-11-23T06:19:36.510Z"
+      }
+    },
+    {
+      "id": "01ed46a9-397b-41cb-a6a9-055815984766",
+      "createdAt": "2025-11-23T06:22:33.608Z",
+      "updatedAt": "2025-11-23T06:22:33.608Z",
+      "roomId": "b7d6c0e9-e34c-4870-a8c8-ab104f9db81f",
+      "authorId": "user-super-admin",
+      "body": "Call event: call_ended",
+      "messageType": "CALL_EVENT",
+      "payload": {
+        "event": "call_ended",
+        "fromUserId": "user-super-admin",
+        "toUserId": "group",
+        "media": "audio",
+        "startedAt": "2025-11-23T06:19:36.510Z",
+        "endedAt": "2025-11-23T06:22:33.608Z",
+        "reason": "ended"
+      }
+    },
+    {
+      "id": "7c943aa0-0f61-428a-bdb9-a89fa769e331",
+      "createdAt": "2025-11-23T06:22:33.706Z",
+      "updatedAt": "2025-11-23T06:22:33.706Z",
+      "roomId": "b7d6c0e9-e34c-4870-a8c8-ab104f9db81f",
+      "authorId": "user-super-admin",
+      "body": "📝 **Call Transcription**\n\n**Super Admin:** Thadoos Salaam alaikum.\n\n**Super Admin:** Hello.\n\n**Super Admin:** Hello Salaam Alaikum.\n\n**Super Admin:** Assalamu Alaikum.\n\n**Super Admin:** But it doesn't pick up uh.\n\n**Super Admin:** الو.\n\n**Super Admin:** Yes i can hear you. No no i can hear i ' m ring ing.\n\n**Super Admin:** So yes so، i have، it i have it ' SA sign just for me right now i need to just go ahead and en able it for both sides.\n\n**Super Admin:** طيب كيفك؟\n\n**Super Admin:** والله الحمد لله بخير. إيش أخبارك طيب؟\n\n**Super Admin:** ok perfect let ' s go ahead and pro ceed for the meeting tom orrow.\n\n**Super Admin:** Cancel.\n\n**Super Admin:** سلمي.\n\n**Super Admin:** Open؟"
+    },
+    {
+      "id": "52313e06-734d-4557-8353-4d9c81899417",
+      "createdAt": "2025-11-23T06:22:36.904Z",
+      "updatedAt": "2025-11-23T06:22:36.904Z",
+      "roomId": "b7d6c0e9-e34c-4870-a8c8-ab104f9db81f",
+      "authorId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "body": "Call event: call_ended",
+      "messageType": "CALL_EVENT",
+      "payload": {
+        "event": "call_ended",
+        "fromUserId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+        "toUserId": "group",
+        "media": "audio",
+        "startedAt": "2025-11-23T06:19:36.510Z",
+        "endedAt": "2025-11-23T06:22:36.904Z",
+        "reason": "ended"
+      }
+    },
+    {
+      "id": "b05d200f-8e3e-42dd-b4cf-216020536f0e",
+      "createdAt": "2025-11-23T06:22:37.152Z",
+      "updatedAt": "2025-11-23T06:22:37.152Z",
+      "roomId": "b7d6c0e9-e34c-4870-a8c8-ab104f9db81f",
+      "authorId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "body": "📝 **Call Transcription**\n\n**Mohamed AlArjani:** \n\n**Mohamed AlArjani:** Auto.\n\n**Mohamed AlArjani:** Oh yeah, my script is working very good. Very good.\n\n**Mohamed AlArjani:** Imagine the account of the camera, right?\n\n**Mohamed AlArjani:** The camps committee, your good camps came.\n\n**Mohamed AlArjani:** Yeah, yeah, very good Bluetooth. You know, I hear you, I hear you.\n\n**Mohamed AlArjani:** Can you hear me work?\n\n**Mohamed AlArjani:** No, no, spherical, straightforward, it says. There is no cracking with anybody.\n\n**Mohamed AlArjani:** Can you click on your on your schedule there on your camera?\n\n**Mohamed AlArjani:** Yeah, double click it.\n\n**Mohamed AlArjani:** Very good."
+    },
+    {
+      "id": "31b9da0a-3503-4fc7-b6cb-060cd7d1bb15",
+      "createdAt": "2025-11-23T07:01:09.991Z",
+      "updatedAt": "2025-11-23T07:01:09.991Z",
+      "roomId": "98773fed-8778-4cf4-800e-b310acfed35a",
+      "authorId": "test-pjm",
+      "body": "Call event: call_started",
+      "messageType": "CALL_EVENT",
+      "payload": {
+        "event": "call_started",
+        "fromUserId": "test-pjm",
+        "toUserId": "user-super-admin",
+        "media": "video",
+        "startedAt": "2025-11-23T07:01:09.990Z"
+      }
+    },
+    {
+      "id": "b73281a3-8531-4fb7-b85f-bb8cf44df578",
+      "createdAt": "2025-11-23T07:01:30.377Z",
+      "updatedAt": "2025-11-23T07:01:30.377Z",
+      "roomId": "98773fed-8778-4cf4-800e-b310acfed35a",
+      "authorId": "test-pjm",
+      "body": "Call event: call_ended",
+      "messageType": "CALL_EVENT",
+      "payload": {
+        "event": "call_ended",
+        "fromUserId": "test-pjm",
+        "toUserId": "group",
+        "media": "video",
+        "startedAt": "2025-11-23T07:01:09.990Z",
+        "endedAt": "2025-11-23T07:01:30.376Z",
+        "reason": "ended"
+      }
+    },
+    {
+      "id": "b3cde397-a034-4e9e-9558-d3b5b5fe5d55",
+      "createdAt": "2025-11-23T07:01:30.582Z",
+      "updatedAt": "2025-11-23T07:01:30.582Z",
+      "roomId": "98773fed-8778-4cf4-800e-b310acfed35a",
+      "authorId": "test-pjm",
+      "body": "📝 **Call Transcription**"
+    },
+    {
+      "id": "2e510d10-c02d-41b5-ad2e-72b46276354d",
+      "createdAt": "2025-11-23T07:01:55.497Z",
+      "updatedAt": "2025-11-23T07:01:55.497Z",
+      "roomId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+      "authorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "body": "hi"
+    },
+    {
+      "id": "47258b6a-5273-456a-bffd-b862cd6997e3",
+      "createdAt": "2025-11-23T07:02:07.490Z",
+      "updatedAt": "2025-11-23T07:02:07.490Z",
+      "roomId": "b89a9283-ef50-4513-83f9-9a6fc96dd20e",
+      "authorId": "test-pjm",
+      "body": "Call event: call_started",
+      "messageType": "CALL_EVENT",
+      "payload": {
+        "event": "call_started",
+        "fromUserId": "test-pjm",
+        "toUserId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+        "media": "video",
+        "startedAt": "2025-11-23T07:02:07.490Z"
+      }
+    },
+    {
+      "id": "b9b4439d-9bcd-464e-b826-1b61dbb27932",
+      "createdAt": "2025-11-23T07:02:32.710Z",
+      "updatedAt": "2025-11-23T07:02:32.710Z",
+      "roomId": "b89a9283-ef50-4513-83f9-9a6fc96dd20e",
+      "authorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "body": "Call event: call_ended",
+      "messageType": "CALL_EVENT",
+      "payload": {
+        "event": "call_ended",
+        "fromUserId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+        "toUserId": "group",
+        "media": "video",
+        "startedAt": "2025-11-23T07:02:07.490Z",
+        "endedAt": "2025-11-23T07:02:32.710Z",
+        "reason": "ended"
+      }
+    },
+    {
+      "id": "d64aed36-fbfb-4377-9db7-a71291f6fa29",
+      "createdAt": "2025-11-23T07:02:32.747Z",
+      "updatedAt": "2025-11-23T07:02:32.747Z",
+      "roomId": "b89a9283-ef50-4513-83f9-9a6fc96dd20e",
+      "authorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "body": "📝 **Call Transcription**"
+    },
+    {
+      "id": "9e9c115e-2790-42d7-997d-62c75797a405",
+      "createdAt": "2025-11-23T07:02:39.476Z",
+      "updatedAt": "2025-11-23T07:02:39.476Z",
+      "roomId": "b89a9283-ef50-4513-83f9-9a6fc96dd20e",
+      "authorId": "test-pjm",
+      "body": "Call event: call_ended",
+      "messageType": "CALL_EVENT",
+      "payload": {
+        "event": "call_ended",
+        "fromUserId": "test-pjm",
+        "toUserId": "group",
+        "media": "video",
+        "startedAt": "2025-11-23T07:02:07.490Z",
+        "endedAt": "2025-11-23T07:02:39.476Z",
+        "reason": "ended"
+      }
+    },
+    {
+      "id": "850f20ec-5a17-4bb9-93c1-5cfa08884fe8",
+      "createdAt": "2025-11-23T07:02:39.678Z",
+      "updatedAt": "2025-11-23T07:02:39.678Z",
+      "roomId": "b89a9283-ef50-4513-83f9-9a6fc96dd20e",
+      "authorId": "test-pjm",
+      "body": "📝 **Call Transcription**"
+    },
+    {
+      "id": "6a5b0b59-b2d0-422c-ad81-d9ba66a5b153",
+      "createdAt": "2025-11-23T07:03:27.630Z",
+      "updatedAt": "2025-11-23T07:03:27.630Z",
+      "roomId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+      "authorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "body": "Call event: call_started",
+      "messageType": "CALL_EVENT",
+      "payload": {
+        "event": "call_started",
+        "fromUserId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+        "toUserId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+        "media": "audio",
+        "startedAt": "2025-11-23T07:03:27.630Z"
+      }
+    },
+    {
+      "id": "bee87be6-0394-459b-a0c1-bd0713221585",
+      "createdAt": "2025-11-23T07:05:35.892Z",
+      "updatedAt": "2025-11-23T07:05:35.892Z",
+      "roomId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+      "authorId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "body": "Call event: call_ended",
+      "messageType": "CALL_EVENT",
+      "payload": {
+        "event": "call_ended",
+        "fromUserId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+        "toUserId": "group",
+        "media": "audio",
+        "startedAt": "2025-11-23T07:03:27.630Z",
+        "endedAt": "2025-11-23T07:05:35.891Z",
+        "reason": "ended"
+      }
+    },
+    {
+      "id": "841991b4-5884-4baf-8140-b4cc71a370ab",
+      "createdAt": "2025-11-23T07:05:36.793Z",
+      "updatedAt": "2025-11-23T07:05:36.793Z",
+      "roomId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+      "authorId": "e9a7ac57-a140-45d7-b294-4b1201e63dad",
+      "body": "📝 **Call Transcription**"
+    },
+    {
+      "id": "d6151938-2fa8-48ca-b46f-c997344beaeb",
+      "createdAt": "2025-11-23T07:05:54.344Z",
+      "updatedAt": "2025-11-23T07:05:54.344Z",
+      "roomId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+      "authorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "body": "Call event: call_ended",
+      "messageType": "CALL_EVENT",
+      "payload": {
+        "event": "call_ended",
+        "fromUserId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+        "toUserId": "group",
+        "media": "audio",
+        "startedAt": "2025-11-23T07:03:27.630Z",
+        "endedAt": "2025-11-23T07:05:54.344Z",
+        "reason": "ended"
+      }
+    },
+    {
+      "id": "976d71ce-c337-41bd-b4fa-1664539c256e",
+      "createdAt": "2025-11-23T07:05:54.432Z",
+      "updatedAt": "2025-11-23T07:05:54.432Z",
+      "roomId": "1fa442d2-5faa-4944-a97c-926784e5b921",
+      "authorId": "edcedaae-7893-474e-aee4-7cdc77eb6ab0",
+      "body": "📝 **Call Transcription**"
+    }
+  ],
   "rolePermissions": [
     {
       "id": "role-perm-super-admin",
@@ -11164,7 +12778,7 @@
         "personas"
       ],
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2025-01-01T00:00:00.000Z"
+      "updatedAt": "2025-11-23T07:08:46.050Z"
     },
     {
       "id": "role-perm-vp",
@@ -11177,10 +12791,15 @@
         "reports",
         "chat",
         "settings",
-        "personas"
+        "personas",
+        "tasks",
+        "teamDevelopers",
+        "approvals",
+        "adminHolidays",
+        "admin"
       ],
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2025-01-01T00:00:00.000Z"
+      "updatedAt": "2025-11-23T07:08:44.856Z"
     },
     {
       "id": "role-perm-pm",
@@ -11195,10 +12814,13 @@
         "chat",
         "settings",
         "admin",
-        "personas"
+        "personas",
+        "tasks",
+        "teamDevelopers",
+        "adminHolidays"
       ],
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2025-01-01T00:00:00.000Z"
+      "updatedAt": "2025-11-23T07:08:47.097Z"
     },
     {
       "id": "role-perm-project-manager",
@@ -11214,7 +12836,7 @@
         "personas"
       ],
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2025-01-01T00:00:00.000Z"
+      "updatedAt": "2025-11-23T07:08:46.446Z"
     },
     {
       "id": "role-perm-developer",
@@ -11228,7 +12850,7 @@
         "personas"
       ],
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2025-01-01T00:00:00.000Z"
+      "updatedAt": "2025-11-23T07:08:48.260Z"
     },
     {
       "id": "role-perm-engineer",
@@ -11242,7 +12864,7 @@
         "personas"
       ],
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2025-01-01T00:00:00.000Z"
+      "updatedAt": "2025-11-23T07:08:47.782Z"
     },
     {
       "id": "role-perm-viewer",
@@ -11256,7 +12878,19 @@
         "personas"
       ],
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2025-01-01T00:00:00.000Z"
+      "updatedAt": "2025-11-23T07:08:45.333Z"
+    },
+    {
+      "id": "0b8a5504-269b-488f-83b4-e8d0744e55cc",
+      "role": "DESIGNER",
+      "modules": [
+        "tasks",
+        "notifications",
+        "chat",
+        "settings"
+      ],
+      "createdAt": "2025-11-23T07:11:10.702Z",
+      "updatedAt": "2025-11-23T07:11:38.604Z"
     }
   ],
   "releases": [],
@@ -11268,11 +12902,21 @@
       "key": "ai-config",
       "value": {
         "provider": "openai",
-        "apiKey": "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",
+        "apiKey": "",
         "modelName": "gpt-5.1"
       },
       "createdAt": "2025-11-22T08:08:34.836Z",
-      "updatedAt": "2025-11-22T08:08:34.836Z"
+      "updatedAt": "2025-11-23T05:57:51.197Z"
+    }
+  ],
+  "roles": [
+    {
+      "id": "77c7afa9-3f25-4a9d-8f4c-d492cda6da3b",
+      "name": "DESIGNER",
+      "description": "",
+      "isSystem": false,
+      "createdAt": "2025-11-23T07:11:10.642Z",
+      "updatedAt": "2025-11-23T07:11:10.642Z"
     }
   ]
 }

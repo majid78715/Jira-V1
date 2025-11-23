@@ -5,7 +5,8 @@ export type Role =
   | "ENGINEER"
   | "PROJECT_MANAGER"
   | "DEVELOPER"
-  | "VIEWER";
+  | "VIEWER"
+  | (string & {});
 
 export type PermissionModule =
   | "dashboard"
@@ -28,10 +29,10 @@ export type ProfileStatus = "ACTIVE" | "PENDING_APPROVAL" | "REJECTED";
 export interface Profile {
   firstName: string;
   lastName: string;
-  mobileNumber: string;
-  country: string;
-  city: string;
-  timeZone: string;
+  mobileNumber?: string;
+  country?: string;
+  city?: string;
+  timeZone?: string;
   title: string;
 }
 

@@ -5,14 +5,17 @@ import { Comment, CommentEntityType } from "../../lib/types";
 import { apiRequest, ApiError } from "../../lib/apiClient";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
+import { GitLabEntry } from "./TimeLogPanel";
+import { formatShortDate } from "../../lib/format";
 
 interface CommentsPanelProps {
   entityId?: string;
   entityType: CommentEntityType;
   resolveUserName?: (userId: string) => string;
+  gitlabEntries?: GitLabEntry[];
 }
 
-export function CommentsPanel({ entityId, entityType, resolveUserName }: CommentsPanelProps) {
+export function CommentsPanel({ entityId, entityType, resolveUserName, gitlabEntries = [] }: CommentsPanelProps) {
   const [comments, setComments] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -96,6 +99,30 @@ export function CommentsPanel({ entityId, entityType, resolveUserName }: Comment
 
       <form onSubmit={handleSubmit} className="space-y-2 rounded-xl border border-ink-100 bg-ink-50/60 p-3">
         <label className="text-xs font-semibold uppercase tracking-wide text-ink-500">Add comment</label>
+        
+        {gitlabEntries.length > 0 && (
+          <div className="mb-2">
+             <label className="mb-1 block text-xs font-semibold uppercase tracking-wide text-ink-500">Link Code Change (GitLab)</label>
+             <select
+              className="w-full rounded-lg border border-ink-100 px-3 py-2 text-sm text-ink-900 shadow-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200 bg-white"
+              onChange={(e) => {
+                const entry = gitlabEntries.find(g => g.id === e.target.value);
+                if (entry) {
+                  setBody(prev => prev ? `${prev} [Code: ${entry.description}]` : `[Code: ${entry.description}]`);
+                }
+              }}
+              defaultValue=""
+            >
+              <option value="" disabled>Select a code snippet to link...</option>
+              {gitlabEntries.map(entry => (
+                <option key={entry.id} value={entry.id}>
+                  [{entry.createdBy}] {entry.description} ({formatShortDate(entry.createdAt)})
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
         <Input
           value={body}
           onChange={(event) => setBody(event.target.value)}

@@ -81,7 +81,8 @@ import {
   WorkItemType,
   WorkflowScheme,
   WorkflowState,
-  WorkflowTransition
+  WorkflowTransition,
+  RoleDefinition
 } from "../models/_types";
 import { nowISO } from "../utils/date";
 import { validateCompany, validateProfile } from "../utils/validation";
@@ -726,9 +727,7 @@ export async function deleteCompany(id: string): Promise<void> {
     if (db.userInvitations.some((invitation) => invitation.companyId === id)) {
       dependencies.push("invitations");
     }
-    if (db.projects.some((project) => project.vendorCompanyIds.includes(id))) {
-      dependencies.push("projects");
-    }
+    // Projects are now cleaned up instead of blocking deletion
     if (db.workSchedules.some((schedule) => schedule.companyId === id)) {
       dependencies.push("work schedules");
     }
@@ -743,12 +742,47 @@ export async function deleteCompany(id: string): Promise<void> {
       throw new Error(`Cannot delete company with linked ${dependencies.join(", ")}.`);
     }
 
+    const timestamp = nowISO();
+
+    // Unlink users
     if (linkedUsers.length > 0) {
-      const timestamp = nowISO();
       db.users = db.users.map((user) =>
         user.companyId === id ? { ...user, companyId: undefined, updatedAt: timestamp } : user
       );
     }
+
+    // Unlink projects
+    db.projects = db.projects.map((project) => {
+      let mutated = false;
+      let primaryVendorId = project.primaryVendorId;
+      let vendorCompanyIds = project.vendorCompanyIds;
+      let additionalVendorIds = project.additionalVendorIds;
+
+      if (primaryVendorId === id) {
+        primaryVendorId = undefined;
+        mutated = true;
+      }
+      if (vendorCompanyIds.includes(id)) {
+        vendorCompanyIds = vendorCompanyIds.filter((vid) => vid !== id);
+        mutated = true;
+      }
+      if (additionalVendorIds.includes(id)) {
+        additionalVendorIds = additionalVendorIds.filter((vid) => vid !== id);
+        mutated = true;
+      }
+
+      if (!mutated) {
+        return project;
+      }
+
+      return {
+        ...project,
+        primaryVendorId,
+        vendorCompanyIds,
+        additionalVendorIds,
+        updatedAt: timestamp
+      };
+    });
 
     db.companies.splice(index, 1);
     return db;
@@ -3711,6 +3745,47 @@ export async function updateSystemSetting<T>(key: string, value: T): Promise<voi
         updatedAt: timestamp
       });
     }
+    return db;
+  });
+}
+
+export async function listRoles(): Promise<RoleDefinition[]> {
+  const db = await readDatabase();
+  return [...db.roles];
+}
+
+export async function createRole(name: string, description?: string): Promise<RoleDefinition> {
+  const timestamp = nowISO();
+  const role: RoleDefinition = {
+    id: randomUUID(),
+    name: name.trim().toUpperCase().replace(/\s+/g, "_"),
+    description: description?.trim(),
+    isSystem: false,
+    createdAt: timestamp,
+    updatedAt: timestamp
+  };
+
+  await updateDatabase(async (db) => {
+    if (db.roles.some((r) => r.name === role.name)) {
+      throw new Error("Role already exists.");
+    }
+    db.roles.push(role);
+    return db;
+  });
+
+  return role;
+}
+
+export async function deleteRole(id: string): Promise<void> {
+  await updateDatabase(async (db) => {
+    const index = db.roles.findIndex((r) => r.id === id);
+    if (index === -1) {
+      throw new Error("Role not found.");
+    }
+    if (db.roles[index].isSystem) {
+      throw new Error("Cannot delete system role.");
+    }
+    db.roles.splice(index, 1);
     return db;
   });
 }

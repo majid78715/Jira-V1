@@ -616,7 +616,12 @@ export default function TaskDetailPage() {
   }
 
   const commentsContent = (
-    <CommentsPanel entityId={taskId} entityType="TASK" resolveUserName={resolveUserLabel} />
+    <CommentsPanel 
+      entityId={taskId} 
+      entityType="TASK" 
+      resolveUserName={resolveUserLabel} 
+      gitlabEntries={gitlabEntries}
+    />
   );
 
   const attachmentsContent = <AttachmentsPanel entityId={taskId} entityType="TASK" />;

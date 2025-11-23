@@ -5,7 +5,8 @@ export type Role =
   | "ENGINEER"
   | "PROJECT_MANAGER"
   | "DEVELOPER"
-  | "VIEWER";
+  | "VIEWER"
+  | (string & {});
 
 export type PermissionModule =
   | "dashboard"
@@ -32,12 +33,12 @@ export interface BaseEntity {
 export interface Profile {
   firstName: string;
   lastName: string;
-  mobileNumber: string;
-  country: string;
-  city: string;
-  timeZone: string;
+  mobileNumber?: string;
+  country?: string;
+  city?: string;
+  timeZone?: string;
   title: string;
-  [key: string]: string;
+  [key: string]: string | undefined;
 }
 
 export type ProfileStatus = "ACTIVE" | "PENDING_APPROVAL" | "REJECTED";
@@ -812,6 +813,12 @@ export interface DashboardSummaryPayload {
 }
 
 
+export interface RoleDefinition extends BaseEntity {
+  name: string;
+  description?: string;
+  isSystem: boolean;
+}
+
 export interface DatabaseSchema {
   users: User[];
   userPreferences: UserPreferences[];
@@ -844,6 +851,7 @@ export interface DatabaseSchema {
   workItemTypes: WorkItemType[];
   workflowSchemes: WorkflowScheme[];
   systemSettings: SystemSetting[];
+  roles: RoleDefinition[];
 }
 
 export const DATABASE_KEYS = [
@@ -877,7 +885,8 @@ export const DATABASE_KEYS = [
   "releases",
   "workItemTypes",
   "workflowSchemes",
-  "systemSettings"
+  "systemSettings",
+  "roles"
 ] as const;
 
 export type DatabaseKey = (typeof DATABASE_KEYS)[number];
@@ -914,7 +923,8 @@ export function createEmptyDatabaseState(): DatabaseSchema {
     releases: [],
     workItemTypes: [],
     workflowSchemes: [],
-    systemSettings: []
+    systemSettings: [],
+    roles: []
   };
 }
 export type PublicUser = Pick<

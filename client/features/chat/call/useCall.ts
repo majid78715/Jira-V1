@@ -103,6 +103,7 @@ export function useCall({ userId, sessionId }: UseCallOptions): UseCallReturn {
   const incomingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const callTimerRef = useRef<NodeJS.Timeout | null>(null);
   const callStateRef = useRef<CallState>("IDLE");
+  const activePeersRef = useRef<Set<string>>(new Set());
   const pendingOffersRef = useRef<Map<string, string>>(new Map()); // Key: sessionId:fromUserId
   const pendingCandidatesRef = useRef<Map<string, RTCIceCandidateInit[]>>(new Map()); // Key: sessionId:fromUserId
   const iceServersRef = useRef<RTCIceServer[] | null>(null);
@@ -237,6 +238,7 @@ export function useCall({ userId, sessionId }: UseCallOptions): UseCallReturn {
     (next: CallState = "IDLE", reason?: string) => {
       appendDebug("resetting call state", { from: callStateRef.current, to: next, reason });
       cleanupTimers();
+      activePeersRef.current.clear();
       pendingOffersRef.current.clear();
       pendingCandidatesRef.current.clear();
       teardownPeer();
@@ -422,6 +424,7 @@ export function useCall({ userId, sessionId }: UseCallOptions): UseCallReturn {
 
     // If we are in call, we should accept the offer automatically (renegotiation or new peer)
     try {
+        activePeersRef.current.add(payload.fromUserId);
         await setupPeerConnection(payload.fromUserId, isVideoEnabled);
         const answer = await createAnswer(payload.fromUserId, payload.sdp);
         await flushPendingCandidates(payload.sessionId, payload.fromUserId);
@@ -437,6 +440,7 @@ export function useCall({ userId, sessionId }: UseCallOptions): UseCallReturn {
         return;
       }
       try {
+        activePeersRef.current.add(payload.fromUserId);
         await setRemoteDescription(payload.fromUserId, { type: "answer", sdp: payload.sdp });
         if (ringTimeoutRef.current) {
           clearTimeout(ringTimeoutRef.current);
@@ -475,6 +479,7 @@ export function useCall({ userId, sessionId }: UseCallOptions): UseCallReturn {
   const handleJoined = useCallback(async (payload: { sessionId: string; userId: string }) => {
       if (currentCall?.sessionId !== payload.sessionId) return;
       appendDebug("User joined call", payload);
+      activePeersRef.current.add(payload.userId);
       // We wait for the joining user to send an offer (Newcomer Initiates pattern)
       // to avoid glare/collision.
   }, [currentCall, appendDebug]);
@@ -484,6 +489,7 @@ export function useCall({ userId, sessionId }: UseCallOptions): UseCallReturn {
       appendDebug("Received participants list", payload);
       
       for (const participantId of payload.participants) {
+          activePeersRef.current.add(participantId);
           try {
               await setupPeerConnection(participantId, isVideoEnabled);
               const offer = await createOffer(participantId);
@@ -509,11 +515,20 @@ export function useCall({ userId, sessionId }: UseCallOptions): UseCallReturn {
       // If specific user ended, close their peer connection
       if (payload.endedByUserId) {
           teardownPeer(payload.endedByUserId);
-          // If no peers left, end call? 
-          // For now, keep call open if it's a group call?
-          // But we don't track "group" vs "p2p" strictly.
-          // If it was the only peer, maybe end?
-          // Let's rely on user explicitly leaving or everyone leaving.
+          activePeersRef.current.delete(payload.endedByUserId);
+
+          if (activePeersRef.current.size === 0) {
+            if (payload.reason && payload.reason !== "ended" && payload.reason !== "disconnected") {
+              setCallError(
+                payload.reason === "declined"
+                  ? "Call declined."
+                  : payload.reason === "missed"
+                    ? "Call missed."
+                    : "Call ended."
+              );
+            }
+            resetCallState("ENDED", "all peers left");
+          }
           return;
       }
 
@@ -630,6 +645,7 @@ export function useCall({ userId, sessionId }: UseCallOptions): UseCallReturn {
         
         // If direct call, initiate immediately
         if (toUserId) {
+            activePeersRef.current.add(toUserId);
             await setupPeerConnection(toUserId, Boolean(video));
             const offer = await createOffer(toUserId);
             signaling.sendOffer(session, toUserId, offer.sdp ?? "");
@@ -725,6 +741,7 @@ export function useCall({ userId, sessionId }: UseCallOptions): UseCallReturn {
       const key = `${incomingCall.sessionId}:${incomingCall.fromUserId}`;
       const offerSdp = pendingOffersRef.current.get(key);
       if (offerSdp) {
+          activePeersRef.current.add(incomingCall.fromUserId);
           await setupPeerConnection(incomingCall.fromUserId, videoEnabled);
           const answer = await createAnswer(incomingCall.fromUserId, offerSdp);
           await flushPendingCandidates(incomingCall.sessionId, incomingCall.fromUserId);

@@ -43,9 +43,7 @@ const DEFAULT_ROLE_MODULES: Record<Role, SidebarLinkId[]> = {
     "notifications",
     "alerts",
     "reports",
-    "approvals",
     "chat",
-    "settings",
     "admin",
     "personas"
   ],
@@ -55,9 +53,7 @@ const DEFAULT_ROLE_MODULES: Record<Role, SidebarLinkId[]> = {
     "notifications",
     "alerts",
     "reports",
-    "approvals",
     "chat",
-    "settings",
     "admin",
     "personas"
   ],
@@ -68,16 +64,15 @@ const DEFAULT_ROLE_MODULES: Record<Role, SidebarLinkId[]> = {
     "teamDevelopers",
     "reports",
     "chat",
-    "settings",
     "personas"
   ],
-  DEVELOPER: ["tasks", "notifications", "chat", "settings", "personas"],
-  ENGINEER: ["tasks", "notifications", "chat", "settings", "personas"],
-  VP: ["dashboard", "projects", "notifications", "alerts", "reports", "chat", "settings", "personas"],
-  VIEWER: ["dashboard", "projects", "notifications", "chat", "settings", "personas"]
+  DEVELOPER: ["tasks", "notifications", "chat", "personas"],
+  ENGINEER: ["tasks", "notifications", "chat", "personas"],
+  VP: ["dashboard", "projects", "notifications", "alerts", "reports", "chat", "personas"],
+  VIEWER: ["dashboard", "projects", "notifications", "chat", "personas"]
 };
 
-const FALLBACK_MODULES: SidebarLinkId[] = ["dashboard", "projects", "notifications", "settings", "personas"];
+const FALLBACK_MODULES: SidebarLinkId[] = ["dashboard", "projects", "notifications", "personas"];
 
 interface SidebarProps {
   currentUser?: User | null;

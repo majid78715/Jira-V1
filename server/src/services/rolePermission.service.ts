@@ -1,5 +1,5 @@
 import { PermissionModule, Role, RolePermission } from "../models/_types";
-import { getRolePermissionByRole, setRolePermissions } from "../data/repositories";
+import { getRolePermissionByRole, setRolePermissions, listRoles } from "../data/repositories";
 
 export const PERMISSION_MODULES: PermissionModule[] = [
   "dashboard",
@@ -17,7 +17,7 @@ export const PERMISSION_MODULES: PermissionModule[] = [
   "personas"
 ];
 
-export const ALL_ROLES: Role[] = [
+export const SYSTEM_ROLES: Role[] = [
   "SUPER_ADMIN",
   "VP",
   "PM",
@@ -27,7 +27,7 @@ export const ALL_ROLES: Role[] = [
   "VIEWER"
 ];
 
-const DEFAULT_ROLE_MODULES: Record<Role, PermissionModule[]> = {
+const DEFAULT_ROLE_MODULES: Record<string, PermissionModule[]> = {
   SUPER_ADMIN: ["dashboard", "projects", "notifications", "alerts", "reports", "approvals", "chat", "settings", "admin", "personas"],
   PM: ["dashboard", "projects", "notifications", "alerts", "reports", "approvals", "chat", "settings", "admin", "personas"],
   PROJECT_MANAGER: ["dashboard", "projects", "notifications", "teamDevelopers", "reports", "chat", "settings", "personas"],
@@ -42,11 +42,12 @@ function normalizeModules(modules: PermissionModule[]): PermissionModule[] {
   return Array.from(new Set(modules)).filter((module) => allowed.has(module));
 }
 
-export function getDefaultModulesForRole(role: Role): PermissionModule[] {
+export function getDefaultModulesForRole(role: string): PermissionModule[] {
   return DEFAULT_ROLE_MODULES[role] ?? [];
 }
 
-export async function resolveRoleModules(role: Role): Promise<PermissionModule[]> {
+export async function resolveRoleModules(role: string): Promise<PermissionModule[]> {
+  // @ts-ignore
   const existing = await getRolePermissionByRole(role);
   const base = existing?.modules?.length ? existing.modules : getDefaultModulesForRole(role);
   return normalizeModules(base);
@@ -54,7 +55,9 @@ export async function resolveRoleModules(role: Role): Promise<PermissionModule[]
 
 export async function listRolePermissionsWithDefaults(): Promise<RolePermission[]> {
   const defaults: RolePermission[] = [];
-  for (const role of ALL_ROLES) {
+  
+  // Handle System Roles
+  for (const role of SYSTEM_ROLES) {
     const existing = await getRolePermissionByRole(role);
     if (existing) {
       defaults.push({ ...existing, modules: normalizeModules(existing.modules) });
@@ -63,12 +66,28 @@ export async function listRolePermissionsWithDefaults(): Promise<RolePermission[
     const created = await setRolePermissions(role, getDefaultModulesForRole(role));
     defaults.push({ ...created, modules: normalizeModules(created.modules) });
   }
+
+  // Handle Custom Roles
+  const customRoles = await listRoles();
+  for (const roleDef of customRoles) {
+    // @ts-ignore
+    const existing = await getRolePermissionByRole(roleDef.name);
+    if (existing) {
+      defaults.push({ ...existing, modules: normalizeModules(existing.modules) });
+    } else {
+      // @ts-ignore
+      const created = await setRolePermissions(roleDef.name, []);
+      defaults.push({ ...created, modules: normalizeModules(created.modules) });
+    }
+  }
+
   return defaults;
 }
 
-export async function updateRolePermissions(role: Role, modules: PermissionModule[]): Promise<RolePermission> {
+export async function updateRolePermissions(role: string, modules: PermissionModule[]): Promise<RolePermission> {
   const normalized = normalizeModules(modules);
   const appliedModules = normalized.length ? normalized : getDefaultModulesForRole(role);
+  // @ts-ignore
   const record = await setRolePermissions(role, appliedModules);
   return { ...record, modules: appliedModules };
 }

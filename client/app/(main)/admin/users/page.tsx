@@ -10,10 +10,8 @@ import { Modal } from "../../../../components/ui/Modal";
 import { Table } from "../../../../components/ui/Table";
 import { Badge } from "../../../../components/ui/Badge";
 import { apiRequest, ApiError } from "../../../../lib/apiClient";
-import { Company, Role, User } from "../../../../lib/types";
+import { Company, Role, User, RolePermission } from "../../../../lib/types";
 import { useCurrentUser } from "../../../../hooks/useCurrentUser";
-
-const roleOptions: Role[] = ["SUPER_ADMIN", "VP", "PM", "ENGINEER", "PROJECT_MANAGER", "DEVELOPER", "VIEWER"];
 
 const initialFormState = {
   email: "",
@@ -21,9 +19,6 @@ const initialFormState = {
   firstName: "",
   lastName: "",
   mobileNumber: "",
-  country: "",
-  city: "",
-  timeZone: "",
   title: "",
   companyId: ""
 };
@@ -35,6 +30,8 @@ const initialEditFormState: EditUserFormState = {
   status: "Active"
 };
 
+const SYSTEM_ROLES = ["SUPER_ADMIN", "VP", "PM", "ENGINEER", "PROJECT_MANAGER", "DEVELOPER", "VIEWER"];
+
 export default function AdminUsersPage() {
   const { user: currentUser, loading: sessionLoading } = useCurrentUser({
     redirectTo: "/login",
@@ -42,6 +39,7 @@ export default function AdminUsersPage() {
   });
   const [users, setUsers] = useState<User[]>([]);
   const [companies, setCompanies] = useState<Company[]>([]);
+  const [roles, setRoles] = useState<Role[]>([]);
   const [form, setForm] = useState(initialFormState);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [editForm, setEditForm] = useState(initialEditFormState);
@@ -61,12 +59,23 @@ export default function AdminUsersPage() {
     const load = async () => {
       try {
         setLoading(true);
-        const [usersResponse, companiesResponse] = await Promise.all([
+        const [usersResponse, companiesResponse, rolesResponse] = await Promise.all([
           apiRequest<{ users: User[] }>("/admin/users"),
-          apiRequest<{ companies: Company[] }>("/companies")
+          apiRequest<{ companies: Company[] }>("/companies"),
+          apiRequest<{ rolePermissions: RolePermission[] }>("/admin/role-permissions")
         ]);
         setUsers(usersResponse.users);
         setCompanies(companiesResponse.companies);
+
+        const loadedRoles = rolesResponse.rolePermissions.map(r => r.role);
+        loadedRoles.sort((a, b) => {
+          const isSystemA = SYSTEM_ROLES.includes(a);
+          const isSystemB = SYSTEM_ROLES.includes(b);
+          if (isSystemA && !isSystemB) return -1;
+          if (!isSystemA && isSystemB) return 1;
+          return a.localeCompare(b);
+        });
+        setRoles(loadedRoles);
       } catch (error) {
         const apiError = error as ApiError;
         setFeedback(apiError?.message ?? "Unable to load users.");
@@ -94,9 +103,6 @@ export default function AdminUsersPage() {
       firstName: user.profile.firstName,
       lastName: user.profile.lastName,
       mobileNumber: user.profile.mobileNumber,
-      country: user.profile.country,
-      city: user.profile.city,
-      timeZone: user.profile.timeZone,
       title: user.profile.title,
       companyId: user.companyId ?? "",
       status: user.isActive ? "Active" : "Disabled"
@@ -128,9 +134,6 @@ export default function AdminUsersPage() {
             firstName: editForm.firstName,
             lastName: editForm.lastName,
             mobileNumber: editForm.mobileNumber,
-            country: editForm.country,
-            city: editForm.city,
-            timeZone: editForm.timeZone,
             title: editForm.title
           }
         })
@@ -192,9 +195,6 @@ export default function AdminUsersPage() {
             firstName: form.firstName,
             lastName: form.lastName,
             mobileNumber: form.mobileNumber,
-            country: form.country,
-            city: form.city,
-            timeZone: form.timeZone,
             title: form.title
           }
         })
@@ -283,23 +283,31 @@ export default function AdminUsersPage() {
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div className="grid gap-3 md:grid-cols-2">
               <div>
-                <label className="text-sm font-medium text-ink-700">First name</label>
+                <label className="text-sm font-medium text-ink-700">
+                  First name <span className="text-rose-600">*</span>
+                </label>
                 <Input value={form.firstName} onChange={(e) => handleChange("firstName", e.target.value)} required />
               </div>
               <div>
-                <label className="text-sm font-medium text-ink-700">Last name</label>
+                <label className="text-sm font-medium text-ink-700">
+                  Last name <span className="text-rose-600">*</span>
+                </label>
                 <Input value={form.lastName} onChange={(e) => handleChange("lastName", e.target.value)} required />
               </div>
             </div>
             <div>
-              <label className="text-sm font-medium text-ink-700">Email</label>
+              <label className="text-sm font-medium text-ink-700">
+                Email <span className="text-rose-600">*</span>
+              </label>
               <Input type="email" value={form.email} onChange={(e) => handleChange("email", e.target.value)} required />
             </div>
             <div className="grid gap-3 md:grid-cols-2">
               <div>
-                <label className="text-sm font-medium text-ink-700">Role</label>
+                <label className="text-sm font-medium text-ink-700">
+                  Role <span className="text-rose-600">*</span>
+                </label>
                 <Select value={form.role} onChange={(e) => handleChange("role", e.target.value)}>
-                  {roleOptions.map((role) => (
+                  {roles.map((role) => (
                     <option key={role} value={role}>
                       {role}
                     </option>
@@ -321,26 +329,14 @@ export default function AdminUsersPage() {
             <div className="grid gap-3 md:grid-cols-2">
               <div>
                 <label className="text-sm font-medium text-ink-700">Mobile (E.164)</label>
-                <Input value={form.mobileNumber} onChange={(e) => handleChange("mobileNumber", e.target.value)} required />
+                <Input value={form.mobileNumber} onChange={(e) => handleChange("mobileNumber", e.target.value)} />
               </div>
               <div>
-                <label className="text-sm font-medium text-ink-700">Country (ISO-2)</label>
-                <Input value={form.country} onChange={(e) => handleChange("country", e.target.value)} required />
+                <label className="text-sm font-medium text-ink-700">
+                  Title <span className="text-rose-600">*</span>
+                </label>
+                <Input value={form.title} onChange={(e) => handleChange("title", e.target.value)} required />
               </div>
-            </div>
-            <div className="grid gap-3 md:grid-cols-2">
-              <div>
-                <label className="text-sm font-medium text-ink-700">City</label>
-                <Input value={form.city} onChange={(e) => handleChange("city", e.target.value)} required />
-              </div>
-              <div>
-                <label className="text-sm font-medium text-ink-700">Time Zone</label>
-                <Input value={form.timeZone} onChange={(e) => handleChange("timeZone", e.target.value)} required />
-              </div>
-            </div>
-            <div>
-              <label className="text-sm font-medium text-ink-700">Title</label>
-              <Input value={form.title} onChange={(e) => handleChange("title", e.target.value)} required />
             </div>
             {feedback && <p className="text-sm text-ink-500">{feedback}</p>}
             <Button type="submit" className="w-full" disabled={submitting}>
@@ -355,23 +351,31 @@ export default function AdminUsersPage() {
           <form className="space-y-4" onSubmit={handleEditSubmit}>
             <div className="grid gap-3 md:grid-cols-2">
               <div>
-                <label className="text-sm font-medium text-ink-700">First name</label>
+                <label className="text-sm font-medium text-ink-700">
+                  First name <span className="text-rose-600">*</span>
+                </label>
                 <Input value={editForm.firstName} onChange={(e) => handleEditChange("firstName", e.target.value)} required />
               </div>
               <div>
-                <label className="text-sm font-medium text-ink-700">Last name</label>
+                <label className="text-sm font-medium text-ink-700">
+                  Last name <span className="text-rose-600">*</span>
+                </label>
                 <Input value={editForm.lastName} onChange={(e) => handleEditChange("lastName", e.target.value)} required />
               </div>
             </div>
             <div>
-              <label className="text-sm font-medium text-ink-700">Email</label>
+              <label className="text-sm font-medium text-ink-700">
+                Email <span className="text-rose-600">*</span>
+              </label>
               <Input type="email" value={editForm.email} onChange={(e) => handleEditChange("email", e.target.value)} required />
             </div>
             <div className="grid gap-3 md:grid-cols-2">
               <div>
-                <label className="text-sm font-medium text-ink-700">Role</label>
+                <label className="text-sm font-medium text-ink-700">
+                  Role <span className="text-rose-600">*</span>
+                </label>
                 <Select value={editForm.role} onChange={(e) => handleEditChange("role", e.target.value)}>
-                  {roleOptions.map((role) => (
+                  {roles.map((role) => (
                     <option key={role} value={role}>
                       {role}
                     </option>
@@ -393,28 +397,16 @@ export default function AdminUsersPage() {
             <div className="grid gap-3 md:grid-cols-2">
               <div>
                 <label className="text-sm font-medium text-ink-700">Mobile (E.164)</label>
-                <Input value={editForm.mobileNumber} onChange={(e) => handleEditChange("mobileNumber", e.target.value)} required />
+                <Input value={editForm.mobileNumber} onChange={(e) => handleEditChange("mobileNumber", e.target.value)} />
               </div>
               <div>
-                <label className="text-sm font-medium text-ink-700">Country (ISO-2)</label>
-                <Input value={editForm.country} onChange={(e) => handleEditChange("country", e.target.value)} required />
-              </div>
-            </div>
-            <div className="grid gap-3 md:grid-cols-2">
-              <div>
-                <label className="text-sm font-medium text-ink-700">City</label>
-                <Input value={editForm.city} onChange={(e) => handleEditChange("city", e.target.value)} required />
-              </div>
-              <div>
-                <label className="text-sm font-medium text-ink-700">Time Zone</label>
-                <Input value={editForm.timeZone} onChange={(e) => handleEditChange("timeZone", e.target.value)} required />
-              </div>
-            </div>
-            <div className="grid gap-3 md:grid-cols-2">
-              <div>
-                <label className="text-sm font-medium text-ink-700">Title</label>
+                <label className="text-sm font-medium text-ink-700">
+                  Title <span className="text-rose-600">*</span>
+                </label>
                 <Input value={editForm.title} onChange={(e) => handleEditChange("title", e.target.value)} required />
               </div>
+            </div>
+            <div className="grid gap-3 md:grid-cols-2">
               <div>
                 <label className="text-sm font-medium text-ink-700">Status</label>
                 <Select value={editForm.status} onChange={(e) => handleEditChange("status", e.target.value)}>

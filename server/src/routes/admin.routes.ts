@@ -7,13 +7,14 @@ import {
   patchAdminUserController
 } from "../controllers/adminUsers.controller";
 import { listRolePermissionsController, updateRolePermissionController } from "../controllers/rolePermissions.controller";
+import { listRolesController, createRoleController, deleteRoleController } from "../controllers/roles.controller";
 import { runAutomationController } from "../controllers/automation.controller";
 import { getAiConfigController, updateAiConfigController } from "../controllers/adminSettings.controller";
 import { requireAuth, requireRoles } from "../middleware/rbac";
 import { validateRequest } from "../middleware/validateRequest";
 import { profileSchema } from "../utils/validation";
 
-const roleValues = ["SUPER_ADMIN", "VP", "PM", "ENGINEER", "PROJECT_MANAGER", "DEVELOPER", "VIEWER"] as const;
+// We allow string for role to support custom roles
 const permissionModuleValues = [
   "dashboard",
   "projects",
@@ -33,7 +34,7 @@ const permissionModuleValues = [
 const createAdminUserSchema = {
   body: z.object({
     email: z.string().trim().email().transform((value) => value.toLowerCase()),
-    role: z.enum(roleValues),
+    role: z.string().min(1),
     profile: profileSchema,
     companyId: z.string().trim().min(1).optional()
   })
@@ -46,7 +47,7 @@ const patchAdminUserSchema = {
   body: z
     .object({
       email: z.string().trim().email().optional(),
-      role: z.enum(roleValues).optional(),
+      role: z.string().min(1).optional(),
       isActive: z.boolean().optional(),
       companyId: z.string().trim().min(1).optional(),
       profile: profileSchema.optional()
@@ -72,8 +73,21 @@ const deleteAdminUserSchema = {
 
 const rolePermissionsSchema = {
   body: z.object({
-    role: z.enum(roleValues),
+    role: z.string().min(1),
     modules: z.array(z.enum(permissionModuleValues)).default([])
+  })
+};
+
+const createRoleSchema = {
+  body: z.object({
+    name: z.string().trim().min(1).regex(/^[A-Z0-9_]+$/, "Role name must be uppercase alphanumeric with underscores"),
+    description: z.string().optional()
+  })
+};
+
+const deleteRoleSchema = {
+  params: z.object({
+    roleName: z.string().trim().min(1)
   })
 };
 
@@ -93,6 +107,12 @@ router.get("/users", listAdminUsersController);
 router.post("/users", validateRequest(createAdminUserSchema), createAdminUserController);
 router.patch("/users/:id", validateRequest(patchAdminUserSchema), patchAdminUserController);
 router.delete("/users/:id", validateRequest(deleteAdminUserSchema), deleteAdminUserController);
+
+// Role Management
+router.get("/roles", listRolesController);
+router.post("/roles", validateRequest(createRoleSchema), createRoleController);
+router.delete("/roles/:roleName", validateRequest(deleteRoleSchema), deleteRoleController);
+
 router.get("/role-permissions", listRolePermissionsController);
 router.post("/role-permissions", validateRequest(rolePermissionsSchema), updateRolePermissionController);
 router.post("/run-automation", runAutomationController);
