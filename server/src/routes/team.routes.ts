@@ -56,7 +56,7 @@ router.post(
   validateRequest(vendorContactSchema),
   createVendorContactController
 );
-router.get("/developers", requireAuth, requireRoles("PROJECT_MANAGER"), listDevelopersController);
+router.get("/developers", requireAuth, requireRoles("PROJECT_MANAGER", "PM", "SUPER_ADMIN"), listDevelopersController);
 router.get("/product-managers", requireAuth, requireRoles("SUPER_ADMIN"), listProductManagersController);
 router.patch(
   "/product-managers/:id",

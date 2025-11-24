@@ -5,28 +5,14 @@ import { startTestServer } from "./testServer";
 function e2eProjectPayload(overrides: Record<string, unknown> = {}) {
   return {
     name: "E2E Delivery",
-    code: `E2E-${Date.now()}`,
-    budgetHours: 80,
-    estimatedEffortHours: 80,
-    description: "Cross-functional delivery",
-    ownerId: "user-pm-1",
-    projectType: "PRODUCT_FEATURE",
-    objectiveOrOkrId: "OKR-E2E",
-    priority: "HIGH",
-    stage: "PLANNING",
-    sponsorUserId: "user-vp-1",
-    deliveryManagerUserId: "user-eng-1",
+    description: "Cross-functional delivery project",
+    productManagerIds: ["user-pm-1"],
+    vendorCompanyId: "company-vertex",
+    projectManagerIds: ["user-vm-1"],
+    plannedStartDate: new Date().toISOString(),
+    plannedEndDate: new Date(Date.now() + 86400000 * 30).toISOString(),
+    budgetBucket: 80,
     coreTeamUserIds: ["user-eng-1"],
-    stakeholderUserIds: ["user-super-admin"],
-    vendorCompanyIds: ["company-vertex"],
-    primaryVendorId: "company-vertex",
-    health: "GREEN",
-    riskLevel: "LOW",
-    businessUnit: "Platform",
-    productModule: "Vendor Hub",
-    tags: ["E2E"],
-    timeTrackingRequired: true,
-    rateModel: "TIME_AND_MATERIAL",
     taskWorkflowDefinitionId: "workflow-task-default",
     ...overrides
   };
@@ -110,7 +96,6 @@ test.describe("invite to alerts journey", () => {
       await login(vendor, vendorEmail, vendorPassword);
 
       const developerEmail = `dev.flow.${Date.now()}@vendor.local`;
-      const developerPassword = "Dev#12345";
       const developerInviteResponse = await vendor.post("/api/invitations/developer", {
         data: {
           email: developerEmail,
@@ -120,36 +105,26 @@ test.describe("invite to alerts journey", () => {
       });
       expect(developerInviteResponse.ok()).toBeTruthy();
       const developerInvite = await developerInviteResponse.json();
-      const developerToken = developerInvite.invitation.token as string;
-
-      const developerAcceptResponse = await unauthenticated.post("/api/auth/accept-invitation", {
-        data: {
-          token: developerToken,
-          password: developerPassword,
-          profile: {
-            firstName: "Devon",
-            lastName: "Walker",
-            mobileNumber: "+442045550000",
-            country: "GB",
-            city: "London",
-            timeZone: "Europe/London",
-            title: "Developer"
-          }
-        }
-      });
-      expect(developerAcceptResponse.ok()).toBeTruthy();
-      const developerUser = await developerAcceptResponse.json();
-      const developerId = developerUser.user.id as string;
-
-      await pm.post(`/api/users/${developerId}/approve-profile`, {
-        data: { comment: "Cleared" }
-      });
+      const developerPassword = developerInvite.tempPassword;
+      const developerId = developerInvite.user.id;
 
       const developer = await createContext();
-      await login(developer, developerEmail, developerPassword);
+      const developerLoginResponse = await login(developer, developerEmail, developerPassword);
+
+      const newDeveloperPassword = "NewDeveloperPassword#123";
+      const changePasswordResponse = await developer.post("/api/auth/change-password-first-login", {
+        data: {
+          currentPassword: developerPassword,
+          newPassword: newDeveloperPassword,
+          confirmNewPassword: newDeveloperPassword
+        }
+      });
+      expect(changePasswordResponse.ok()).toBeTruthy();
 
       const projectResponse = await pm.post("/api/projects", {
-        data: e2eProjectPayload()
+        data: e2eProjectPayload({
+          projectManagerIds: [vendorId]
+        })
       });
       expect(projectResponse.ok()).toBeTruthy();
       const project = await projectResponse.json();
@@ -157,17 +132,12 @@ test.describe("invite to alerts journey", () => {
 
       const taskResponse = await vendor.post(`/api/projects/${projectId}/tasks`, {
         data: {
+          itemType: "IMPROVEMENT",
           title: "Initial Discovery",
-          description: "Discovery and onboarding task",
-          budgetHours: 16,
-          requiredSkills: ["node"],
-          acceptanceCriteria: ["Document outcomes"],
-          dueDate: new Date().toISOString(),
-          plannedStartDate: new Date().toISOString(),
-          taskType: "TASK",
-          priority: "HIGH",
-          isVendorTask: true,
-          vendorId: "company-vertex"
+          improvementFields: { description: "Discovery and onboarding task" },
+          estimatedHours: 16,
+          plannedCompletionDate: new Date().toISOString(),
+          plannedStartDate: new Date().toISOString()
         }
       });
       expect(taskResponse.ok()).toBeTruthy();
@@ -185,25 +155,36 @@ test.describe("invite to alerts journey", () => {
       const assignmentPayload = await assignmentResponse.json();
       const assignmentId = assignmentPayload.assignment.id as string;
 
-      const approveAssignmentResponse = await pm.post(`/api/assignments/${assignmentId}/approve`);
-      expect(approveAssignmentResponse.ok()).toBeTruthy();
-
       const today = new Date();
-      const dateKey = today.toISOString().substring(0, 10);
-      const timeEntryResponse = await developer.post("/api/time-entries", {
-        data: {
-          projectId,
-          taskId,
-          date: dateKey,
-          startTime: "09:00",
-          endTime: "11:30",
-          note: "Initial discovery"
-        }
-      });
-      expect(timeEntryResponse.ok()).toBeTruthy();
+      let baseDate = new Date(today);
+      if (today.getDay() === 0) baseDate = new Date(today.getTime() + 24 * 3600 * 1000);
+      if (today.getDay() === 6) baseDate = new Date(today.getTime() + 48 * 3600 * 1000);
+
+      const currentDay = baseDate.getDay();
+      const diff = baseDate.getDate() - currentDay + (currentDay === 0 ? -6 : 1);
+      const monday = new Date(baseDate.setDate(diff));
+      const weekStartKey = monday.toISOString().substring(0, 10);
+
+      for (let i = 0; i < 5; i++) {
+        const d = new Date(monday);
+        d.setDate(monday.getDate() + i);
+        const dateKey = d.toISOString().substring(0, 10);
+        
+        const timeEntryResponse = await developer.post("/api/time-entries", {
+          data: {
+            projectId,
+            taskId,
+            date: dateKey,
+            startTime: "09:00",
+            endTime: "17:00",
+            note: "Daily work"
+          }
+        });
+        expect(timeEntryResponse.ok()).toBeTruthy();
+      }
 
       const generateResponse = await developer.post("/api/timesheets/generate", {
-        data: { weekStart: dateKey }
+        data: { weekStart: weekStartKey }
       });
       expect(generateResponse.status()).toBe(201);
       const generated = await generateResponse.json();

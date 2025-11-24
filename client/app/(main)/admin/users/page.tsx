@@ -18,7 +18,6 @@ const initialFormState = {
   role: "PM" as Role,
   firstName: "",
   lastName: "",
-  mobileNumber: "",
   title: "",
   companyId: ""
 };
@@ -102,7 +101,6 @@ export default function AdminUsersPage() {
       role: user.role,
       firstName: user.profile.firstName,
       lastName: user.profile.lastName,
-      mobileNumber: user.profile.mobileNumber,
       title: user.profile.title,
       companyId: user.companyId ?? "",
       status: user.isActive ? "Active" : "Disabled"
@@ -133,7 +131,6 @@ export default function AdminUsersPage() {
           profile: {
             firstName: editForm.firstName,
             lastName: editForm.lastName,
-            mobileNumber: editForm.mobileNumber,
             title: editForm.title
           }
         })
@@ -194,7 +191,6 @@ export default function AdminUsersPage() {
           profile: {
             firstName: form.firstName,
             lastName: form.lastName,
-            mobileNumber: form.mobileNumber,
             title: form.title
           }
         })
@@ -328,10 +324,6 @@ export default function AdminUsersPage() {
             </div>
             <div className="grid gap-3 md:grid-cols-2">
               <div>
-                <label className="text-sm font-medium text-ink-700">Mobile (E.164)</label>
-                <Input value={form.mobileNumber} onChange={(e) => handleChange("mobileNumber", e.target.value)} />
-              </div>
-              <div>
                 <label className="text-sm font-medium text-ink-700">
                   Title <span className="text-rose-600">*</span>
                 </label>
@@ -395,10 +387,6 @@ export default function AdminUsersPage() {
               </div>
             </div>
             <div className="grid gap-3 md:grid-cols-2">
-              <div>
-                <label className="text-sm font-medium text-ink-700">Mobile (E.164)</label>
-                <Input value={editForm.mobileNumber} onChange={(e) => handleEditChange("mobileNumber", e.target.value)} />
-              </div>
               <div>
                 <label className="text-sm font-medium text-ink-700">
                   Title <span className="text-rose-600">*</span>

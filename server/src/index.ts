@@ -35,6 +35,7 @@ import teamChatRoutes from "./routes/teamChat.routes";
 import reportsRoutes from "./routes/reports.routes";
 import dashboardRoutes from "./routes/dashboard.routes";
 import callsRoutes from "./routes/calls.routes";
+import meetingsRoutes from "./routes/meetings.routes";
 import releasesRoutes from "./routes/releases.routes";
 import workItemTypesRoutes from "./routes/workItemTypes.routes";
 import workflowSchemesRoutes from "./routes/workflowSchemes.routes";
@@ -91,6 +92,7 @@ export function createApp() {
   app.use("/api/reports", reportsRoutes);
   app.use("/api/dashboard", dashboardRoutes);
   app.use("/api/calls", callsRoutes);
+  app.use("/api/meetings", meetingsRoutes);
   app.use("/api/releases", releasesRoutes);
   app.use("/api/work-item-types", workItemTypesRoutes);
   app.use("/api/workflow-schemes", workflowSchemesRoutes);

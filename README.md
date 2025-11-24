@@ -102,7 +102,7 @@ This script executes Vitest (unit + integration) and Playwright (API-level E2E).
 npm run seed --workspace=server
 ```
 
-Profile fields (enforced everywhere): `firstName`, `lastName`, `mobileNumber`, `country`, `city`, `timeZone`, `title`.
+Profile fields (enforced everywhere): `firstName`, `lastName`, `country`, `city`, `timeZone`, `title`.
 
 ## Database & Seeding
 
@@ -118,7 +118,7 @@ Feel free to extend `db/seed.json` with additional fixtures for demos; rerun the
 ### Baseline Recap
 
 - **Roles:** `SUPER_ADMIN`, `VP`, `PM`, `ENGINEER`, `PROJECT_MANAGER`, `DEVELOPER`, `VIEWER`
-- **Profile fields:** `firstName`, `lastName`, `mobileNumber`, `country`, `city`, `timeZone`, `title`
+- **Profile fields:** `firstName`, `lastName`, `country`, `city`, `timeZone`, `title`
 - **DB keys:** `users`, `companies`, `userInvitations`, `profileChangeRequests`, `projects`, `tasks`, `assignments`, `workflowDefinitions`, `workflowInstances`, `workflowActions`, `timeEntries`, `workSchedules`, `companyHolidays`, `dayOffs`, `attendanceRecords`, `timesheets`, `comments`, `attachments`, `alerts`, `notifications`, `activityLogs`, `chatSessions`, `chatMessages`
 - **Repo tree (Phase 0 layout):**
 

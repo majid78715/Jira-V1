@@ -14,11 +14,13 @@
     "@dnd-kit/utilities": "^3.2.2",
     "clsx": "^2.1.0",
     "microsoft-cognitiveservices-speech-sdk": "^1.47.0",
-    "next": "14.2.3",
+    "next": "^14.2.33",
+    "path-scurry": "^1.11.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-markdown": "^10.1.0",
-    "socket.io-client": "^4.7.5"
+    "socket.io-client": "^4.7.5",
+    "styled-jsx": "^5.1.1"
   },
   "devDependencies": {
     "@types/node": "^20.11.30",
@@ -26,7 +28,7 @@
     "@types/react-dom": "^18.2.18",
     "autoprefixer": "^10.4.17",
     "eslint": "^8.57.0",
-    "eslint-config-next": "14.2.3",
+    "eslint-config-next": "14.2.15",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.4.5"

@@ -83,29 +83,30 @@ export async function sendChatMessageForUser(
             const draft = await createProjectDraft(user, {
               name: llmOutcome.action.name,
               description: `Draft created by AI for ${llmOutcome.action.name}`,
-              productManagerId: user.id,
+              productManagerIds: [user.id],
               vendorCompanyId: vendorId,
-              projectManagerId: user.id,
+              projectManagerIds: [user.id],
               budgetBucket: 100
             });
             responseText += `\n\n✅ Project draft "${draft.name}" created successfully (ID: ${draft.code}).`;
           }
         } else if (llmOutcome.action.type === "CREATE_TASK") {
+          const action = llmOutcome.action as { type: "CREATE_TASK"; title: string; projectName: string };
           const projects = await listProjectsForUser(user);
           const targetProject = projects.find(
             (p) =>
-              p.name.toLowerCase().includes(llmOutcome.action!.projectName.toLowerCase()) ||
-              p.code.toLowerCase() === llmOutcome.action!.projectName.toLowerCase()
+              p.name.toLowerCase().includes(action.projectName.toLowerCase()) ||
+              p.code.toLowerCase() === action.projectName.toLowerCase()
           );
 
           if (!targetProject) {
-            responseText += `\n\n❌ I couldn't find a project named "${llmOutcome.action.projectName}".`;
+            responseText += `\n\n❌ I couldn't find a project named "${action.projectName}".`;
           } else {
             const task = await createTaskForProject(
               targetProject.id,
               {
-                itemType: "TASK",
-                title: llmOutcome.action.title,
+                itemType: "NEW_FEATURE",
+                title: action.title,
                 taskFields: { description: "Created via AI Assistant" }
               },
               user

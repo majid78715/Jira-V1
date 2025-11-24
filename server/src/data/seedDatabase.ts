@@ -40,6 +40,7 @@ type SeedCompany = {
 
 export async function seedDatabase(seedFilePath?: string) {
   const seedPath = seedFilePath ?? path.resolve(__dirname, "../../../db/seed.json");
+  console.log("Seeding database from:", seedPath); // DEBUG LOG
   const raw = await fs.readFile(seedPath, "utf-8");
   const payload = JSON.parse(raw) as Partial<DatabaseSchema>;
   const baseline = createEmptyDatabaseState();

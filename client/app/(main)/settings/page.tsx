@@ -71,7 +71,6 @@ export default function SettingsPage() {
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
-    mobileNumber: "",
     country: "",
     city: "",
     timeZone: "",
@@ -130,13 +129,12 @@ export default function SettingsPage() {
     setForm({
       firstName: user.profile.firstName,
       lastName: user.profile.lastName,
-      mobileNumber: user.profile.mobileNumber,
-      country: user.profile.country,
-      city: user.profile.city,
-      timeZone: user.profile.timeZone,
+      country: user.profile.country ?? "",
+      city: user.profile.city ?? "",
+      timeZone: user.profile.timeZone ?? "",
       title: user.profile.title
     });
-    setScheduleTimeZone(user.profile.timeZone);
+    setScheduleTimeZone(user.profile.timeZone ?? "");
   }, [user]);
 
   useEffect(() => {
@@ -393,10 +391,6 @@ export default function SettingsPage() {
             <p className="text-sm text-ink-900">{user.email}</p>
           </div>
           <div>
-            <p className="text-xs uppercase tracking-wide text-ink-400">Mobile</p>
-            <p className="text-sm text-ink-900">{user.profile.mobileNumber}</p>
-          </div>
-          <div>
             <p className="text-xs uppercase tracking-wide text-ink-400">Location</p>
             <p className="text-sm text-ink-900">
               {user.profile.city}, {user.profile.country}
@@ -428,10 +422,6 @@ export default function SettingsPage() {
             </div>
           </div>
           <div className="grid gap-4 md:grid-cols-2">
-            <div>
-              <label className="text-sm font-medium text-ink-700">Mobile (E.164)</label>
-              <Input value={form.mobileNumber} onChange={(e) => handleChange("mobileNumber", e.target.value)} required />
-            </div>
             <div>
               <label className="text-sm font-medium text-ink-700">Country (ISO-2)</label>
               <Input value={form.country} onChange={(e) => handleChange("country", e.target.value)} required />

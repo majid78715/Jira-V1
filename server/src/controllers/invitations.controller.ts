@@ -116,13 +116,18 @@ export async function listProjectManagersController(_req: Request, res: Response
 export async function listDevelopersController(req: Request, res: Response, next: NextFunction) {
   try {
     const companyId = req.currentUser?.companyId;
-    if (!companyId) {
+    const isInternal = ["SUPER_ADMIN", "PM", "VP", "ENGINEER"].includes(req.currentUser?.role || "");
+
+    if (!companyId && !isInternal) {
       return res.status(400).json({ message: "Company context required." });
     }
+
+    const queryCompanyId = isInternal ? undefined : companyId;
+
     const [developers, pms, invitations] = await Promise.all([
-      listUsersByRole("DEVELOPER", companyId),
-      listUsersByRole("PM", companyId),
-      listUserInvitations({ role: "DEVELOPER", companyId })
+      listUsersByRole("DEVELOPER", queryCompanyId),
+      listUsersByRole("PM", queryCompanyId),
+      listUserInvitations({ role: "DEVELOPER", companyId: queryCompanyId })
     ]);
     res.json({ users: [...developers, ...pms], invitations });
   } catch (error) {

@@ -5,7 +5,6 @@ import { CompanyType, Profile } from "../models/_types";
 
 countries.registerLocale(enLocale as LocaleData);
 
-const E164_REGEX = /^\+[1-9]\d{1,14}$/;
 const COUNTRY_CODES = new Set(Object.keys(countries.getAlpha2Codes()).map((code) => code.toUpperCase()));
 const CITY_MAX = 64;
 const TITLE_MAX = 64;
@@ -34,12 +33,6 @@ export const profileSchema = z
   .object({
     firstName: z.string({ message: "firstName is required." }).trim().min(1).max(64),
     lastName: z.string({ message: "lastName is required." }).trim().min(1).max(64),
-    mobileNumber: z
-      .string()
-      .trim()
-      .regex(E164_REGEX, "mobileNumber must follow E.164 format.")
-      .optional()
-      .or(z.literal("")),
     country: countrySchema.optional(),
     city: z.string({ message: "city is required." }).trim().min(1).max(CITY_MAX).optional(),
     timeZone: timeZoneSchema.optional(),

@@ -407,7 +407,7 @@ export async function activateProjectPackage(actor: PublicUser, projectId: strin
       packageSentBackTo: undefined,
       packageSentBackReason: undefined,
       isDraft: false,
-      status: "ACTIVE"
+      status: "COMPLETED"
     }),
     listProjectTasks(projectId),
     listTimeEntries({ projectId })
@@ -939,9 +939,21 @@ async function computeProjectMetrics(projects: Project[]): Promise<Map<string, P
 function buildMetricsFromData(project: Project, tasks: Task[], timeEntries: TimeEntry[]): ProjectMetrics {
   const totalMinutes = timeEntries.reduce((sum, entry) => sum + entry.minutes, 0);
   const hoursLogged = totalMinutes / 60;
+  
   const totalTasks = tasks.length;
   const completedTasks = tasks.filter((task) => task.status === "DONE").length;
-  const progressPercent = totalTasks ? Math.round((completedTasks / totalTasks) * 100) : 0;
+
+  // Calculate progress based on top-level tasks (main tasks)
+  const topLevelTasks = tasks.filter(t => !t.parentId);
+  const completedTopLevel = topLevelTasks.filter(t => t.status === "DONE").length;
+  
+  let progressPercent = topLevelTasks.length 
+    ? Math.round((completedTopLevel / topLevelTasks.length) * 100) 
+    : (totalTasks ? Math.round((completedTasks / totalTasks) * 100) : 0);
+
+  if (project.status === "COMPLETED") {
+    progressPercent = 100;
+  }
   const hoursLoggedPercent = project.estimatedEffortHours
     ? Math.min(100, Math.round((hoursLogged / project.estimatedEffortHours) * 100))
     : 0;

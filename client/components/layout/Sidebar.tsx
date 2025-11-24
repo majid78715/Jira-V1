@@ -19,9 +19,9 @@ const NAV_BLUEPRINT: Partial<Record<SidebarLinkId, SidebarLink>> = {
   dashboard: { id: "dashboard", href: "/dashboard", label: "Dashboard" },
   projects: { id: "projects", href: "/projects", label: "Projects" },
   notifications: { id: "notifications", href: "/notifications", label: "Notifications" },
-  approvals: { id: "approvals", href: "/team/pending-profiles", label: "Approvals" },
   alerts: { id: "alerts", href: "/alerts", label: "Alerts & Risks" },
   reports: { id: "reports", href: "/reports", label: "Reports" },
+  calendar: { id: "calendar", href: "/calendar", label: "Calendar" },
   chat: { id: "chat", href: "/chat", label: "Chat" },
   settings: { id: "settings", href: "/settings", label: "Settings" },
   admin: { id: "admin", href: "/admin", label: "Admin" },
@@ -32,6 +32,7 @@ const DEFAULT_ROLE_MODULES: Record<Role, SidebarLinkId[]> = {
   SUPER_ADMIN: [
     "dashboard",
     "projects",
+    "calendar",
     "notifications",
     "alerts",
     "reports",
@@ -42,6 +43,7 @@ const DEFAULT_ROLE_MODULES: Record<Role, SidebarLinkId[]> = {
   PM: [
     "dashboard",
     "projects",
+    "calendar",
     "notifications",
     "alerts",
     "reports",
@@ -52,15 +54,16 @@ const DEFAULT_ROLE_MODULES: Record<Role, SidebarLinkId[]> = {
   PROJECT_MANAGER: [
     "dashboard",
     "projects",
+    "calendar",
     "notifications",
     "reports",
     "chat",
     "personas"
   ],
-  DEVELOPER: ["notifications", "chat", "personas"],
-  ENGINEER: ["notifications", "chat", "personas"],
-  VP: ["dashboard", "projects", "notifications", "alerts", "reports", "chat", "personas"],
-  VIEWER: ["dashboard", "projects", "notifications", "chat", "personas"]
+  DEVELOPER: ["notifications", "calendar", "chat", "personas"],
+  ENGINEER: ["notifications", "calendar", "chat", "personas"],
+  VP: ["dashboard", "projects", "calendar", "notifications", "alerts", "reports", "chat", "personas"],
+  VIEWER: ["dashboard", "projects", "calendar", "notifications", "chat", "personas"]
 };
 
 const FALLBACK_MODULES: SidebarLinkId[] = ["dashboard", "projects", "notifications", "personas"];
@@ -180,12 +183,14 @@ function buildNavList(role?: Role | null, permittedModules?: PermissionModule[] 
     : role
       ? DEFAULT_ROLE_MODULES[role] ?? FALLBACK_MODULES
       : FALLBACK_MODULES;
-  const keys = allowedModules.filter((key) => NAV_BLUEPRINT[key]);
-  return keys.map((key) => {
-    const item = NAV_BLUEPRINT[key];
-    const label = role && item.alias?.[role] ? item.alias[role]! : item.label;
-    return { ...item, label };
-  });
+  
+  return allowedModules
+    .map((key) => NAV_BLUEPRINT[key])
+    .filter((item): item is SidebarLink => item !== undefined)
+    .map((item) => {
+      const label = role && item.alias?.[role] ? item.alias[role]! : item.label;
+      return { ...item, label };
+    });
 }
 
 

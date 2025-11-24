@@ -9,7 +9,6 @@
       "profile": {
         "firstName": "Ada",
         "lastName": "Steward",
-        "mobileNumber": "+14155551000",
         "country": "US",
         "city": "San Francisco",
         "timeZone": "America/Los_Angeles",
@@ -29,7 +28,6 @@
       "profile": {
         "firstName": "Miguel",
         "lastName": "Sanders",
-        "mobileNumber": "+14155551005",
         "country": "US",
         "city": "Chicago",
         "timeZone": "America/Chicago",
@@ -72,7 +70,6 @@
       "profile": {
         "firstName": "Priya",
         "lastName": "Malhotra",
-        "mobileNumber": "+14155551010",
         "country": "IN",
         "city": "Bengaluru",
         "timeZone": "Asia/Kolkata",
@@ -96,7 +93,6 @@
       "profile": {
         "firstName": "Luis",
         "lastName": "Garcia",
-        "mobileNumber": "+33155551020",
         "country": "FR",
         "city": "Paris",
         "timeZone": "Europe/Paris",
@@ -116,7 +112,6 @@
       "profile": {
         "firstName": "Valeria",
         "lastName": "Monroe",
-        "mobileNumber": "+14155558000",
         "country": "US",
         "city": "Austin",
         "timeZone": "America/Chicago",
@@ -139,7 +134,6 @@
       "profile": {
         "firstName": "Carmen",
         "lastName": "Lopez",
-        "mobileNumber": "+14155558010",
         "country": "US",
         "city": "Austin",
         "timeZone": "America/Chicago",
@@ -162,7 +156,6 @@
       "profile": {
         "firstName": "Dara",
         "lastName": "Singh",
-        "mobileNumber": "+442045551234",
         "country": "GB",
         "city": "London",
         "timeZone": "Europe/London",
@@ -182,7 +175,6 @@
       "profile": {
         "firstName": "Test",
         "lastName": "Product Manager",
-        "mobileNumber": "+10000000001",
         "country": "US",
         "city": "Test City",
         "timeZone": "America/Los_Angeles",
@@ -202,7 +194,6 @@
       "profile": {
         "firstName": "Test",
         "lastName": "Project Manager",
-        "mobileNumber": "+10000000002",
         "country": "US",
         "city": "Test City",
         "timeZone": "America/Los_Angeles",
@@ -222,7 +213,6 @@
       "profile": {
         "firstName": "Test",
         "lastName": "Developer",
-        "mobileNumber": "+10000000003",
         "country": "US",
         "city": "Test City",
         "timeZone": "America/Los_Angeles",
@@ -242,7 +232,6 @@
       "profile": {
         "firstName": "Test",
         "lastName": "Admin",
-        "mobileNumber": "+10000000004",
         "country": "US",
         "city": "Test City",
         "timeZone": "America/Los_Angeles",

@@ -279,7 +279,13 @@ function TaskCard({ task, subtasks, teamMembers, columns, onTaskClick, onStatusC
   return (
     <div
       onClick={() => onTaskClick(task.id)}
-      className={`group relative flex cursor-pointer flex-col gap-2 rounded-md border border-gray-200 bg-white p-2.5 shadow-sm transition-all hover:shadow-md hover:border-brand-300 active:scale-[0.98] ${isOverlay ? 'cursor-grabbing shadow-xl rotate-2' : ''}`}
+      className={`group relative flex cursor-pointer flex-col gap-2 rounded-md border transition-all hover:shadow-md hover:border-brand-300 active:scale-[0.98] ${
+        isOverlay ? 'cursor-grabbing shadow-xl rotate-2' : ''
+      } ${
+        task.status === 'DONE' 
+          ? 'bg-emerald-50 border-emerald-200 shadow-sm' 
+          : 'bg-white border-gray-200 shadow-sm'
+      }`}
     >
       <div className="flex items-start justify-between gap-1.5">
         <span className="text-xs font-medium text-gray-900 line-clamp-2 leading-snug">
@@ -345,7 +351,9 @@ function TaskCard({ task, subtasks, teamMembers, columns, onTaskClick, onStatusC
                 e.stopPropagation();
                 onTaskClick(subtask.id);
               }}
-              className="flex items-center justify-between text-[10px] bg-gray-50 p-1.5 rounded hover:bg-gray-100 transition-colors"
+              className={`flex items-center justify-between text-[10px] p-1.5 rounded hover:bg-opacity-80 transition-colors ${
+                subtask.status === 'DONE' ? 'bg-emerald-100/50' : 'bg-gray-50 hover:bg-gray-100'
+              }`}
             >
               <div className="flex items-center gap-1.5 overflow-hidden">
                   <div className="w-1 h-1 rounded-full bg-gray-400 flex-shrink-0"></div>
@@ -357,9 +365,23 @@ function TaskCard({ task, subtasks, teamMembers, columns, onTaskClick, onStatusC
                       {teamMembers.find((u: any) => u.id === subtask.assigneeUserId)?.profile.firstName[0]}
                     </div>
                 )}
-                <span className={`text-[9px] px-1 rounded ${subtask.status === 'DONE' ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-600'}`}>
-                  {columns.find((c: any) => c.id === subtask.status)?.label || subtask.status}
-                </span>
+                <select
+                  className={`h-4 w-auto rounded border-0 bg-transparent py-0 pl-0 pr-4 text-[9px] font-medium focus:ring-0 cursor-pointer ${
+                    subtask.status === 'DONE' ? 'text-emerald-700' : 'text-gray-500'
+                  }`}
+                  value={subtask.status}
+                  onClick={(e) => e.stopPropagation()}
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    void onStatusChange(subtask.id, e.target.value as TaskStatus);
+                  }}
+                >
+                  {columns.map((c: any) => (
+                    <option key={c.id} value={c.id}>
+                      {c.label}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
           ))}

@@ -10,7 +10,8 @@ import {
   listProjects,
   listTasksByIds,
   listUsers,
-  toPublicUser
+  toPublicUser,
+  listMeetings
 } from "../data/repositories";
 import {
   Assignment,
@@ -20,13 +21,14 @@ import {
   Project,
   PublicCompany,
   PublicUser,
-  Task
+  Task,
+  Meeting
 } from "../models/_types";
 import { HttpError } from "../middleware/httpError";
 
 export type CalendarScope = "user" | "team";
 
-export type CalendarEventType = "ASSIGNMENT" | "MILESTONE" | "DAY_OFF" | "HOLIDAY";
+export type CalendarEventType = "ASSIGNMENT" | "MILESTONE" | "DAY_OFF" | "HOLIDAY" | "MEETING";
 
 export interface CalendarEvent {
   id: string;
@@ -39,6 +41,10 @@ export interface CalendarEvent {
   taskId?: string;
   userId?: string;
   status?: string;
+  meetingId?: string;
+  linkedChatRoomId?: string;
+  location?: string;
+  allDay?: boolean;
 }
 
 export interface UserCalendarPayload {
@@ -96,9 +102,10 @@ export async function getUserCalendar(
     scope === "team" && companyId
       ? { companyId, statuses: ["APPROVED"] as DayOffStatus[] }
       : { userId: targetPublic.id, statuses: ["APPROVED"] as DayOffStatus[] };
-  const [dayOffs, holidays] = await Promise.all([
+  const [dayOffs, holidays, meetings] = await Promise.all([
     listDayOffs(dayOffFilters),
-    companyId ? listCompanyHolidays({ companyId }) : Promise.resolve([])
+    companyId ? listCompanyHolidays({ companyId }) : Promise.resolve([]),
+    listMeetings({ userId: targetPublic.id })
   ]);
 
   const events: CalendarEvent[] = [];
@@ -106,6 +113,7 @@ export async function getUserCalendar(
   events.push(...buildMilestoneEvents(tasks, projectLookup));
   events.push(...buildDayOffEvents(dayOffs, userLookup));
   events.push(...buildHolidayEvents(holidays, companyLookup));
+  events.push(...buildMeetingEvents(meetings));
 
   return {
     scope,
@@ -166,11 +174,14 @@ export async function getProjectCalendar(actor: PublicUser, projectId: string): 
     assignmentUserIds.has(dayOff.userId)
   );
 
+  const meetings = await listMeetings({ projectId: project.id });
+
   const events: CalendarEvent[] = [];
   events.push(...buildAssignmentEvents(projectAssignments, tasks, projectLookup, userLookup));
   events.push(...buildMilestoneEvents(tasks, projectLookup));
   events.push(...buildDayOffEvents(dayOffs, userLookup));
   events.push(...buildHolidayEvents(holidaySets, companyLookup));
+  events.push(...buildMeetingEvents(meetings));
 
   return {
     project,
@@ -351,6 +362,23 @@ function buildHolidayEvents(holidays: CompanyHoliday[], companyLookup: Map<strin
     });
   }
   return events;
+}
+
+function buildMeetingEvents(meetings: Meeting[]): CalendarEvent[] {
+  return meetings.map((meeting) => ({
+    id: `meeting-${meeting.id}`,
+    type: "MEETING",
+    title: meeting.title,
+    subtitle: meeting.type === 'VIRTUAL' ? 'Online Meeting' : 'In Person',
+    description: meeting.description,
+    startDate: meeting.startTime,
+    endDate: meeting.endTime,
+    meetingId: meeting.id,
+    linkedChatRoomId: meeting.linkedChatRoomId,
+    location: meeting.location,
+    status: meeting.status,
+    allDay: meeting.allDay
+  }));
 }
 
 function sortEvents(events: CalendarEvent[]): CalendarEvent[] {

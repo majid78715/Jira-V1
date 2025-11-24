@@ -1,7 +1,7 @@
 # Models
 
 - **Roles:** `SUPER_ADMIN`, `VP`, `PM`, `ENGINEER`, `PROJECT_MANAGER`, `DEVELOPER`, `VIEWER`
-- **Profile (required):** `firstName`, `lastName`, `mobileNumber (E.164)`, `country (ISO-2)`, `city (1..64)`, `timeZone (IANA)`, `title (1..64)`
+- **Profile (required):** `firstName`, `lastName`, `country (ISO-2)`, `city (1..64)`, `timeZone (IANA)`, `title (1..64)`
 - **User:** `{ id, email, passwordHash, role, profile, companyId?, isActive, profileStatus ("ACTIVE" | "PENDING_APPROVAL" | "REJECTED"), profileComment?, createdAt, updatedAt }`
 - **Company:** `{ id, name, type ("HUMAIN" | "VENDOR"), description?, isActive, createdAt, updatedAt }`
 - **UserInvitation:** `{ id, email, firstName, lastName, role, companyId?, invitedById, token, status ("SENT" | "ACCEPTED" | "EXPIRED"), acceptedUserId?, createdAt, updatedAt }`

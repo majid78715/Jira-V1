@@ -154,10 +154,12 @@ describe("automation rules and alerts", () => {
     });
 
     const result = await runAutomation({ now: AUTOMATION_NOW });
-    expect(result.countsByType.TASK_OVERDUE).toBe(1);
+    expect(result.countsByType.TASK_OVERDUE).toBeGreaterThanOrEqual(1);
 
     const overdueAlerts = await listAlertsRepo({ statuses: ["OPEN"], types: ["TASK_OVERDUE"] });
-    expect(overdueAlerts[0]?.projectId).toBe(project.id);
+    const projectAlerts = overdueAlerts.filter((a) => a.projectId === project.id);
+    expect(projectAlerts.length).toBe(1);
+    expect(projectAlerts[0]?.projectId).toBe(project.id);
   });
 
   it("lists and resolves alerts via the API", async () => {

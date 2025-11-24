@@ -47,7 +47,7 @@ type ApprovalQueueResponse = {
 
 export async function getTimesheetOverview(actor: PublicUser, weekStart?: string): Promise<TimesheetOverview> {
   ensureContributor(actor);
-  const range = resolveWeekRange(weekStart, actor.profile.timeZone);
+  const range = resolveWeekRange(weekStart, actor.profile.timeZone ?? "UTC");
   const [timesheet, entries] = await Promise.all([
     findTimesheetByUserAndWeek(actor.id, range.weekStart),
     listTimeEntries({ userId: actor.id, startDate: range.weekStart, endDate: range.weekEnd })
@@ -75,7 +75,7 @@ export async function generateTimesheet(
   payload: { weekStart?: string }
 ): Promise<{ timesheet: Timesheet; created: boolean }> {
   ensureContributor(actor);
-  const range = resolveWeekRange(payload.weekStart, actor.profile.timeZone);
+  const range = resolveWeekRange(payload.weekStart, actor.profile.timeZone ?? "UTC");
   const entries = await listTimeEntries({ userId: actor.id, startDate: range.weekStart, endDate: range.weekEnd });
   if (!entries.length) {
     throw new HttpError(400, "No time entries found for the selected week.");

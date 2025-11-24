@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { PageShell } from "../../../../components/layout/PageShell";
 import { Card } from "../../../../components/ui/Card";
 import { Button } from "../../../../components/ui/Button";
@@ -8,6 +8,7 @@ import { Badge } from "../../../../components/ui/Badge";
 import { Table } from "../../../../components/ui/Table";
 import { Modal } from "../../../../components/ui/Modal";
 import { Input } from "../../../../components/ui/Input";
+import { Switch } from "../../../../components/ui/Switch";
 import { useCurrentUser } from "../../../../hooks/useCurrentUser";
 import { apiRequest, ApiError } from "../../../../lib/apiClient";
 import { PermissionModule, Role, RolePermission } from "../../../../lib/types";
@@ -16,7 +17,6 @@ const MODULES: Array<{ id: PermissionModule; label: string }> = [
   { id: "dashboard", label: "Dashboard" },
   { id: "projects", label: "Projects" },
   { id: "notifications", label: "Notifications" },
-  { id: "approvals", label: "Approvals" },
   { id: "alerts", label: "Alerts" },
   { id: "reports", label: "Reports" },
   { id: "chat", label: "Chat" },
@@ -34,7 +34,7 @@ type RolePermissionMap = Record<string, Set<PermissionModule>>;
 const toSet = (modules: PermissionModule[] = []): Set<PermissionModule> => new Set(modules);
 
 export default function RolePermissionsPage() {
-  const { user, loading: sessionLoading } = useCurrentUser({ redirectTo: "/login", requiredRoles: ["SUPER_ADMIN"] });
+  const { user, loading: sessionLoading } = useCurrentUser({ redirectTo: "/dashboard", requiredRoles: ["SUPER_ADMIN", "PM", "PROJECT_MANAGER"] });
   const [permissions, setPermissions] = useState<RolePermissionMap | null>(null);
   const [roles, setRoles] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
@@ -50,7 +50,7 @@ export default function RolePermissionsPage() {
   const [createError, setCreateError] = useState<string | null>(null);
   const [isCreating, setIsCreating] = useState(false);
 
-  const loadPermissions = async () => {
+  const loadPermissions = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -80,13 +80,13 @@ export default function RolePermissionsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     void loadPermissions();
-  }, []);
+  }, [loadPermissions]);
 
-  const handleToggle = (role: string, module: PermissionModule) => {
+  const handleToggle = useCallback((role: string, module: PermissionModule) => {
     setPermissions((prev) => {
       if (!prev) return prev;
       const next = new Set(prev[role] ?? []);
@@ -97,9 +97,9 @@ export default function RolePermissionsPage() {
       }
       return { ...prev, [role]: next } as RolePermissionMap;
     });
-  };
+  }, []);
 
-  const handleSave = async (role: string) => {
+  const handleSave = useCallback(async (role: string) => {
     if (!permissions) return;
     setSavingRole(role);
     setInfoMessage(null);
@@ -121,7 +121,7 @@ export default function RolePermissionsPage() {
     } finally {
       setSavingRole(null);
     }
-  };
+  }, [permissions]);
 
   const handleCreateRole = async () => {
     if (!newRoleName) return;
@@ -145,7 +145,7 @@ export default function RolePermissionsPage() {
     }
   };
 
-  const handleDeleteRole = async (role: string) => {
+  const handleDeleteRole = useCallback(async (role: string) => {
     if (!confirm(`Are you sure you want to delete the role "${role}"? This cannot be undone.`)) return;
     setDeletingRole(role);
     setInfoMessage(null);
@@ -162,7 +162,7 @@ export default function RolePermissionsPage() {
     } finally {
       setDeletingRole(null);
     }
-  };
+  }, [loadPermissions]);
 
   const tableBody = useMemo(() => {
     if (!permissions) return null;
@@ -174,7 +174,7 @@ export default function RolePermissionsPage() {
           <td className="px-4 py-3 text-sm font-semibold text-ink-900">
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-2">
-                <Badge label={role.replace(/_/g, " ")} variant={isSystemRole ? "default" : "warning"} />
+                <Badge label={role.replace(/_/g, " ")} tone={isSystemRole ? "neutral" : "warning"} />
               </div>
               {!isSystemRole && (
                 <button 
@@ -189,12 +189,12 @@ export default function RolePermissionsPage() {
           </td>
           {MODULES.map((module) => (
             <td key={module.id} className="px-4 py-3 text-center">
-              <input
-                type="checkbox"
-                className="h-4 w-4 rounded border-ink-200 text-brand-600 focus:ring-brand-200"
-                checked={allocated.has(module.id)}
-                onChange={() => handleToggle(role, module.id)}
-              />
+              <div className="flex justify-center">
+                <Switch
+                  checked={allocated.has(module.id)}
+                  onChange={() => handleToggle(role, module.id)}
+                />
+              </div>
             </td>
           ))}
           <td className="px-4 py-3 text-right">
@@ -205,7 +205,7 @@ export default function RolePermissionsPage() {
         </tr>
       );
     });
-  }, [permissions, roles, savingRole, loading, deletingRole]);
+  }, [permissions, roles, savingRole, loading, deletingRole, handleToggle, handleSave, handleDeleteRole]);
 
   if (sessionLoading || !user) {
     return <div className="flex min-h-screen items-center justify-center text-ink-400">Loading...</div>;
@@ -264,18 +264,22 @@ export default function RolePermissionsPage() {
         title="Create Custom Role"
       >
         <div className="space-y-4">
-          <Input
-            label="Role Name (Uppercase, Alphanumeric, Underscores)"
-            placeholder="e.g. INTERN_DEVELOPER"
-            value={newRoleName}
-            onChange={(e) => setNewRoleName(e.target.value.toUpperCase().replace(/[^A-Z0-9_]/g, ""))}
-          />
-          <Input
-            label="Description"
-            placeholder="Optional description"
-            value={newRoleDescription}
-            onChange={(e) => setNewRoleDescription(e.target.value)}
-          />
+          <div className="space-y-1">
+            <label className="text-xs font-medium text-ink-700">Role Name (Uppercase, Alphanumeric, Underscores)</label>
+            <Input
+              placeholder="e.g. INTERN_DEVELOPER"
+              value={newRoleName}
+              onChange={(e) => setNewRoleName(e.target.value.toUpperCase().replace(/[^A-Z0-9_]/g, ""))}
+            />
+          </div>
+          <div className="space-y-1">
+            <label className="text-xs font-medium text-ink-700">Description</label>
+            <Input
+              placeholder="Optional description"
+              value={newRoleDescription}
+              onChange={(e) => setNewRoleDescription(e.target.value)}
+            />
+          </div>
           {createError && <p className="text-sm text-rose-600">{createError}</p>}
           <div className="flex justify-end gap-2 pt-4">
             <Button variant="secondary" onClick={() => setIsCreateModalOpen(false)}>Cancel</Button>

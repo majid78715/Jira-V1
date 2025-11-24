@@ -82,7 +82,10 @@ import {
   WorkflowScheme,
   WorkflowState,
   WorkflowTransition,
-  RoleDefinition
+  RoleDefinition,
+  Meeting,
+  MeetingStatus,
+  MeetingType
 } from "../models/_types";
 import { nowISO } from "../utils/date";
 import { validateCompany, validateProfile } from "../utils/validation";
@@ -361,7 +364,7 @@ export async function deleteUserCascade(userId: string, deletedById: string): Pr
       return value;
     };
 
-    const removeUserFromList = (values: string[]): string[] => values.filter((value) => value !== userId);
+    const removeUserFromList = (values: string[] | undefined): string[] => (values || []).filter((value) => value !== userId);
 
     db.userPreferences = db.userPreferences.filter((preference) => preference.userId !== userId);
     db.workSchedules = db.workSchedules.filter((schedule) => schedule.userId !== userId);
@@ -467,16 +470,16 @@ export async function deleteUserCascade(userId: string, deletedById: string): Pr
         deliveryManagerUserId = deletedById;
         mutated = true;
       }
-      if (coreTeamUserIds.length !== project.coreTeamUserIds.length) {
+      if (coreTeamUserIds.length !== (project.coreTeamUserIds?.length ?? 0)) {
         mutated = true;
       }
-      if (stakeholderUserIds.length !== project.stakeholderUserIds.length) {
+      if (stakeholderUserIds.length !== (project.stakeholderUserIds?.length ?? 0)) {
         mutated = true;
       }
-      if (ownerIds.length !== project.ownerIds.length) {
+      if (ownerIds.length !== (project.ownerIds?.length ?? 0)) {
         mutated = true;
       }
-      if (deliveryManagerUserIds.length !== project.deliveryManagerUserIds.length) {
+      if (deliveryManagerUserIds.length !== (project.deliveryManagerUserIds?.length ?? 0)) {
         mutated = true;
       }
 
@@ -762,11 +765,11 @@ export async function deleteCompany(id: string): Promise<void> {
         primaryVendorId = undefined;
         mutated = true;
       }
-      if (vendorCompanyIds.includes(id)) {
+      if (vendorCompanyIds?.includes(id)) {
         vendorCompanyIds = vendorCompanyIds.filter((vid) => vid !== id);
         mutated = true;
       }
-      if (additionalVendorIds.includes(id)) {
+      if (additionalVendorIds?.includes(id)) {
         additionalVendorIds = additionalVendorIds.filter((vid) => vid !== id);
         mutated = true;
       }
@@ -865,6 +868,37 @@ export async function createUserInvitation(input: CreateInvitationInput): Promis
   });
 
   await recordActivity(input.invitedById, "INVITE_CREATED", `Invited ${invitation.email} as ${invitation.role}`, {
+    invitationId: invitation.id
+  });
+
+  return { ...invitation };
+}
+
+export async function createAcceptedInvitation(
+  input: CreateInvitationInput & { acceptedUserId: string }
+): Promise<PublicInvitation> {
+  const timestamp = nowISO();
+  const invitation: UserInvitation = {
+    id: randomUUID(),
+    createdAt: timestamp,
+    updatedAt: timestamp,
+    email: input.email.toLowerCase(),
+    firstName: input.firstName.trim(),
+    lastName: input.lastName.trim(),
+    role: input.role,
+    companyId: input.companyId,
+    invitedById: input.invitedById,
+    token: randomUUID(),
+    status: "ACCEPTED",
+    acceptedUserId: input.acceptedUserId
+  };
+
+  await updateDatabase(async (db) => {
+    db.userInvitations.push(invitation);
+    return db;
+  });
+
+  await recordActivity(input.invitedById, "INVITE_CREATED", `Created accepted invitation for ${invitation.email}`, {
     invitationId: invitation.id
   });
 
@@ -3776,16 +3810,156 @@ export async function createRole(name: string, description?: string): Promise<Ro
   return role;
 }
 
-export async function deleteRole(id: string): Promise<void> {
+export async function deleteRoleByName(name: string): Promise<void> {
   await updateDatabase(async (db) => {
-    const index = db.roles.findIndex((r) => r.id === id);
+    const index = db.roles.findIndex((r) => r.name === name);
     if (index === -1) {
       throw new Error("Role not found.");
     }
     if (db.roles[index].isSystem) {
       throw new Error("Cannot delete system role.");
     }
+    
+    // Remove role definition
     db.roles.splice(index, 1);
+
+    // Remove associated permissions
+    const permIndex = db.rolePermissions.findIndex((rp) => rp.role === name);
+    if (permIndex !== -1) {
+      db.rolePermissions.splice(permIndex, 1);
+    }
+
+    return db;
+  });
+}
+
+export type NewMeetingInput = {
+  title: string;
+  description?: string;
+  startTime: string;
+  endTime: string;
+  organizerId: string;
+  participantIds: string[];
+  externalParticipants?: string[];
+  location?: string;
+  type: MeetingType;
+  linkedChatRoomId?: string;
+  projectId?: string;
+  taskId?: string;
+  allDay?: boolean;
+};
+
+export type UpdateMeetingInput = Partial<
+  Pick<
+    Meeting,
+    | "title"
+    | "description"
+    | "startTime"
+    | "endTime"
+    | "participantIds"
+    | "externalParticipants"
+    | "location"
+    | "type"
+    | "status"
+    | "linkedChatRoomId"
+    | "projectId"
+    | "taskId"
+    | "allDay"
+  >
+>;
+
+export async function listMeetings(filters: {
+  userId?: string;
+  projectId?: string;
+  startDate?: string;
+  endDate?: string;
+} = {}): Promise<Meeting[]> {
+  const db = await readDatabase();
+  return db.meetings
+    .filter((meeting) => {
+      if (filters.userId && meeting.organizerId !== filters.userId && !meeting.participantIds.includes(filters.userId)) {
+        return false;
+      }
+      if (filters.projectId && meeting.projectId !== filters.projectId) {
+        return false;
+      }
+      if (filters.startDate && meeting.endTime < filters.startDate) {
+        return false;
+      }
+      if (filters.endDate && meeting.startTime > filters.endDate) {
+        return false;
+      }
+      return true;
+    })
+    .map((meeting) => ({ ...meeting }));
+}
+
+export async function getMeetingById(id: string): Promise<Meeting | undefined> {
+  const db = await readDatabase();
+  return db.meetings.find((meeting) => meeting.id === id);
+}
+
+export async function createMeeting(input: NewMeetingInput): Promise<Meeting> {
+  const timestamp = nowISO();
+  const meeting: Meeting = {
+    id: randomUUID(),
+    createdAt: timestamp,
+    updatedAt: timestamp,
+    title: input.title.trim(),
+    description: input.description?.trim(),
+    startTime: input.startTime,
+    endTime: input.endTime,
+    organizerId: input.organizerId,
+    participantIds: input.participantIds,
+    externalParticipants: input.externalParticipants,
+    location: input.location,
+    type: input.type,
+    status: "SCHEDULED",
+    linkedChatRoomId: input.linkedChatRoomId,
+    projectId: input.projectId,
+    taskId: input.taskId,
+    allDay: input.allDay ?? false
+  };
+
+  await updateDatabase(async (db) => {
+    db.meetings.push(meeting);
+    return db;
+  });
+
+  return { ...meeting };
+}
+
+export async function updateMeeting(id: string, update: UpdateMeetingInput): Promise<Meeting> {
+  let stored: Meeting | undefined;
+  await updateDatabase(async (db) => {
+    const index = db.meetings.findIndex((meeting) => meeting.id === id);
+    if (index === -1) {
+      throw new Error("Meeting not found.");
+    }
+    const merged: Meeting = {
+      ...db.meetings[index],
+      ...update,
+      updatedAt: nowISO()
+    };
+    db.meetings[index] = merged;
+    stored = merged;
+    return db;
+  });
+
+  if (!stored) {
+    throw new Error("Unable to update meeting.");
+  }
+
+  return { ...stored };
+}
+
+export async function deleteMeeting(id: string): Promise<void> {
+  await updateDatabase(async (db) => {
+    const index = db.meetings.findIndex((meeting) => meeting.id === id);
+    if (index === -1) {
+      throw new Error("Meeting not found.");
+    }
+    db.meetings.splice(index, 1);
     return db;
   });
 }

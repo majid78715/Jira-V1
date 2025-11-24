@@ -7,7 +7,7 @@ import { useCurrentUser } from "../../../../hooks/useCurrentUser";
 export default function AiConfigPage() {
   const { user, loading } = useCurrentUser({
     redirectTo: "/login",
-    requiredRoles: ["SUPER_ADMIN"]
+    requiredRoles: ["SUPER_ADMIN", "PM", "PROJECT_MANAGER"]
   });
 
   if (loading || !user) {

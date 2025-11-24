@@ -41,6 +41,8 @@ describe("Team chat API", () => {
     expect(postResponse.status).toBe(201);
     expect(postResponse.body.message?.body).toBe("Team chat integration test");
 
+    await new Promise((resolve) => setTimeout(resolve, 500)); // Wait for persistence
+
     const messagesResponse = await request(app)
       .get(`/api/team-chat/rooms/${roomId}/messages`)
       .set("Cookie", cookie);

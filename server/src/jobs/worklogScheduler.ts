@@ -197,7 +197,7 @@ async function processUserProjects(
 
 async function resolveUserSchedule(user: PublicUser): Promise<{ timeZone: string; slots: WorkScheduleSlot[] }> {
   const schedule = await findWorkScheduleForUser(user.id, user.companyId);
-  const timeZone = schedule?.timeZone ?? user.profile.timeZone;
+  const timeZone = schedule?.timeZone ?? user.profile.timeZone ?? "UTC";
   const slots = resolveScheduleSlots(schedule?.slots);
   return { timeZone, slots };
 }

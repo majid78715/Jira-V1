@@ -10,7 +10,6 @@ import { apiRequest, ApiError } from "../../../../lib/apiClient";
 const initialProfile = {
   firstName: "",
   lastName: "",
-  mobileNumber: "",
   country: "",
   city: "",
   timeZone: "",
@@ -92,19 +91,15 @@ export default function AcceptInvitePage() {
           </div>
           <div className="grid gap-4 md:grid-cols-2">
             <div>
-              <label className="text-sm font-medium text-ink-700">Mobile (E.164)</label>
-              <Input value={profile.mobileNumber} onChange={(e) => handleChange("mobileNumber", e.target.value)} required />
-            </div>
-            <div>
               <label className="text-sm font-medium text-ink-700">Country (ISO-2)</label>
               <Input value={profile.country} onChange={(e) => handleChange("country", e.target.value)} required />
             </div>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2">
             <div>
               <label className="text-sm font-medium text-ink-700">City</label>
               <Input value={profile.city} onChange={(e) => handleChange("city", e.target.value)} required />
             </div>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
             <div>
               <label className="text-sm font-medium text-ink-700">Time Zone</label>
               <Input value={profile.timeZone} onChange={(e) => handleChange("timeZone", e.target.value)} required />

@@ -25,7 +25,7 @@ export async function getScheduleForUser(actor: PublicUser, userId: string): Pro
   const schedule = await findWorkScheduleForUser(target.id, target.companyId);
   return {
     schedule: {
-      timeZone: schedule?.timeZone ?? target.profile.timeZone,
+      timeZone: schedule?.timeZone ?? target.profile.timeZone ?? "UTC",
       slots: schedule?.slots ?? []
     },
     targetUser: toPublicUser(target)
@@ -38,7 +38,7 @@ export async function saveScheduleForUser(actor: PublicUser, userId: string, pay
   const slots = validateSlots(payload.slots ?? []);
   return upsertWorkSchedule({
     userId: target.id,
-    timeZone: target.profile.timeZone,
+    timeZone: target.profile.timeZone ?? "UTC",
     slots,
     name: `${target.profile.firstName} ${target.profile.lastName}`
   });

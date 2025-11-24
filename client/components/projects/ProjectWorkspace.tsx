@@ -126,11 +126,11 @@ export function ProjectWorkspace({ detail, loading, currentUser, onRefresh, onEd
   }, [workflowScheme]);
 
   useEffect(() => {
-    if (initialOpenTaskForm && project && canEditTasks) {
+    if (initialOpenTaskForm && canEditTasks) {
       setItemFormOpen(true);
       onAutoOpenHandled?.();
     }
-  }, [initialOpenTaskForm, project?.id, canEditTasks, onAutoOpenHandled]);
+  }, [initialOpenTaskForm, canEditTasks, onAutoOpenHandled]);
 
   const handleTabChange = (tab: string) => {
     const params = new URLSearchParams(searchParams);
@@ -568,7 +568,7 @@ function TaskList(props: {
             <tbody className="divide-y divide-ink-100 bg-white text-ink-700">
               {items.map((task) => (
                 <Fragment key={task.id}>
-                <tr key={task.id}>
+                <tr key={task.id} className={task.status === "DONE" ? "bg-emerald-50" : ""}>
                   <td className="px-3 py-2">
                     <input
                       type="checkbox"
@@ -620,7 +620,7 @@ function TaskList(props: {
                       onChange={(e) =>
                         void updateTaskField(task.id, { status: e.target.value as TaskStatus }, setInlineUpdating, onTasksUpdated)
                       }
-                      className="text-xs py-1"
+                      className={`text-xs py-1 ${task.status === "DONE" ? "text-emerald-700 font-medium" : ""}`}
                     >
                       {statusColumns.map((col) => (
                         <option key={col.id} value={col.id}>
@@ -652,7 +652,7 @@ function TaskList(props: {
                   </td>
                 </tr>
                 {subtasksMap.get(task.id)?.map(subtask => (
-                  <tr key={subtask.id} className="bg-gray-50/50">
+                  <tr key={subtask.id} className={subtask.status === "DONE" ? "bg-emerald-50" : "bg-gray-50/50"}>
                     <td className="px-3 py-2">
                        <div className="flex justify-end pr-2">
                          <div className="w-3 h-3 border-l-2 border-b-2 border-gray-300 rounded-bl-sm"></div>
@@ -696,7 +696,7 @@ function TaskList(props: {
                         onChange={(e) =>
                           void updateTaskField(subtask.id, { status: e.target.value as TaskStatus }, setInlineUpdating, onTasksUpdated)
                         }
-                        className="text-xs py-1 h-auto"
+                        className={`text-xs py-1 h-auto ${subtask.status === "DONE" ? "text-emerald-700 font-medium" : ""}`}
                       >
                         {statusColumns.map((col) => (
                           <option key={col.id} value={col.id}>

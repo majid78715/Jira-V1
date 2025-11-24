@@ -425,7 +425,11 @@ function ProjectListPanel({
                 onClick={() => void onSelect(project.id)}
                 className={`w-full rounded-2xl border px-4 py-3 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-200 ${
                   selectedProjectId === project.id
-                    ? "border-brand-200 bg-brand-gradient/5"
+                    ? project.status === "ACTIVE"
+                      ? "border-emerald-500 bg-emerald-100"
+                      : "border-brand-200 bg-brand-gradient/5"
+                    : project.status === "ACTIVE"
+                    ? "border-emerald-200 bg-emerald-50 hover:border-emerald-300"
                     : "border-ink-100 bg-white hover:border-brand-200"
                 }`}
               >

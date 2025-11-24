@@ -125,7 +125,7 @@ export async function getAttendanceSummary(actor: PublicUser): Promise<Attendanc
 
 async function resolveSchedule(actor: PublicUser): Promise<{ timeZone: string; slots: WorkScheduleSlot[] }> {
   const schedule = await findWorkScheduleForUser(actor.id, actor.companyId);
-  const timeZone = schedule?.timeZone ?? actor.profile.timeZone;
+  const timeZone = schedule?.timeZone ?? actor.profile.timeZone ?? "UTC";
   const slots = resolveScheduleSlots(schedule?.slots);
   return { timeZone, slots };
 }

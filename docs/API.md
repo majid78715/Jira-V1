@@ -47,7 +47,6 @@
 
 Validation enforced for every profile payload:
 
-- mobileNumber must be E.164
 - country ISO-2 (case-insensitive) or canonical country name
 - city & 	itle length 1..64 chars
 - 	imeZone must be an IANA identifier (e.g., America/New_York)

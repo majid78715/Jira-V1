@@ -61,7 +61,7 @@ export function ProjectPackageReviewBar({
     stage?.id === "PM"
       ? "Start Project"
       : stage?.status === "PM_ACTIVATE"
-        ? "Approve & Start"
+        ? "Approve & Complete Project"
         : "Complete Project";
 
   const handleAdvance = async () => {

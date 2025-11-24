@@ -563,7 +563,7 @@ async function resolveSchedule(user: PublicUser, data: BaseDigestData): Promise<
   }
   const schedule = await findWorkScheduleForUser(user.id, user.companyId);
   const info: ScheduleInfo = {
-    timeZone: schedule?.timeZone ?? user.profile.timeZone,
+    timeZone: schedule?.timeZone ?? user.profile.timeZone ?? "UTC",
     slots: normalizeSlots(schedule?.slots ?? [])
   };
   data.schedules.set(user.id, info);

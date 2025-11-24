@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 import { ChatComposer } from "../collaboration/ChatComposer";
 import { ChatTranscript } from "../collaboration/ChatTranscript";
 import { useAiChat } from "../../hooks/useAiChat";
@@ -15,18 +15,38 @@ interface AskAiDrawerProps {
 export function AskAiDrawer({ open, onClose, currentUserId }: AskAiDrawerProps) {
   const { messages, sending, error, contextChips, toggleChip, sendMessage, chipOptions, reset } =
     useAiChat();
+  const isMouseDownOnBackdrop = useRef(false);
 
   const handleClose = useCallback(() => {
     reset();
     onClose();
   }, [onClose, reset]);
 
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      isMouseDownOnBackdrop.current = true;
+    } else {
+      isMouseDownOnBackdrop.current = false;
+    }
+  };
+
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (isMouseDownOnBackdrop.current && e.target === e.currentTarget) {
+      handleClose();
+    }
+    isMouseDownOnBackdrop.current = false;
+  };
+
   if (!open) {
     return null;
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex bg-black/30" onClick={handleClose}>
+    <div 
+      className="fixed inset-0 z-50 flex bg-black/30" 
+      onMouseDown={handleMouseDown}
+      onClick={handleBackdropClick}
+    >
       <div
         className="ml-auto flex h-full w-full max-w-lg flex-col bg-white shadow-2xl"
         onClick={(event) => event.stopPropagation()}

@@ -391,7 +391,7 @@ export async function finalApproveTaskAndStart(
     payload.plannedStartDate,
     task.estimation.quantity,
     task.estimation.unit,
-    assignee.profile.timeZone || actor.profile.timeZone,
+    assignee.profile.timeZone || actor.profile.timeZone || "UTC",
     schedule?.slots,
     holidays,
     dayOffs

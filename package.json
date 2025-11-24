@@ -24,5 +24,16 @@
   "dependencies": {
     "lucide-react": "^0.554.0",
     "recharts": "^3.4.1"
+  },
+  "overrides": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "glob": "^10.5.0",
+    "@next/eslint-plugin-next": {
+      "glob": "^10.5.0"
+    },
+    "rimraf": {
+      "glob": "^7.2.3"
+    }
   }
 }

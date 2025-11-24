@@ -13,7 +13,8 @@ export const PERMISSION_MODULES: PermissionModule[] = [
   "admin",
   "personas",
   "createProject",
-  "createWorkflow"
+  "createWorkflow",
+  "calendar"
 ];
 
 export const SYSTEM_ROLES: Role[] = [
@@ -27,13 +28,13 @@ export const SYSTEM_ROLES: Role[] = [
 ];
 
 const DEFAULT_ROLE_MODULES: Record<string, PermissionModule[]> = {
-  SUPER_ADMIN: ["dashboard", "projects", "notifications", "alerts", "reports", "approvals", "chat", "settings", "admin", "personas", "createProject", "createWorkflow"],
-  PM: ["dashboard", "projects", "notifications", "alerts", "reports", "approvals", "chat", "settings", "admin", "personas", "createProject", "createWorkflow"],
-  PROJECT_MANAGER: ["dashboard", "projects", "notifications", "reports", "chat", "settings", "personas"],
-  DEVELOPER: ["dashboard", "notifications", "chat", "settings", "personas"],
-  ENGINEER: ["dashboard", "notifications", "chat", "settings", "personas"],
-  VP: ["dashboard", "projects", "notifications", "alerts", "reports", "chat", "settings", "personas"],
-  VIEWER: ["dashboard", "projects", "notifications", "chat", "settings", "personas"]
+  SUPER_ADMIN: ["dashboard", "projects", "notifications", "alerts", "reports", "approvals", "chat", "settings", "admin", "personas", "createProject", "createWorkflow", "calendar"],
+  PM: ["dashboard", "projects", "notifications", "alerts", "reports", "approvals", "chat", "settings", "admin", "personas", "createProject", "createWorkflow", "calendar"],
+  PROJECT_MANAGER: ["dashboard", "projects", "notifications", "reports", "chat", "settings", "personas", "calendar"],
+  DEVELOPER: ["dashboard", "notifications", "chat", "settings", "personas", "calendar"],
+  ENGINEER: ["dashboard", "notifications", "chat", "settings", "personas", "calendar"],
+  VP: ["dashboard", "projects", "notifications", "alerts", "reports", "chat", "settings", "personas", "calendar"],
+  VIEWER: ["dashboard", "projects", "notifications", "chat", "settings", "personas", "calendar"]
 };
 
 function normalizeModules(modules: PermissionModule[]): PermissionModule[] {

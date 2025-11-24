@@ -29,6 +29,9 @@ function projectPayload(overrides: Record<string, unknown> = {}) {
     stakeholderUserIds: ["user-super-admin"],
     vendorCompanyIds: ["company-vertex"],
     primaryVendorId: "company-vertex",
+    vendorCompanyId: "company-vertex",
+    productManagerIds: ["user-pm-1"],
+    projectManagerIds: ["user-vm-1"],
     health: "GREEN",
     riskLevel: "LOW",
     businessUnit: "Platform",
@@ -58,6 +61,9 @@ describe("security and validation", () => {
       .post("/api/projects")
       .set("Cookie", pmCookie)
       .send(projectPayload());
+    if (projectResponse.status !== 201) {
+      console.error("Project creation failed:", projectResponse.status, JSON.stringify(projectResponse.body));
+    }
     expect(projectResponse.status).toBe(201);
     const projectId = projectResponse.body.project.id;
 
@@ -67,6 +73,7 @@ describe("security and validation", () => {
       .set("Cookie", vmCookie)
       .send(
         {
+          itemType: "IMPROVEMENT",
           title: "Immutable Task",
           description: "Should lock after approval",
           budgetHours: 4,
@@ -74,30 +81,32 @@ describe("security and validation", () => {
           acceptanceCriteria: ["Complete vendor work"],
           dueDate: new Date().toISOString(),
           plannedStartDate: new Date().toISOString(),
-          taskType: "TASK",
           priority: "HIGH",
           isVendorTask: true,
           vendorId: "company-vertex"
         }
       );
+    if (taskResponse.status !== 201) {
+      console.error("Task creation failed:", taskResponse.status, JSON.stringify(taskResponse.body));
+    }
     expect(taskResponse.status).toBe(201);
-  const taskId = taskResponse.body.task.id;
+    const taskId = taskResponse.body.task.id;
 
-  await request(app)
-    .post(`/api/tasks/${taskId}/estimate`)
-    .set("Cookie", pmCookie)
-    .send({
-      quantity: 4,
-      unit: "HOURS",
-      notes: "Short engagement"
-    })
-    .expect(201);
+    await request(app)
+      .post(`/api/tasks/${taskId}/estimate`)
+      .set("Cookie", pmCookie)
+      .send({
+        quantity: 4,
+        unit: "HOURS",
+        notes: "Short engagement"
+      })
+      .expect(201);
 
-  await request(app)
-    .post(`/api/workflows/tasks/${taskId}/actions`)
-    .set("Cookie", vmCookie)
-    .send({ action: "APPROVE" })
-    .expect(200);
+    await request(app)
+      .post(`/api/workflows/tasks/${taskId}/actions`)
+      .set("Cookie", vmCookie)
+      .send({ action: "APPROVE" })
+      .expect(200);
 
     await request(app)
       .post(`/api/tasks/${taskId}/final-approve-and-start`)

@@ -5,6 +5,7 @@ import { DatabaseSchema, createEmptyDatabaseState } from "../models/_types";
 const ROOT_DIR = path.resolve(__dirname, "../../../");
 const DEFAULT_DB_FILE_PATH = path.join(ROOT_DIR, "db", "db.json");
 const DB_FILE_PATH = process.env.DB_FILE_PATH ? path.resolve(process.env.DB_FILE_PATH) : DEFAULT_DB_FILE_PATH;
+console.log("DB_FILE_PATH:", DB_FILE_PATH); // DEBUG LOG
 const DB_FILE_DIR = path.dirname(DB_FILE_PATH);
 const LOCK_FILE_PATH = `${DB_FILE_PATH}.lock`;
 const MAX_LOCK_RETRIES = 40;

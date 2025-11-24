@@ -518,7 +518,7 @@ async function getPublicUserForEntry(userId: string): Promise<PublicUser> {
 
 async function resolveSchedule(target: PublicUser): Promise<{ timeZone: string; slots: WorkScheduleSlot[] }> {
   const schedule = await findWorkScheduleForUser(target.id, target.companyId);
-  const timeZone = schedule?.timeZone ?? target.profile.timeZone;
+  const timeZone = schedule?.timeZone ?? target.profile.timeZone ?? "UTC";
   const slots = resolveScheduleSlots(schedule?.slots);
   return { timeZone, slots };
 }

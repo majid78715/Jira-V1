@@ -34,7 +34,6 @@ const createContactFormState = () => ({
   firstName: "",
   lastName: "",
   email: "",
-  mobileNumber: "",
   country: "",
   city: "",
   timeZone: "",
@@ -250,7 +249,6 @@ export default function AdminCompaniesPage() {
           profile: {
             firstName: contactForm.firstName,
             lastName: contactForm.lastName,
-            mobileNumber: contactForm.mobileNumber,
             country: contactForm.country,
             city: contactForm.city,
             timeZone: contactForm.timeZone,
@@ -498,7 +496,6 @@ export default function AdminCompaniesPage() {
               ))}
             </Select>
           </div>
-          <InputField label="Mobile (E.164)" value={contactForm.mobileNumber} onChange={(value) => setContactForm((prev) => ({ ...prev, mobileNumber: value }))} required />
           <div className="grid gap-3 md:grid-cols-2">
             <InputField label="Country" value={contactForm.country} onChange={(value) => setContactForm((prev) => ({ ...prev, country: value }))} required />
             <InputField label="City" value={contactForm.city} onChange={(value) => setContactForm((prev) => ({ ...prev, city: value }))} required />

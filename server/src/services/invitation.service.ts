@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import {
   createUserInvitation,
+  createAcceptedInvitation,
   createUser,
   getInvitationByToken,
   getCompanyById,
@@ -50,7 +51,6 @@ interface AcceptInvitationPayload {
   profile: {
     firstName: string;
     lastName: string;
-    mobileNumber: string;
     country: string;
     city: string;
     timeZone: string;
@@ -114,7 +114,6 @@ export async function inviteDeveloper(payload: InviteDeveloperPayload): Promise<
     profile: {
       firstName: payload.firstName,
       lastName: payload.lastName,
-      mobileNumber: "+10000000000",
       country: "US",
       city: "TBD",
       timeZone: "UTC",
@@ -137,16 +136,15 @@ export async function inviteDeveloper(payload: InviteDeveloperPayload): Promise<
     }
   }
 
-  const invitation = await createUserInvitation({
+  const invitation = await createAcceptedInvitation({
     email: payload.email,
     firstName: payload.firstName,
     lastName: payload.lastName,
     role: "DEVELOPER",
     companyId: payload.companyId,
-    invitedById: payload.invitedById
+    invitedById: payload.invitedById,
+    acceptedUserId: user.id
   });
-
-  await markInvitationAccepted(invitation.id, user.id);
 
   await recordActivity(payload.invitedById, "INTERNAL_USER_CREATED", `Created Developer ${user.email}`, {
     userId: user.id,
@@ -193,7 +191,6 @@ export async function inviteProductManager(payload: InviteProductManagerPayload)
     profile: {
       firstName: payload.firstName,
       lastName: payload.lastName,
-      mobileNumber: "+10000000000",
       country: "US",
       city: "TBD",
       timeZone: "UTC",
@@ -224,16 +221,15 @@ export async function inviteProductManager(payload: InviteProductManagerPayload)
     }
   }
 
-  const invitation = await createUserInvitation({
+  const invitation = await createAcceptedInvitation({
     email: payload.email,
     firstName: payload.firstName,
     lastName: payload.lastName,
     role: "PM",
     companyId: payload.companyId,
-    invitedById: payload.invitedById
+    invitedById: payload.invitedById,
+    acceptedUserId: user.id
   });
-
-  await markInvitationAccepted(invitation.id, user.id);
 
   await recordActivity(payload.invitedById, "INTERNAL_USER_CREATED", `Created Product Manager ${user.email}`, {
     userId: user.id,

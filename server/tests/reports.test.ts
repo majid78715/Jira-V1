@@ -139,7 +139,7 @@ describe("reporting APIs", () => {
 
     const csvResponse = await request(app)
       .get("/api/reports/timesheet-summary")
-      .query({ format: "csv", groupBy: "project" })
+      .query({ format: "csv", groupBy: "project", from: "2025-06-01", to: "2025-06-10" })
       .set("Cookie", cookie);
     expect(csvResponse.status).toBe(200);
     expect(csvResponse.headers["content-type"]).toContain("text/csv");

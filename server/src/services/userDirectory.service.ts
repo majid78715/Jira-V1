@@ -27,7 +27,6 @@ export type UserDirectoryEntry = {
   title?: string;
   companyId?: string;
   companyName?: string;
-  mobileNumber: string;
   country: string;
   city: string;
   timeZone: string;
@@ -37,7 +36,6 @@ export async function searchUsersDirectory(filters: UserDirectoryFilters): Promi
   const [users, companies] = await Promise.all([listUsers(), listCompanies()]);
   const companyLookup = new Map(companies.map((company) => [company.id, company.name]));
   const normalizedRole = filters.role;
-  const normalizedQuery = filters.query?.replace(/\D/g, "") ?? "";
   const normalizedCountry = filters.country?.toLowerCase();
   const normalizedCity = filters.city?.toLowerCase();
   const normalizedTimeZone = filters.timeZone?.toLowerCase();
@@ -47,20 +45,14 @@ export async function searchUsersDirectory(filters: UserDirectoryFilters): Promi
       if (normalizedRole && user.role !== normalizedRole) {
         return false;
       }
-      if (normalizedCountry && user.profile.country.toLowerCase() !== normalizedCountry) {
+      if (normalizedCountry && (!user.profile.country || user.profile.country.toLowerCase() !== normalizedCountry)) {
         return false;
       }
-      if (normalizedCity && user.profile.city.toLowerCase() !== normalizedCity) {
+      if (normalizedCity && (!user.profile.city || user.profile.city.toLowerCase() !== normalizedCity)) {
         return false;
       }
-      if (normalizedTimeZone && user.profile.timeZone.toLowerCase() !== normalizedTimeZone) {
+      if (normalizedTimeZone && (!user.profile.timeZone || user.profile.timeZone.toLowerCase() !== normalizedTimeZone)) {
         return false;
-      }
-      if (normalizedQuery) {
-        const digits = user.profile.mobileNumber.replace(/\D/g, "");
-        if (!digits.includes(normalizedQuery)) {
-          return false;
-        }
       }
       return true;
     })
@@ -74,10 +66,9 @@ export async function searchUsersDirectory(filters: UserDirectoryFilters): Promi
         title: user.profile.title || undefined,
         companyId: user.companyId,
         companyName: user.companyId ? companyLookup.get(user.companyId) : undefined,
-        mobileNumber: user.profile.mobileNumber,
-        country: user.profile.country,
-        city: user.profile.city,
-        timeZone: user.profile.timeZone
+        country: user.profile.country ?? "",
+        city: user.profile.city ?? "",
+        timeZone: user.profile.timeZone ?? "UTC"
       };
     })
     .sort((a, b) => a.name.localeCompare(b.name));

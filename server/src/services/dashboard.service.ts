@@ -389,9 +389,19 @@ function buildProjectRows(context: DashboardComputationContext): DashboardProjec
 
   return context.projects
     .map((project) => {
-      const taskStats = tasksByProject.get(project.id) ?? { total: 0, done: 0 };
+      const taskStats = tasksByProject.get(project.id) ?? { total: 0, done: 0, topLevelTotal: 0, topLevelDone: 0 };
       const hoursLogged = timeByProject.get(project.id) ?? 0;
-      const progressPercent = taskStats.total ? Math.round((taskStats.done / taskStats.total) * 100) : 0;
+      
+      let progressPercent = 0;
+      if (taskStats.topLevelTotal > 0) {
+        progressPercent = Math.round((taskStats.topLevelDone / taskStats.topLevelTotal) * 100);
+      } else if (taskStats.total > 0) {
+        progressPercent = Math.round((taskStats.done / taskStats.total) * 100);
+      }
+
+      if (project.status === "COMPLETED") {
+        progressPercent = 100;
+      }
       const plannedPercent = computePlannedPercent(project, context.filters.dateTo);
       return {
         projectId: project.id,
@@ -725,16 +735,22 @@ function aggregateTimeByProject(timeEntries: TimeEntry[]): Map<string, number> {
   return totals;
 }
 
-function aggregateTasksByProject(tasks: Task[]): Map<string, { total: number; done: number }> {
-  const map = new Map<string, { total: number; done: number }>();
+function aggregateTasksByProject(tasks: Task[]): Map<string, { total: number; done: number; topLevelTotal: number; topLevelDone: number }> {
+  const map = new Map<string, { total: number; done: number; topLevelTotal: number; topLevelDone: number }>();
   for (const task of tasks) {
     if (!map.has(task.projectId)) {
-      map.set(task.projectId, { total: 0, done: 0 });
+      map.set(task.projectId, { total: 0, done: 0, topLevelTotal: 0, topLevelDone: 0 });
     }
     const bucket = map.get(task.projectId)!;
     bucket.total += 1;
     if (task.status === "DONE") {
       bucket.done += 1;
+    }
+    if (!task.parentId) {
+      bucket.topLevelTotal += 1;
+      if (task.status === "DONE") {
+        bucket.topLevelDone += 1;
+      }
     }
   }
   return map;

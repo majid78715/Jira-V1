@@ -19,6 +19,7 @@ export type PermissionModule =
   | "settings"
   | "admin"
   | "personas"
+  | "calendar"
   | "createProject"
   | "createWorkflow";
 
@@ -32,7 +33,6 @@ export interface BaseEntity {
 export interface Profile {
   firstName: string;
   lastName: string;
-  mobileNumber?: string;
   country?: string;
   city?: string;
   timeZone?: string;
@@ -812,6 +812,26 @@ export interface DashboardSummaryPayload {
 }
 
 
+export type MeetingType = "VIRTUAL" | "PHYSICAL" | "HYBRID";
+export type MeetingStatus = "SCHEDULED" | "CANCELLED" | "COMPLETED";
+
+export interface Meeting extends BaseEntity {
+  title: string;
+  description?: string;
+  startTime: string;
+  endTime: string;
+  organizerId: string;
+  participantIds: string[];
+  externalParticipants?: string[];
+  location?: string;
+  type: MeetingType;
+  status: MeetingStatus;
+  linkedChatRoomId?: string;
+  projectId?: string;
+  taskId?: string;
+  allDay: boolean;
+}
+
 export interface RoleDefinition extends BaseEntity {
   name: string;
   description?: string;
@@ -851,6 +871,7 @@ export interface DatabaseSchema {
   workflowSchemes: WorkflowScheme[];
   systemSettings: SystemSetting[];
   roles: RoleDefinition[];
+  meetings: Meeting[];
 }
 
 export const DATABASE_KEYS = [
@@ -885,7 +906,8 @@ export const DATABASE_KEYS = [
   "workItemTypes",
   "workflowSchemes",
   "systemSettings",
-  "roles"
+  "roles",
+  "meetings"
 ] as const;
 
 export type DatabaseKey = (typeof DATABASE_KEYS)[number];
@@ -923,7 +945,8 @@ export function createEmptyDatabaseState(): DatabaseSchema {
     workItemTypes: [],
     workflowSchemes: [],
     systemSettings: [],
-    roles: []
+    roles: [],
+    meetings: []
   };
 }
 export type PublicUser = Pick<

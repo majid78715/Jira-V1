@@ -172,7 +172,8 @@ export async function createProjectTaskController(req: Request, res: Response, n
       newFeatureFields,
       existingFeatureFields,
       improvementFields,
-      taskFields
+      taskFields,
+      estimatedHours
     } = req.body;
 
     if (!itemType || !title) {
@@ -198,7 +199,8 @@ export async function createProjectTaskController(req: Request, res: Response, n
         bugFields,
         featureFields: mappedFeatureFields,
         improvementFields,
-        taskFields
+        taskFields,
+        estimatedHours
       },
       req.currentUser!
     );

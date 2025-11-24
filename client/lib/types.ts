@@ -12,13 +12,13 @@ export type PermissionModule =
   | "dashboard"
   | "projects"
   | "notifications"
-  | "approvals"
   | "alerts"
   | "reports"
   | "chat"
   | "settings"
   | "admin"
   | "personas"
+  | "calendar"
   | "createProject"
   | "createWorkflow";
 
@@ -28,7 +28,6 @@ export type ProfileStatus = "ACTIVE" | "PENDING_APPROVAL" | "REJECTED";
 export interface Profile {
   firstName: string;
   lastName: string;
-  mobileNumber?: string;
   country?: string;
   city?: string;
   timeZone?: string;
@@ -622,19 +621,24 @@ export interface Timesheet {
 
 export type CalendarScope = "user" | "team";
 
-export type CalendarEventType = "ASSIGNMENT" | "MILESTONE" | "DAY_OFF" | "HOLIDAY";
+export type CalendarEventType = "ASSIGNMENT" | "MILESTONE" | "DAY_OFF" | "HOLIDAY" | "MEETING";
 
 export interface CalendarEvent {
   id: string;
   type: CalendarEventType;
   title: string;
   subtitle?: string;
+  description?: string;
   startDate: string;
   endDate: string;
   projectId?: string;
   taskId?: string;
   userId?: string;
   status?: string;
+  meetingId?: string;
+  linkedChatRoomId?: string;
+  location?: string;
+  allDay?: boolean;
 }
 
 export interface UserCalendarResponse {
@@ -903,7 +907,6 @@ export interface UserDirectoryEntry {
   title?: string;
   companyId?: string;
   companyName?: string;
-  mobileNumber: string;
   country: string;
   city: string;
   timeZone: string;
@@ -1078,6 +1081,29 @@ export interface RoleDefinition {
   name: string;
   description?: string;
   isSystem: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type MeetingType = "VIRTUAL" | "PHYSICAL" | "HYBRID";
+export type MeetingStatus = "SCHEDULED" | "CANCELLED" | "COMPLETED";
+
+export interface Meeting {
+  id: string;
+  title: string;
+  description?: string;
+  startTime: string;
+  endTime: string;
+  organizerId: string;
+  participantIds: string[];
+  externalParticipants?: string[];
+  location?: string;
+  type: MeetingType;
+  status: MeetingStatus;
+  linkedChatRoomId?: string;
+  projectId?: string;
+  taskId?: string;
+  allDay: boolean;
   createdAt: string;
   updatedAt: string;
 }
