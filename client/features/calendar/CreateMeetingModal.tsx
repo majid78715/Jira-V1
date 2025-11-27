@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { User, MeetingType } from "../../lib/types";
+import { User, MeetingType, UserDirectoryEntry } from "../../lib/types";
 import { Button } from "../../components/ui/Button";
 import { apiRequest } from "../../lib/apiClient";
 
@@ -10,6 +10,8 @@ interface CreateMeetingModalProps {
   onClose: () => void;
   currentUser: User;
   onSuccess: () => void;
+  initialStartTime?: Date | null;
+  initialEndTime?: Date | null;
 }
 
 function formatDateTimeLocal(date: Date) {
@@ -19,7 +21,7 @@ function formatDateTimeLocal(date: Date) {
   )}`;
 }
 
-export function CreateMeetingModal({ isOpen, onClose, currentUser, onSuccess }: CreateMeetingModalProps) {
+export function CreateMeetingModal({ isOpen, onClose, currentUser, onSuccess, initialStartTime, initialEndTime }: CreateMeetingModalProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [startTime, setStartTime] = useState("");
@@ -27,7 +29,7 @@ export function CreateMeetingModal({ isOpen, onClose, currentUser, onSuccess }: 
   const [type, setType] = useState<MeetingType>("VIRTUAL");
   const [location, setLocation] = useState("Online");
   const [participants, setParticipants] = useState<string[]>([]);
-  const [availableUsers, setAvailableUsers] = useState<User[]>([]);
+  const [availableUsers, setAvailableUsers] = useState<UserDirectoryEntry[]>([]);
   const [loading, setLoading] = useState(false);
   const [suggesting, setSuggesting] = useState(false);
   const [suggestions, setSuggestions] = useState<string[]>([]);
@@ -35,19 +37,39 @@ export function CreateMeetingModal({ isOpen, onClose, currentUser, onSuccess }: 
   useEffect(() => {
     if (!isOpen) return;
 
-    apiRequest<User[]>("/users")
-      .then(setAvailableUsers)
+    apiRequest<{ users: UserDirectoryEntry[] }>("/users")
+      .then((response) => setAvailableUsers(Array.isArray(response.users) ? response.users : []))
       .catch((error) => console.error("Failed to load users", error));
 
-    const now = new Date();
-    now.setMinutes(Math.ceil(now.getMinutes() / 30) * 30, 0, 0);
-    const end = new Date(now.getTime() + 30 * 60000);
-    setStartTime(formatDateTimeLocal(now));
-    setEndTime(formatDateTimeLocal(end));
+    const roundUpToHalfHour = (date: Date) => {
+      const copy = new Date(date);
+      copy.setMilliseconds(0);
+      copy.setSeconds(0);
+      const minutes = copy.getMinutes();
+      const remainder = minutes % 30;
+      if (remainder !== 0) {
+        copy.setMinutes(minutes + (30 - remainder));
+      }
+      return copy;
+    };
+
+    const toValidDate = (value?: Date | null): Date | null => {
+      if (!value) return null;
+      const parsed = new Date(value);
+      return Number.isNaN(parsed.getTime()) ? null : parsed;
+    };
+
+    const defaultStart = roundUpToHalfHour(new Date());
+    const startCandidate = toValidDate(initialStartTime) ?? defaultStart;
+    const endCandidate = toValidDate(initialEndTime) ?? new Date(startCandidate.getTime() + 30 * 60000);
+    const finalEnd = endCandidate.getTime() > startCandidate.getTime() ? endCandidate : new Date(startCandidate.getTime() + 30 * 60000);
+
+    setStartTime(formatDateTimeLocal(startCandidate));
+    setEndTime(formatDateTimeLocal(finalEnd));
     setType("VIRTUAL");
     setLocation("Online");
     setSuggestions([]);
-  }, [isOpen]);
+  }, [initialEndTime, initialStartTime, isOpen]);
 
   const handleSuggestTimes = async () => {
     setSuggesting(true);
@@ -120,7 +142,8 @@ export function CreateMeetingModal({ isOpen, onClose, currentUser, onSuccess }: 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div className="w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-xl bg-white p-6 shadow-xl">
-        <h2 className="mb-4 text-xl font-bold text-ink-900">Schedule Meeting</h2>
+        <h2 className="mb-1 text-xl font-bold text-ink-900">Schedule Meeting</h2>
+        <p className="mb-3 text-xs text-ink-500">A video-ready chat room is auto-created and shared with invitees.</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -228,9 +251,7 @@ export function CreateMeetingModal({ isOpen, onClose, currentUser, onSuccess }: 
                 availableUsers
                   .filter((user) => user.id !== currentUser.id)
                   .map((user) => {
-                    const name = user.profile
-                      ? `${user.profile.firstName} ${user.profile.lastName}`.trim()
-                      : user.email;
+                    const name = user.name?.trim() || user.email;
                     return (
                       <label
                         key={user.id}

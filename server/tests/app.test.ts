@@ -1026,3 +1026,87 @@ describe("calendars and exports", () => {
     ).toBe(true);
   });
 });
+
+describe("completed project restrictions", () => {
+  it("prevents task creation in completed projects", async () => {
+    const pmCookie = await login("pm@humain.local", "Manager#123");
+    
+    // Create a project
+    const projectResponse = await request(app)
+      .post("/api/projects")
+      .set("Cookie", pmCookie)
+      .send(buildProjectPayload({ name: "Completed Project Test", code: "CPT-001" }));
+    expect(projectResponse.status).toBe(201);
+    const projectId = projectResponse.body.project.id;
+
+    // Update project status to COMPLETED
+    const updateResponse = await request(app)
+      .patch(`/api/projects/${projectId}`)
+      .set("Cookie", pmCookie)
+      .send({ status: "COMPLETED" });
+    expect(updateResponse.status).toBe(200);
+    expect(updateResponse.body.project.status).toBe("COMPLETED");
+
+    // Try to create a task - should fail
+    const vmCookie = await login("vm@vendor.local", "Vendor#123");
+    const taskResponse = await request(app)
+      .post(`/api/projects/${projectId}/tasks`)
+      .set("Cookie", vmCookie)
+      .send({
+        itemType: "IMPROVEMENT",
+        title: "Should Not Be Created",
+        taskFields: { description: "This task should not be created" },
+        estimatedHours: 10,
+        plannedCompletionDate: new Date().toISOString()
+      });
+    
+    expect(taskResponse.status).toBe(400);
+    expect(taskResponse.body.message).toContain("Cannot create tasks in a completed project");
+  });
+
+  it("prevents subtask creation in completed projects", async () => {
+    const pmCookie = await login("pm@humain.local", "Manager#123");
+    
+    // Create a project
+    const projectResponse = await request(app)
+      .post("/api/projects")
+      .set("Cookie", pmCookie)
+      .send(buildProjectPayload({ name: "Completed Project Test 2", code: "CPT-002" }));
+    expect(projectResponse.status).toBe(201);
+    const projectId = projectResponse.body.project.id;
+
+    // Create a task first
+    const vmCookie = await login("vm@vendor.local", "Vendor#123");
+    const taskResponse = await request(app)
+      .post(`/api/projects/${projectId}/tasks`)
+      .set("Cookie", vmCookie)
+      .send({
+        itemType: "IMPROVEMENT",
+        title: "Parent Task",
+        taskFields: { description: "Parent task" },
+        estimatedHours: 10,
+        plannedCompletionDate: new Date().toISOString()
+      });
+    expect(taskResponse.status).toBe(201);
+    const taskId = taskResponse.body.task.id;
+
+    // Update project status to COMPLETED
+    const updateResponse = await request(app)
+      .patch(`/api/projects/${projectId}`)
+      .set("Cookie", pmCookie)
+      .send({ status: "COMPLETED" });
+    expect(updateResponse.status).toBe(200);
+
+    // Try to create a subtask - should fail
+    const subtaskResponse = await request(app)
+      .post(`/api/tasks/${taskId}/subtasks`)
+      .set("Cookie", vmCookie)
+      .send({
+        title: "Should Not Be Created Subtask",
+        description: "This subtask should not be created"
+      });
+    
+    expect(subtaskResponse.status).toBe(400);
+    expect(subtaskResponse.body.message).toContain("Cannot create subtasks in a completed project");
+  });
+});

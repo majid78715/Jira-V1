@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { MouseEvent, useCallback, useEffect, useMemo, useState } from "react";
 import clsx from "clsx";
 import { Button } from "../../components/ui/Button";
 import { apiRequest } from "../../lib/apiClient";
@@ -17,10 +17,10 @@ const eventTone: Record<
   { bg: string; border: string; text: string; dot: string }
 > = {
   MEETING: {
-    bg: "bg-[#e8f0fe]",
-    border: "border-[#1a73e8]",
-    text: "text-[#1a73e8]",
-    dot: "bg-[#1a73e8]"
+    bg: "bg-[#e6f4ea]",
+    border: "border-[#16a34a]",
+    text: "text-[#166534]",
+    dot: "bg-[#16a34a]"
   },
   HOLIDAY: {
     bg: "bg-[#e6f4ea]",
@@ -60,6 +60,8 @@ export function CalendarView({ currentUser }: { currentUser: User }) {
   const [events, setEvents] = useState<CalendarEvent[]>([]);
   const [loading, setLoading] = useState(true);
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
+  const [draftStartTime, setDraftStartTime] = useState<Date | null>(null);
+  const [draftEndTime, setDraftEndTime] = useState<Date | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
   const [scope, setScope] = useState<CalendarScope>("user");
   const [searchTerm, setSearchTerm] = useState("");
@@ -115,6 +117,54 @@ export function CalendarView({ currentUser }: { currentUser: User }) {
 
   const handleToday = () => setCurrentDate(new Date());
 
+  const openCreateModalAt = useCallback((start: Date, end?: Date) => {
+    setDraftStartTime(start);
+    setDraftEndTime(end ?? new Date(start.getTime() + 30 * 60000));
+    setCreateModalOpen(true);
+  }, []);
+
+  const defaultSlotForDay = useCallback(
+    (day: Date) => {
+      const now = new Date();
+      const base = new Date(day);
+      if (isSameDay(base, now)) {
+        const rounded = new Date(now);
+        rounded.setSeconds(0, 0);
+        const minutes = rounded.getMinutes();
+        const remainder = minutes % 30;
+        if (remainder !== 0) {
+          rounded.setMinutes(minutes + (30 - remainder));
+        }
+        return {
+          start: rounded,
+          end: new Date(rounded.getTime() + 30 * 60000)
+        };
+      }
+      base.setHours(10, 0, 0, 0);
+      return { start: base, end: new Date(base.getTime() + 30 * 60000) };
+    },
+    []
+  );
+
+  const handleDayBoxCreate = useCallback(
+    (day: Date) => {
+      const { start, end } = defaultSlotForDay(day);
+      openCreateModalAt(start, end);
+    },
+    [defaultSlotForDay, openCreateModalAt]
+  );
+
+  const handleTimeSlotCreate = useCallback(
+    (day: Date, minutesFromStart: number) => {
+      const start = new Date(day);
+      start.setHours(0, 0, 0, 0);
+      start.setMinutes(minutesFromStart);
+      const end = new Date(start.getTime() + 30 * 60000);
+      openCreateModalAt(start, end);
+    },
+    [openCreateModalAt]
+  );
+
   const filteredEvents = useMemo(() => {
     return events.filter((event) => {
       if (!visibleTypes[event.type]) {
@@ -142,8 +192,8 @@ export function CalendarView({ currentUser }: { currentUser: User }) {
           </div>
           <button
             type="button"
-            onClick={() => setCreateModalOpen(true)}
-            className="inline-flex items-center gap-2 rounded-full bg-[#1a73e8] px-3 py-1.5 text-xs font-semibold text-white shadow hover:bg-[#1558b0]"
+            onClick={() => { const { start, end } = defaultSlotForDay(currentDate); openCreateModalAt(start, end); }}
+            className="inline-flex items-center gap-2 rounded-full bg-[#16a34a] px-3 py-1.5 text-xs font-semibold text-white shadow hover:bg-[#15803d]"
           >
             <span className="text-lg leading-none">+</span>
             Create
@@ -202,7 +252,7 @@ export function CalendarView({ currentUser }: { currentUser: User }) {
                   </div>
                   <input
                     type="checkbox"
-                    className="h-4 w-4 rounded border-ink-300 text-[#1a73e8] focus:ring-[#1a73e8]"
+                    className="h-4 w-4 rounded border-ink-300 text-[#16a34a] focus:ring-[#16a34a]"
                     checked={visibleTypes[entry.key]}
                     onChange={() => toggleType(entry.key)}
                   />
@@ -268,7 +318,7 @@ export function CalendarView({ currentUser }: { currentUser: User }) {
                 </button>
               ))}
             </div>
-            <Button size="sm" onClick={() => setCreateModalOpen(true)}>
+            <Button size="sm" onClick={() => { const { start, end } = defaultSlotForDay(currentDate); openCreateModalAt(start, end); }}>
               + Create Meeting
             </Button>
           </div>
@@ -276,13 +326,13 @@ export function CalendarView({ currentUser }: { currentUser: User }) {
 
         <div className="relative flex-1 overflow-hidden rounded-3xl border border-ink-100 bg-white shadow-sm">
           {view === "month" && (
-            <MonthView date={currentDate} events={filteredEvents} onEventClick={setSelectedEvent} />
+            <MonthView date={currentDate} events={filteredEvents} onEventClick={setSelectedEvent} onDayCreate={handleDayBoxCreate} />
           )}
           {view === "week" && (
-            <WeekView date={currentDate} events={filteredEvents} onEventClick={setSelectedEvent} />
+            <WeekView date={currentDate} events={filteredEvents} onEventClick={setSelectedEvent} onSlotSelect={handleTimeSlotCreate} />
           )}
           {view === "day" && (
-            <DayView date={currentDate} events={filteredEvents} onEventClick={setSelectedEvent} />
+            <DayView date={currentDate} events={filteredEvents} onEventClick={setSelectedEvent} onSlotSelect={handleTimeSlotCreate} />
           )}
           {view === "agenda" && (
             <AgendaView date={currentDate} events={filteredEvents} onEventClick={setSelectedEvent} />
@@ -298,12 +348,20 @@ export function CalendarView({ currentUser }: { currentUser: User }) {
 
       <CreateMeetingModal
         isOpen={isCreateModalOpen}
-        onClose={() => setCreateModalOpen(false)}
+        onClose={() => {
+          setCreateModalOpen(false);
+          setDraftStartTime(null);
+          setDraftEndTime(null);
+        }}
         currentUser={currentUser}
         onSuccess={() => {
           setCreateModalOpen(false);
+          setDraftStartTime(null);
+          setDraftEndTime(null);
           void loadEvents();
         }}
+        initialStartTime={draftStartTime ?? undefined}
+        initialEndTime={draftEndTime ?? undefined}
       />
 
       <MeetingDetailsPanel event={selectedEvent} onClose={() => setSelectedEvent(null)} currentUser={currentUser} />
@@ -314,11 +372,13 @@ export function CalendarView({ currentUser }: { currentUser: User }) {
 function MonthView({
   date,
   events,
-  onEventClick
+  onEventClick,
+  onDayCreate
 }: {
   date: Date;
   events: CalendarEvent[];
   onEventClick: (event: CalendarEvent) => void;
+  onDayCreate: (day: Date) => void;
 }) {
   const month = date.getMonth();
   const year = date.getFullYear();
@@ -356,17 +416,18 @@ function MonthView({
           return (
             <div
               key={day.toISOString()}
+              onClick={() => onDayCreate(day)}
               className={clsx(
                 "min-h-[120px] p-2 transition-colors",
                 !isCurrentMonth && "bg-ink-25 text-ink-400",
-                isToday && "bg-[#e8f0fe]"
+                isToday && "bg-[#e6f4ea]"
               )}
             >
               <div className="flex items-center justify-end">
                 <span
                   className={clsx(
                     "flex h-7 w-7 items-center justify-center rounded-full text-sm font-semibold",
-                    isToday ? "bg-[#1a73e8] text-white" : "text-ink-700"
+                    isToday ? "bg-[#16a34a] text-white" : "text-ink-700"
                   )}
                 >
                   {day.getDate()}
@@ -411,11 +472,13 @@ function MonthView({
 function WeekView({
   date,
   events,
-  onEventClick
+  onEventClick,
+  onSlotSelect
 }: {
   date: Date;
   events: CalendarEvent[];
   onEventClick: (event: CalendarEvent) => void;
+  onSlotSelect?: (day: Date, minutesFromStart: number) => void;
 }) {
   const startOfWeek = new Date(date);
   startOfWeek.setDate(date.getDate() - date.getDay());
@@ -424,29 +487,33 @@ function WeekView({
     day.setDate(startOfWeek.getDate() + index);
     return day;
   });
-  return <TimeGrid days={days} events={events} onEventClick={onEventClick} />;
+  return <TimeGrid days={days} events={events} onEventClick={onEventClick} onSlotSelect={onSlotSelect} />;
 }
 
 function DayView({
   date,
   events,
-  onEventClick
+  onEventClick,
+  onSlotSelect
 }: {
   date: Date;
   events: CalendarEvent[];
   onEventClick: (event: CalendarEvent) => void;
+  onSlotSelect?: (day: Date, minutesFromStart: number) => void;
 }) {
-  return <TimeGrid days={[date]} events={events} onEventClick={onEventClick} />;
+  return <TimeGrid days={[date]} events={events} onEventClick={onEventClick} onSlotSelect={onSlotSelect} />;
 }
 
 function TimeGrid({
   days,
   events,
-  onEventClick
+  onEventClick,
+  onSlotSelect
 }: {
   days: Date[];
   events: CalendarEvent[];
   onEventClick: (event: CalendarEvent) => void;
+  onSlotSelect?: (day: Date, minutesFromStart: number) => void;
 }) {
   const [now, setNow] = useState(new Date());
   useEffect(() => {
@@ -468,6 +535,17 @@ function TimeGrid({
     }));
   }, [days, events]);
 
+  const handleColumnClick = (event: MouseEvent<HTMLDivElement>, day: Date) => {
+    if (!onSlotSelect) return;
+    const target = event.currentTarget;
+    const scroller = target.closest('[data-timegrid-scroll]') as HTMLElement | null;
+    const scrollTop = scroller?.scrollTop ?? 0;
+    const rect = target.getBoundingClientRect();
+    const y = event.clientY - rect.top + scrollTop;
+    const minutesFromStart = Math.min(24 * 60 - 30, Math.max(0, Math.round(((y / hourHeight) * 60) / 30) * 30));
+    onSlotSelect(day, minutesFromStart);
+  };
+
   return (
     <div className="flex h-full flex-col overflow-hidden">
       <div className="flex border-b border-ink-100 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-wide text-ink-400">
@@ -477,13 +555,13 @@ function TimeGrid({
             const isToday = isSameDay(day, today);
             return (
               <div key={day.toISOString()} className="flex-1 px-3">
-                <div className={clsx("text-[11px] font-semibold", isToday ? "text-[#1a73e8]" : "text-ink-500")}>{
+                <div className={clsx("text-[11px] font-semibold", isToday ? "text-[#166534]" : "text-ink-500")}>{
                   day.toLocaleDateString("en-US", { weekday: "short" })
                 }</div>
                 <div
                   className={clsx(
                     "mt-1 inline-flex h-9 w-9 items-center justify-center rounded-full text-base font-semibold",
-                    isToday ? "bg-[#1a73e8] text-white" : "text-ink-800"
+                    isToday ? "bg-[#16a34a] text-white" : "text-ink-800"
                   )}
                 >
                   {day.getDate()}
@@ -555,7 +633,7 @@ function TimeGrid({
           {eventsByDay.map(({ day, timed }) => {
             const isToday = isSameDay(day, today);
             return (
-              <div key={`timed-${day.toISOString()}`} className="relative flex-1 px-1">
+              <div key={`timed-${day.toISOString()}`} className="relative flex-1 px-1" onClick={(event) => handleColumnClick(event, day)}>
                 {timed.map((event) => {
                   const { startMinutes, durationMinutes } = computeEventPosition(event, day);
                   const tone = eventTone[event.type] ?? eventTone.DEFAULT;
@@ -712,9 +790,9 @@ function MiniMonth({
               className={clsx(
                 "flex h-9 w-full items-center justify-center rounded-full text-sm font-semibold transition",
                 isSelected
-                  ? "bg-[#1a73e8] text-white"
+                  ? "bg-[#16a34a] text-white"
                   : isToday
-                    ? "border border-[#1a73e8] text-[#1a73e8]"
+                    ? "border border-[#16a34a] text-[#166534]"
                     : isCurrentMonth
                       ? "text-ink-800 hover:bg-white"
                       : "text-ink-400 hover:bg-white/80"

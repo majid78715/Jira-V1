@@ -117,7 +117,8 @@ function normalizeSnapshot(payload: Partial<DatabaseSchema>): DatabaseSchema {
     workItemTypes: ensureArray("workItemTypes"),
     workflowSchemes: ensureArray("workflowSchemes"),
     systemSettings: ensureArray("systemSettings"),
-    roles: ensureArray("roles")
+    roles: ensureArray("roles"),
+    meetings: ensureArray("meetings")
   };
 }
 

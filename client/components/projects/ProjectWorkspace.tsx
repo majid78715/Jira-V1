@@ -108,7 +108,7 @@ export function ProjectWorkspace({ detail, loading, currentUser, onRefresh, onEd
 
   const project = detail?.project ?? null;
   const canEditStage = project ? canEditPackageStage(project, currentUser) : false;
-  const canEditTasks = canEdit && (project ? project.packageStatus === "ACTIVE" || canEditStage : false);
+  const canEditTasks = canEdit && (project ? (project.status !== "COMPLETED" && (project.packageStatus === "ACTIVE" || canEditStage)) : false);
 
   useEffect(() => {
     if (project?.workflowSchemeId) {

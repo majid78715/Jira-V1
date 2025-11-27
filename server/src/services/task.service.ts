@@ -95,6 +95,11 @@ export async function createTaskForProject(
     throw new Error("title is required.");
   }
   
+  // Prevent task creation in completed projects
+  if (project.status === "COMPLETED") {
+    throw new Error("Cannot create tasks in a completed project.");
+  }
+  
   // Assignees are optional now
   const assignmentPlan = normalizeAssignees(payload.assignees);
   
@@ -205,9 +210,14 @@ export async function createSubtask(
   if (!parent) {
     throw new Error("Parent task not found.");
   }
-  await assertProjectEditAccess(actor, parent.projectId);
+  const project = await assertProjectEditAccess(actor, parent.projectId);
   if (!payload.title?.trim()) {
     throw new Error("title is required.");
+  }
+
+  // Prevent subtask creation in completed projects
+  if (project.status === "COMPLETED") {
+    throw new Error("Cannot create subtasks in a completed project.");
   }
 
   const assignmentPlan = normalizeAssignees(payload.assignees);
